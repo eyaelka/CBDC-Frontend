@@ -14,7 +14,7 @@
 
                                         <h4 class="mb-3"><i
                                                 class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span
-                                                class="text-primary"></span>Register now and enjoy a true digital banking experience</h4>
+                                                class="text-primary"></span>Simplifiez vous la vie ! </h4>
 
                                         <div dir="ltr">
                                             <owl-carousel-o class="owl-theme auth-review-carousel"
@@ -22,7 +22,7 @@
                                                 <ng-template carouselSlide>
                                                     <div class="item">
                                                         <div class="py-3">
-                                                            <p class="font-size-16 mb-4">" Instant transfers and payments "
+                                                            <p class="font-size-16 mb-4">" Votre sécurité est notre priorité "
                                                             </p>
                                                         </div>
 
@@ -31,7 +31,7 @@
                                                 <ng-template carouselSlide>
                                                     <div class="item">
                                                         <div class="py-3">
-                                                            <p class="font-size-16 mb-4">" Transparent fees "</p>
+                                                            <p class="font-size-16 mb-4">" Paiement et Transfert instantané "</p>
 
                                                         </div>
 
@@ -56,14 +56,17 @@
                     <div class="d-flex flex-column h-100">
                         <div class="mb-4 mb-md-5">
                             <a routerLink="/" class="d-block auth-logo">
+                              <!--
                                 <img src="assets/images/logo-dark.png" alt="" height="18" class="auth-logo-dark">
                                 <img src="assets/images/logo-light.png" alt="" height="18" class="auth-logo-light">
+                              -->
+                              <img src="assets/images/talan.png" alt="" height="45" class="auth-logo-dark">
                             </a>
                         </div>
                         <div class="my-auto">
                             <div>
-                                <h5 class="text-primary">Register account</h5>
-                                <p class="text-muted">Get your free Skote account now.</p>
+                                <h5 class="text-primary">Créer votre compte</h5>
+                                <p class="text-muted">Inscrivez-vous maintenant et profitez d'une véritable expérience bancaire numérique.</p>
                             </div>
                             <div class="mt-4">
                                 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -74,12 +77,12 @@
                                     <ngb-alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</ngb-alert>
 
                                     <div class="mb-3">
-                                        <label for="username">Username</label>
+                                        <label for="username">Identifiant</label>
                                         <input type="text" formControlName="username" class="form-control" id="username"
                                             [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-                                            placeholder="Enter username">
+                                            placeholder="identifiant">
                                         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                                            <div *ngIf="f.username.errors.required">Userame is required</div>
+                                            <div *ngIf="f.username.errors.required">Vous devez saisir votre identifiant</div>
                                         </div>
                                     </div>
 
@@ -87,38 +90,38 @@
                                         <label for="useremail">Email</label>
                                         <input type="email" formControlName="email"
                                             [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                                            class="form-control" id="useremail" placeholder="Enter email">
+                                            class="form-control" id="useremail" placeholder="email">
                                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                            <div *ngIf="f.email.errors.required">Email is required</div>
+                                            <div *ngIf="f.email.errors.required">Vous devez saisir votre email</div>
                                             <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="userpassword">Password</label>
+                                        <label for="userpassword">Mot de passe</label>
                                         <input type="password" formControlName="password"
                                             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                            class="form-control" id="userpassword" placeholder="Enter password">
+                                            class="form-control" id="userpassword" placeholder="mot de passe">
                                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                            <div *ngIf="f.password.errors.required">Password is required</div>
+                                            <div *ngIf="f.password.errors.required">Vous devez saisir un mot de passe</div>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <p class="mb-0">By registering you agree to the Skote <a
-                                                href="javascript: void(0);" class="text-primary">Terms of Use</a>
+                                        <p class="mb-0">En vous inscrivant, vous acceptez  <a
+                                                href="javascript: void(0);" class="text-primary">les conditions d'utilisation</a>
                                         </p>
                                     </div>
 
                                     <div class="mt-4 d-grid">
-                                        <button class="btn btn-primary btn-block" type="submit">Register</button>
+                                        <button class="btn btn-primary btn-block" type="submit">S'inscrire</button>
                                     </div>
 
                                 </form>
 
                                 <div class="mt-5 text-center">
-                                    <p>Already have an account ? <a routerLink="/account/login-2"
-                                            class="fw-medium text-primary"> Login</a> </p>
+                                    <p>Vous avez déjà un compte ? <a routerLink="/account/login-2"
+                                            class="fw-medium text-primary"> Se connecter</a> </p>
                                 </div>
                             </div>
                         </div>
