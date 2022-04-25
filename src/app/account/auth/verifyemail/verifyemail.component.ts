@@ -27,7 +27,7 @@ export class VerifyemailComponent implements OnInit {
   btnClick(){
     this.successmsg = true;
               if (this.successmsg) {
-                this.router.navigate(['/confirmmail']);
+                this.router.navigate(['/confirm-mail']);
               }
 
   }

@@ -32,6 +32,7 @@ export class Register2Component implements OnInit {
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      type: ['user',Validators.required]
     });
   }
 
@@ -71,7 +72,7 @@ export class Register2Component implements OnInit {
           .catch(error => {
             this.error = error ? error : '';
           });
-      } else {
+      } else if (this.signupForm.value.type == 'user'){
         this.userService.register(this.signupForm.value)
           .pipe(first())
           .subscribe(
@@ -84,7 +85,23 @@ export class Register2Component implements OnInit {
             error => {
               this.error = error ? error : '';
             });
+      }else{
+        this.userService.register(this.signupForm.value)
+          .pipe(first())
+          .subscribe(
+            data => {
+              this.successmsg = true;
+              if (this.successmsg) {
+                this.router.navigate(['/email-verification']);
+              }
+            },
+            error => {
+              this.error = error ? error : '';
+            });
+
       }
+      }
+
     }
   }
-}
+

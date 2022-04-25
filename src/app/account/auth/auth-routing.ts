@@ -10,6 +10,7 @@ import { Recoverpwd2Component } from './recoverpwd2/recoverpwd2.component';
 import { VerifyemailComponent } from './verifyemail/verifyemail.component';
 import { ConfirmmailComponent } from './confirmmail/confirmmail.component';
 import { KycComponent } from './kyc/kyc.component';
+import { MerchantformComponent } from './merchantform/merchantform.component';
 
 const routes: Routes = [
     {
@@ -21,12 +22,16 @@ const routes: Routes = [
       component: VerifyemailComponent
     },
     {
-      path: 'confirmmail',
+      path: 'confirm-mail',
       component: ConfirmmailComponent
     },
     {
       path: 'kyc',
       component: KycComponent
+    },
+    {
+      path: 'merchant-form',
+      component: MerchantformComponent
     },
     {
         path: 'signup',

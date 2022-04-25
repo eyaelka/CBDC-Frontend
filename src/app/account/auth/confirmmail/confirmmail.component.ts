@@ -12,6 +12,7 @@ export class ConfirmmailComponent implements OnInit {
   submitted = false;
   successmsg = false;
   error = '';
+  role;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
   config = {
@@ -32,10 +33,13 @@ export class ConfirmmailComponent implements OnInit {
  year: number = new Date().getFullYear();
 
  btnClick(){
-  this.successmsg = true;
-            if (this.successmsg) {
-              this.router.navigate(['/kyc']);
-            }
+   if (this.successmsg  && this.role == 'user'){
+    this.router.navigate(['/kyc']);
+  }else{
+    this.router.navigate(['/merchant-form'])
+  }
+
+
 
 }
 

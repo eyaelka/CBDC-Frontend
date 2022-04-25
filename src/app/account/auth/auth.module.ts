@@ -22,10 +22,11 @@ import { PasswordresetComponent } from './passwordreset/passwordreset.component'
 import { KycComponent } from './kyc/kyc.component';
 import { VerifyemailComponent } from './verifyemail/verifyemail.component';
 import { ConfirmmailComponent } from './confirmmail/confirmmail.component';
+import { MerchantformComponent } from './merchantform/merchantform.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, Login2Component, PasswordresetComponent, Register2Component, Recoverpwd2Component, KycComponent, VerifyemailComponent, ConfirmmailComponent],
+  declarations: [LoginComponent, Login2Component, PasswordresetComponent, Register2Component, Recoverpwd2Component, KycComponent, VerifyemailComponent, ConfirmmailComponent, MerchantformComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
