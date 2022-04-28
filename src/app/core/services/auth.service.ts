@@ -37,8 +37,8 @@ export class AuthenticationService {
      * @param email email
      * @param password password
      */
-    register(email: string, password: string) {
-        return getFirebaseBackend().registerUser(email, password).then((response: any) => {
+    register(email: string) {
+        return getFirebaseBackend().registerUser(email).then((response: any) => {
             const user = response;
             return user;
         });
@@ -62,5 +62,7 @@ export class AuthenticationService {
         // logout the user
         getFirebaseBackend().logout();
     }
+
+
 }
 

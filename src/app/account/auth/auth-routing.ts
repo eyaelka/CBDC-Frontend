@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
 import { Login2Component } from './login2/login2.component';
+import { LoginComponent } from './login/login.component';
 
 import { PasswordresetComponent } from './passwordreset/passwordreset.component';
 import { Register2Component } from './register2/register2.component';
@@ -11,11 +11,12 @@ import { VerifyemailComponent } from './verifyemail/verifyemail.component';
 import { ConfirmmailComponent } from './confirmmail/confirmmail.component';
 import { KycComponent } from './kyc/kyc.component';
 import { MerchantformComponent } from './merchantform/merchantform.component';
+import { StartPageComponent } from './start-page/start-page.component';
 
 const routes: Routes = [
     {
-        path: 'login',
-        component: LoginComponent
+      path: 'start-page',
+      component: StartPageComponent
     },
     {
       path: 'email-verification',
@@ -48,6 +49,10 @@ const routes: Routes = [
     {
         path: 'login-2',
         component: Login2Component
+    },
+    {
+      path: 'login',
+      component: LoginComponent
     }
 ];
 

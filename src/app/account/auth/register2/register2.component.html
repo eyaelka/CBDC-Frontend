@@ -98,19 +98,9 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="userpassword">Mot de passe</label>
-                                        <input type="password" formControlName="password"
-                                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                            class="form-control" id="userpassword" placeholder="mot de passe">
-                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                            <div *ngIf="f.password.errors.required">Vous devez saisir un mot de passe</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
                                       <label for ="btn">Vous étes :</label> &nbsp; &nbsp; &nbsp; &nbsp;
                                       <div class="btn-group " role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" checked autocomplete="off">
                                         <label class="btn btn-outline-primary" for="btnradio5" value ="user">Utilisateur</label>
 
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
@@ -131,7 +121,7 @@
 
 
                                 <div class="mt-5 text-center">
-                                    <p>Vous avez déjà un compte ? <a routerLink="/account/login-2"
+                                    <p>Vous avez déjà un compte ? <a routerLink="/login-2"
                                             class="fw-medium text-primary"> Se connecter</a> </p>
                                 </div>
                             </div>

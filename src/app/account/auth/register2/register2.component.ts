@@ -31,7 +31,6 @@ export class Register2Component implements OnInit {
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
       type: ['user',Validators.required]
     });
   }
@@ -63,7 +62,7 @@ export class Register2Component implements OnInit {
       return;
     } else {
       if (environment.defaultauth === 'firebase') {
-        this.authenticationService.register(this.f.email.value, this.f.password.value).then((res: any) => {
+        this.authenticationService.register(this.f.email.value).then((res: any) => {
           this.successmsg = true;
           if (this.successmsg) {
             this.router.navigate(['/dashboard']);

@@ -12,7 +12,6 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { UIModule } from '../../shared/ui/ui.module';
-import { LoginComponent } from './login/login.component';
 import { Login2Component } from './login2/login2.component';
 import { Register2Component } from './register2/register2.component';
 import { Recoverpwd2Component } from './recoverpwd2/recoverpwd2.component';
@@ -23,10 +22,12 @@ import { KycComponent } from './kyc/kyc.component';
 import { VerifyemailComponent } from './verifyemail/verifyemail.component';
 import { ConfirmmailComponent } from './confirmmail/confirmmail.component';
 import { MerchantformComponent } from './merchantform/merchantform.component';
+import { StartPageComponent } from './start-page/start-page.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, Login2Component, PasswordresetComponent, Register2Component, Recoverpwd2Component, KycComponent, VerifyemailComponent, ConfirmmailComponent, MerchantformComponent],
+  declarations: [Login2Component, PasswordresetComponent, Register2Component, Recoverpwd2Component, KycComponent, VerifyemailComponent, ConfirmmailComponent, MerchantformComponent, StartPageComponent, LoginComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
