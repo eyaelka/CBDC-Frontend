@@ -4,7 +4,7 @@
           <div class="col-lg-12">
               <div class="text-center mb-5 text-muted">
                   <a routerLink="/" class="d-block auth-logo">
-                      <img src="assets/images/talan.png" alt="" height="45" class="auth-logo-dark mx-auto">
+                      <img src="assets/images/logo-light.png" alt="" height="100" class="auth-logo-dark mx-auto">
                   </a>
               </div>
           </div>
@@ -31,12 +31,12 @@
                                           class="fw-semibold">example@abc.com</span></p>
 
                                   <form>
-                                      <ng-otp-input [config]="config"></ng-otp-input>
+                                      <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
 
                                   </form>
 
                                   <div class="mt-4">
-                                      <a routerLink="/" class="btn btn-primary w-md" (click)="btnClick()">Confirmer</a>
+                                      <a  class="btn btn-primary w-md" (click)="btnClick()">Confirmer</a>
                                   </div>
                               </div>
 

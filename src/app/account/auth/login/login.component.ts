@@ -27,14 +27,16 @@ export class LoginComponent implements OnInit {
   error = '';
   returnUrl: string;
 
+  accountNumber = "11121301BC"
+  myPassword = "123456"
   // set the currenr year
   year: number = new Date().getFullYear();
 
   ngOnInit(): void {
     document.body.classList.add('auth-body-bg')
     this.loginForm = this.formBuilder.group({
-      email: ['admin@themesbrand.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
 
     // reset login status
@@ -65,29 +67,40 @@ export class LoginComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
+    let email = this.f.email.value
+    let password = this.f.password.value
 
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    } else {
-      if (environment.defaultauth === 'firebase') {
-        this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
-          this.router.navigate(['/dashboard']);
-        })
-          .catch(error => {
-            this.error = error ? error : '';
-          });
-      } else {
-        this.authFackservice.login(this.f.email.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.router.navigate(['/dashboard']);
-            },
-            error => {
-              this.error = error ? error : '';
-            });
-      }
+    if (email == this.accountNumber && password == this.myPassword){
+      this.router.navigate(['/page/dashboards/crypto'])
     }
+    else{
+      this.router.navigate(['/page/dashboards/saas'])
+    }
+
+
+    // // stop here if form is invalid
+    // if (this.loginForm.invalid) {
+    //   return;
+    // } else {
+    //   if (environment.defaultauth === 'firebase') {
+    //     this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
+    //       this.router.navigate(['/dashboard']);
+    //     })
+    //       .catch(error => {
+    //         this.error = error ? error : '';
+    //       });
+    //   } else {
+    //     this.authFackservice.login(this.f.email.value, this.f.password.value)
+    //       .pipe(first())
+    //       .subscribe(
+    //         data => {
+    //           this.router.navigate(['/dashboard']);
+    //         },
+    //         error => {
+    //           this.error = error ? error : '';
+    //         });
+    //  }
+   // }
+
   }
 }

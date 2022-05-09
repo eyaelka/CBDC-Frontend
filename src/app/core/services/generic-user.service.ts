@@ -23,12 +23,27 @@ export class GenericUserService{
     return this.http.get<any>(url,userId);
   }
 
+  //Read All User
+  getAll(url){
+    return this.http.get<any>(url);
+  }
+
   //Update User
   updateUser(url,userDetails,userId){
     //retrieve the token
     let token = this.authenticationService.getUserToken();
     return this.http.post<any>(url,userDetails,userId);
   }
+
+  //Email Verification
+  sendEmail(url, email){
+    return this.http.post<any>(url,email);
+  }
+
+  // //Notify Admin
+  // notifyAdmin(url,endUser){
+  //   return this.http.post<any>(url,endUser);
+  // }
 
 
 

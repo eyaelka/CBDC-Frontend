@@ -12,6 +12,7 @@ import { ConfirmmailComponent } from './confirmmail/confirmmail.component';
 import { KycComponent } from './kyc/kyc.component';
 import { MerchantformComponent } from './merchantform/merchantform.component';
 import { StartPageComponent } from './start-page/start-page.component';
+import { LoginFeaturesComponent } from './login2/login-features/login-features.component'
 
 const routes: Routes = [
     {
@@ -19,11 +20,11 @@ const routes: Routes = [
       component: StartPageComponent
     },
     {
-      path: 'email-verification',
+      path: 'email-verification/:role',
       component: VerifyemailComponent
     },
     {
-      path: 'confirm-mail',
+      path: 'confirm-mail/:role',
       component: ConfirmmailComponent
     },
     {
@@ -50,6 +51,10 @@ const routes: Routes = [
         path: 'login-2',
         component: Login2Component
     },
+    {
+      path: 'login-2/features',
+      component: LoginFeaturesComponent
+  },
     {
       path: 'login',
       component: LoginComponent

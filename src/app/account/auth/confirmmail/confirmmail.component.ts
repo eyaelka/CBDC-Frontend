@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GenericUserService } from 'src/app/core/services/generic-user.service';
 
 
 
@@ -13,8 +14,12 @@ export class ConfirmmailComponent implements OnInit {
   successmsg = false;
   error = '';
   role;
+  email;
+  code : number;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private userService: GenericUserService) {
+
+   }
   config = {
     allowNumbersOnly: true,
     length: 4,
@@ -25,18 +30,53 @@ export class ConfirmmailComponent implements OnInit {
       'width': '80px',
       'height': '50px'
     }
+
   };
   ngOnInit(): void {
-    document.body.classList.remove('auth-body-bg')
+    this.role = this.route.snapshot.params.role;
+    console.log(this.role);
+    let email = 'eya.elkamel@etudiant-fst.utm.tn'
+    if ( this.role == 'user'){
+      this.userService.sendEmail('http://localhost:10053/enduser/sendcodeverification',email).subscribe(
+      res =>{
+        this.code = res})
+      }else{
+        this.userService.sendEmail('http://localhost:10054/merchant/sendcodeverification',email).subscribe(
+          res =>{
+            this.code = res})
+      }
+
+
+
+
+
+    document.body.classList.remove('auth-body-bg');
+
   }
  // set the currenr year
  year: number = new Date().getFullYear();
 
  btnClick(){
-   if (this.successmsg  && this.role == 'user'){
-    this.router.navigate(['/kyc']);
-  }else{
-    this.router.navigate(['/merchant-form'])
+   let digit = this.code.toString()
+   if(digit == this.otp){
+    if (this.role == 'user'){
+      this.router.navigate(['/kyc']);
+    }
+    if(this.role == 'merchant'){
+      this.router.navigate(['/merchant-form'])
+    }
+   }else{
+     alert("Vérifier votre code");
+
+   }
+
+ }
+
+ otp:string;
+  onOtpChange(event){
+    this.otp = event;
+    console.log(this.otp);
+
   }
 
 
@@ -44,4 +84,4 @@ export class ConfirmmailComponent implements OnInit {
 }
 
 
-}
+

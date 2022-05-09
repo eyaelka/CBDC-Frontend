@@ -1,7 +1,7 @@
 <header id="page-topbar">
   <div class="navbar-header">
     <div class="d-flex">
-      <!-- LOGO -->
+      <!-- LOGO
       <div class="navbar-brand-box">
         <a routerLink="/" class="logo logo-dark">
           <span class="logo-sm">
@@ -20,7 +20,7 @@
             <img src="assets/images/logo-light.png" alt="" height="19">
           </span>
         </a>
-      </div>
+      </div>-->
 
       <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item" (click)="toggleMenubar()">
         <i class="fa fa-fw fa-bars"></i>
@@ -416,7 +416,7 @@
                       <div class="col-lg-4"><a class="dropdown-item side-nav-link-ref" routerLinkActive="active" [routerLink]="item.subItems[i + 2]?.link">{{item.subItems[i + 2]?.label | translate}}</a></div>
                   </div>
               </div>
-              
+
                 <div class="dropdown" *ngIf="hasItems(subitem)">
                   <a class="dropdown-item dropdown-toggle" href="javascript: void(0);"
                     (click)="onMenuClick($event)">{{ subitem.label | translate }}

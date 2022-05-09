@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
 import { first } from 'rxjs/operators';
 import { UserProfileService } from '../../../core/services/user.service';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-register2',
@@ -19,6 +20,7 @@ export class Register2Component implements OnInit {
   submitted = false;
   error = '';
   successmsg = false;
+  myRouterLink = "/email-verification/user";
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
     private userService: UserProfileService) { }
@@ -54,53 +56,68 @@ export class Register2Component implements OnInit {
   /**
    * On submit form
    */
+
+  setRouter(type){
+    if (type === 1){
+      this.myRouterLink = '/email-verification/user'
+    }
+    else{
+      this.myRouterLink = '/email-verification/merchant'
+    }
+    console.log(this.myRouterLink);
+  }
+
   onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.signupForm.invalid) {
-      return;
-    } else {
-      if (environment.defaultauth === 'firebase') {
-        this.authenticationService.register(this.f.email.value).then((res: any) => {
-          this.successmsg = true;
-          if (this.successmsg) {
-            this.router.navigate(['/dashboard']);
-          }
-        })
-          .catch(error => {
-            this.error = error ? error : '';
-          });
-      } else if (this.signupForm.value.type == 'user'){
-        this.userService.register(this.signupForm.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.successmsg = true;
-              if (this.successmsg) {
-                this.router.navigate(['/email-verification']);
-              }
-            },
-            error => {
-              this.error = error ? error : '';
-            });
-      }else{
-        this.userService.register(this.signupForm.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.successmsg = true;
-              if (this.successmsg) {
-                this.router.navigate(['/email-verification']);
-              }
-            },
-            error => {
-              this.error = error ? error : '';
-            });
-
+   this.router.navigate([this.myRouterLink]);
+   console.log(this.router.url);
       }
-      }
+
+    // this.submitted = true;
+
+    // // stop here if form is invalid
+    // if (this.signupForm.invalid) {
+    //   return;
+    // } else {
+    //   if (environment.defaultauth === 'firebase') {
+    //     this.authenticationService.register(this.f.email.value).then((res: any) => {
+    //       this.successmsg = true;
+    //       if (this.successmsg) {
+    //         this.router.navigate(['/dashboard']);
+    //       }
+    //     })
+    //       .catch(error => {
+    //         this.error = error ? error : '';
+    //       });
+    //   } else if (this.signupForm.value.type == 'user'){
+    //     this.userService.register(this.signupForm.value)
+    //       .pipe(first())
+    //       .subscribe(
+    //         data => {
+    //           this.successmsg = true;
+    //           if (this.successmsg) {
+    //             this.router.navigate(['/email-verification/user']);
+    //           }
+    //         },
+    //         error => {
+    //           this.error = error ? error : '';
+    //         });
+    //   }else{
+    //     this.userService.register(this.signupForm.value)
+    //       .pipe(first())
+    //       .subscribe(
+    //         data => {
+    //           this.successmsg = true;
+    //           if (this.successmsg) {
+    //             this.router.navigate(['/email-verification/merchant']);
+    //           }
+    //         },
+    //         error => {
+    //           this.error = error ? error : '';
+    //         });
+
+    //   }
+    //   }
 
     }
-  }
+
 

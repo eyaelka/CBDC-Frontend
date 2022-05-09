@@ -24,10 +24,11 @@ import { ConfirmmailComponent } from './confirmmail/confirmmail.component';
 import { MerchantformComponent } from './merchantform/merchantform.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { LoginComponent } from './login/login.component';
+import { LoginFeaturesComponent } from './login2/login-features/login-features.component';
 
 
 @NgModule({
-  declarations: [Login2Component, PasswordresetComponent, Register2Component, Recoverpwd2Component, KycComponent, VerifyemailComponent, ConfirmmailComponent, MerchantformComponent, StartPageComponent, LoginComponent],
+  declarations: [Login2Component, PasswordresetComponent, Register2Component, Recoverpwd2Component, KycComponent, VerifyemailComponent, ConfirmmailComponent, MerchantformComponent, StartPageComponent, LoginComponent, LoginFeaturesComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

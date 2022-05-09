@@ -37,6 +37,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ChatComponent } from './chat/chat.component';
 
 import { FilemanagerComponent } from './filemanager/filemanager.component';
+import { CommercialbankComponent } from './commercialbank/commercialbank.component';
+import { ActivateAccountComponent } from './activate-account/activate-account.component';
+import { ActivateMerchantComponent } from './activate-merchant/activate-merchant.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -45,7 +48,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent],
   imports: [
     CommonModule,
     FormsModule,

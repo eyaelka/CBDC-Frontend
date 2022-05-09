@@ -13,8 +13,7 @@ export class VerifyemailComponent implements OnInit {
   submitted = false;
   successmsg = false;
   error = '';
-
-
+  role;
 
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthenticationService) { }
@@ -22,14 +21,15 @@ export class VerifyemailComponent implements OnInit {
   year: number = new Date().getFullYear();
   ngOnInit(): void {
     document.body.classList.remove('auth-body-bg')
-    this.authService.sendEmail("http://localhost:10053/enduser/sendcodeverification","elkamel.eyaa@gmail.com")
+    this.role = this.route.snapshot.params.role;
+    this.authService.sendEmail("http://localhost:10054/merchant/sendcodeverification","elkamel.eyaa@gmail.com")
 
   }
 
   btnClick(){
     this.successmsg = true;
               if (this.successmsg) {
-                this.router.navigate(['/confirm-mail']);
+                this.router.navigate(['/confirm-mail/'+this.role]);
               }
 
   }

@@ -60,7 +60,7 @@
                                 <img src="assets/images/logo-dark.png" alt="" height="18" class="auth-logo-dark">
                                 <img src="assets/images/logo-light.png" alt="" height="18" class="auth-logo-light">
                               -->
-                              <img src="assets/images/talan.png" alt="" height="45" class="auth-logo-dark">
+                              <img src="assets/images/logo-light.png" alt="" height="100" class="auth-logo-dark">
                             </a>
                         </div>
                         <div class="my-auto">
@@ -77,16 +77,6 @@
                                     <ngb-alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</ngb-alert>
 
                                     <div class="mb-3">
-                                        <label for="username">Identifiant</label>
-                                        <input type="text" formControlName="username" class="form-control" id="username"
-                                            [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-                                            placeholder="identifiant">
-                                        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                                            <div *ngIf="f.username.errors.required">Vous devez saisir votre identifiant</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
                                         <label for="useremail">Email</label>
                                         <input type="email" formControlName="email"
                                             [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
@@ -100,10 +90,12 @@
                                     <div class="mb-3">
                                       <label for ="btn">Vous étes :</label> &nbsp; &nbsp; &nbsp; &nbsp;
                                       <div class="btn-group " role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" checked autocomplete="off">
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio5" checked autocomplete="off"
+                                        (change)="setRouter(1)">
                                         <label class="btn btn-outline-primary" for="btnradio5" value ="user">Utilisateur</label>
 
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off">
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off"
+                                        (change)="setRouter(2)">
                                         <label class="btn btn-outline-primary" for="btnradio6" value = "merchant">Marchand</label>
                                       </div>
                                     </div>
@@ -125,7 +117,11 @@
                                             class="fw-medium text-primary"> Se connecter</a> </p>
                                 </div>
                             </div>
+
                         </div>
+                        <div class="mt-4 mt-md-5 text-center">
+                          <p class="mb-0">©{{year}} Talan Tunisie.</p>
+                      </div>
                     </div>
                 </div>
             </div>

@@ -54,7 +54,7 @@
                   <div class="d-flex flex-column h-100">
                       <div class="mb-4 mb-md-5">
                           <a routerLink="/" class="d-block auth-logo">
-                              <img src="assets/images/talan.png" alt="" height="45" class="auth-logo-dark">
+                              <img src="assets/images/logo-light.png" alt="" height="100" class="auth-logo-dark">
 
                           </a>
                       </div>
@@ -69,16 +69,15 @@
                               <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
                                   <div class="mb-3">
-                                      <label for="email">Email</label>
+                                      <label for="email">Numéro de compte</label>
                                       <input type="email" class="form-control" id="email" formControlName="email"
                                           [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                                          placeholder="Enter email">
+                                          placeholder="Numéro de compte">
                                       <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                           <div *ngIf="f.email.errors.required">Vous devez saisir votre email</div>
-                                          <div *ngIf="f.email.errors.email">Vous devez saisir votre email valide
                                           </div>
                                       </div>
-                                  </div>
+                                
 
                                   <div class="mb-3">
 
@@ -86,7 +85,7 @@
                                       <div class="input-group auth-pass-inputgroup">
                                           <input type="password" class="form-control" formControlName="password"
                                               [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                              placeholder="Enter password" aria-label="Password"
+                                              placeholder="Mot de passe" aria-label="Password"
                                               aria-describedby="password-addon">
                                           <button class="btn btn-light " type="button" id="password-addon"><i
                                                   class="mdi mdi-eye-outline"></i></button>
@@ -115,10 +114,16 @@
 
                                   </div>
 
+
                               </form>
+
                           </div>
                       </div>
+                      <div class="mt-4 mt-md-5 text-center">
+                        <p class="mb-0">©{{year}} Talan Tunisie.</p>
+                    </div>
                   </div>
+
               </div>
           </div>
       </div>

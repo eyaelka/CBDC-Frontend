@@ -4,6 +4,10 @@ import { WebcamImage } from 'ngx-webcam';
 import { Subject, Observable } from 'rxjs';
 import * as faceapi from 'face-api.js';
 import { ActivatedRoute, Router } from '@angular/router';
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GenericUserService } from 'src/app/core/services/generic-user.service';
+import { EndUSer } from 'src/app/pages/activate-account/enduser.model';
+
 
 
 
@@ -13,6 +17,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./kyc.component.scss']
 })
 export class KycComponent implements OnInit {
+  kycForm: FormGroup;
+
   public webcamImage: WebcamImage = null;
   images: WebcamImage[] = [];
   imageUpload: any;
@@ -28,14 +34,28 @@ export class KycComponent implements OnInit {
   loadedImageLabels: any;
   noFaceDetectedError = false;
   uploadSuccess = false;
+  kycFrom: FormGroup;
 
   // breadcrumb items
   breadCrumbItems: Array<{}>;
 
-  constructor(private modalService: NgbModal, private router: Router) { }
+  constructor(private modalService: NgbModal, private router: Router,
+              private formBuilder: FormBuilder,
+              private userService: GenericUserService) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Crypto' }, { label: 'KYC Application', active: true }];
+
+    this.kycFrom = this.formBuilder.group({
+      cin : ['',[Validators.required]],
+      nom : ['',[Validators.required]],
+      dateNaissance : ['',[Validators.required]],
+      adresse : ['',[Validators.required]],
+      nationalite : ['',[Validators.required]],
+      telephone : ['',[Validators.required]],
+      email : ['',[Validators.required]]
+
+
+    })
     this.imageUpload = document.getElementById('imageUpload');
     Promise.all([
       faceapi.nets.tinyFaceDetector.loadFromUri('/assets/models'),
@@ -139,6 +159,24 @@ export class KycComponent implements OnInit {
 
   goToDashboard(){
     this.router.navigate(['/page/dashboard']);
+  }
+
+
+  addUser(){
+    // const currentDate = new Date();
+    // let userDetails = {...this.kycForm.value}
+    // console.log(userDetails)
+    //  let user1 : EndUSer
+    //  this.userService.notifyAdmin('http://localhost:10053/enduser/notify',userDetails).subscribe(
+    //    res => {
+    //     if(res != null){
+    //       alert("Mail envoyer à admin ")
+    //     }else{
+    //       alert("verifier vos données")
+    //     }
+    //   }
+    //  )
+
   }
 
 
