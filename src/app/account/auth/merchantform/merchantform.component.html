@@ -26,11 +26,11 @@
                 </a>
               </div>
             </div>
-            <form name="addMerchantForm" [formGroup]="addMerchantForm" novalidate>
+            <form name="merchantForm" [formGroup]="merchantForm" novalidate>
               <div class="row-md">
                 <div class="mb-3">
                   <label for="businessName">Nom de l'entreprise</label>
-                  <input type="businessName" formControlName="businessName" class="form-control" id="businessName" placeholder="Nom de l'entreprise">
+                  <input type="text" formControlName="businessName" class="form-control" id="businessName" placeholder="Nom de l'entreprise">
                 </div>
                 <div class="mb-3">
                   <label for="businessType">Type de l'entreprise</label>
@@ -41,13 +41,26 @@
                   </select>
                 </div>
                 <div class="mb-3">
+                  <label for="email">Email</label>
+                  <input type="text" formControlName="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="mb-3">
                   <label for="address">Adresse</label>
                   <input type="address" formControlName="address" class="form-control" id="address" placeholder="adresse">
                 </div>
                 <div class="mb-3">
-                  <label for="agreement" class="form-label">Agreement</label>
-                  <input class="form-control" type="file" id="formFile" formControlName="agreement">
+                  <label for="accountType" class="form-label">Type de compte</label>
+                  <input class="form-control" type="text"  formControlName="accountType">
                 </div>
+                <div class="mb-3">
+                  <label for="bankIndcation" class="form-label">Choisir Banque</label>
+                  <input class="form-control" type="text"  formControlName="bankIndcation">
+                </div>
+                <div class="mb-3">
+                  <label for="agreement" class="form-label">Agreement</label>
+                  <input class="form-control" type="file"  formControlName="agreement">
+                </div>
+
 
                 <div class="form-check form-checkbox-outline form-check-primary mb-3">
                   <input class="form-check-input" type="checkbox" id="customCheckcolor1" checked>
@@ -57,7 +70,7 @@
                 </div>
 
                 <div class="ms-0">
-                  <button  class="btn btn-primary" [disabled]="!addMerchantForm.valid" (click)="addMerchant()">Enregistrer</button>
+                  <button  class="btn btn-primary" [disabled]="!merchantForm.valid" (click)="validateAccount()">Enregistrer</button>
                 </div>
             </div>
             </form>

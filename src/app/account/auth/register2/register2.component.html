@@ -56,10 +56,7 @@
                     <div class="d-flex flex-column h-100">
                         <div class="mb-4 mb-md-5">
                             <a routerLink="/" class="d-block auth-logo">
-                              <!--
-                                <img src="assets/images/logo-dark.png" alt="" height="18" class="auth-logo-dark">
-                                <img src="assets/images/logo-light.png" alt="" height="18" class="auth-logo-light">
-                              -->
+
                               <img src="assets/images/logo-light.png" alt="" height="100" class="auth-logo-dark">
                             </a>
                         </div>
@@ -69,21 +66,15 @@
                                 <p class="text-muted">Inscrivez-vous maintenant et profitez d'une véritable expérience bancaire numérique.</p>
                             </div>
                             <div class="mt-4">
-                                <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-                                    <ngb-alert type="success" *ngIf="successmsg" [dismissible]="false">Registeration
-                                        successfull.
-                                    </ngb-alert>
-
-                                    <ngb-alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</ngb-alert>
-
+                                <form [formGroup]="signupForm" (ngSubmit)="toConfirm()">
                                     <div class="mb-3">
                                         <label for="useremail">Email</label>
                                         <input type="email" formControlName="email"
                                             [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                                             class="form-control" id="useremail" placeholder="email">
                                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                            <div *ngIf="f.email.errors.required">Vous devez saisir votre email</div>
-                                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                            <div *ngIf="f.email.errors.required">*Vous devez saisir votre email</div>
+                                            <div *ngIf="f.email.errors.email">*Email invalide</div>
                                         </div>
                                     </div>
 
@@ -126,8 +117,5 @@
                 </div>
             </div>
         </div>
-        <!-- end col -->
     </div>
-    <!-- end row -->
 </div>
-<!-- end container-fluid -->

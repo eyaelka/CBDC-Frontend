@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
+import { Observable } from 'rxjs';
 
 import { User } from '../models/auth.models';
 
@@ -29,21 +30,38 @@ export class GenericUserService{
   }
 
   //Update User
-  updateUser(url,userDetails,userId){
+  updateUser(url,data){
     //retrieve the token
     let token = this.authenticationService.getUserToken();
-    return this.http.post<any>(url,userDetails,userId);
+    return this.http.post<any>(url,data,{
+      headers: new HttpHeaders({
+        'Authorization': token
+      })
+    });
   }
 
   //Email Verification
-  sendEmail(url, email){
-    return this.http.post<any>(url,email);
+  sendEmailVerification(url:any,email: any){
+    //let token = this.authenticationService.getUserToken();
+
+    console.log(email)
+    console.log(url)
+    let sendEmail = this.http.post<any>(url,email/*,{
+      headers: new HttpHeaders(
+        {
+          'Authorization':""
+        }
+      )
+    }*/
+      )
+    console.log(sendEmail);
+    return sendEmail;
   }
 
-  // //Notify Admin
-  // notifyAdmin(url,endUser){
-  //   return this.http.post<any>(url,endUser);
-  // }
+//Notify Admin
+  notifyAdmin(url,endUser){
+    return this.http.post<any>(url,endUser);
+}
 
 
 

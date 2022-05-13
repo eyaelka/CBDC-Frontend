@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import * as moment from 'moment';
+import { AccountIdAndPassword } from '../models/account-id-and-password.model';
 
 
 @Injectable({
@@ -13,7 +14,6 @@ export class AuthenticationService{
   isCommercialBank = false;
   isUser = false;
 
-  URL ="http://localhost:10050"
 
   constructor (private router: Router, private http: HttpClient){}
 
@@ -23,8 +23,8 @@ export class AuthenticationService{
   }
 
   //Login the user
-  login(url,username,password){
-    return this.http.post<any>(url,{username,password});
+  login(url,userLogin: AccountIdAndPassword){
+    return this.http.post<any>(url,userLogin, {observe:'response'})
   }
 
   //Return true if user is logged in
@@ -53,10 +53,21 @@ export class AuthenticationService{
     localStorage.setItem("currentUser", jwt);
   }
 
-  //Get the token
+  //Get the authenticated user token : access token
   getUserToken(){
     return localStorage.getItem("currentUser");
   }
+
+  //Get refresh token
+  public getUserRefreshToken(): any{
+    return localStorage.getItem("refreshToken");
+  }
+
+  //Save refresh token
+  public saveRefreshTokenLocalStorage(jwt: any){
+    localStorage.setItem("refreshToken",jwt);
+  }
+
 
   //Remove the token
   logout(){
@@ -64,9 +75,10 @@ export class AuthenticationService{
     this.router.navigate(['']);
   }
 
-  //Send Email Verification
-  sendEmail(url,email){
-    return this.http.post<any>(url,email);
+  //Remove refresh token
+  public removeUserRefreshToken(): any{
+    return localStorage.removeItem("refreshToken");
   }
+
 
 }

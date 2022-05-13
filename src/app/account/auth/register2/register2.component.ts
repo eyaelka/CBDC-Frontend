@@ -31,16 +31,14 @@ export class Register2Component implements OnInit {
     document.body.classList.add('auth-body-bg')
 
     this.signupForm = this.formBuilder.group({
-      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      type: ['user',Validators.required]
     });
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.signupForm.controls; }
 
-  carouselOption: OwlOptions = {
+  carouselOption: OwlOptions ={
     items: 1,
     loop: false,
     margin: 0,
@@ -67,10 +65,20 @@ export class Register2Component implements OnInit {
     console.log(this.myRouterLink);
   }
 
-  onSubmit() {
-   this.router.navigate([this.myRouterLink]);
-   console.log(this.router.url);
+  toConfirm() {
+    this.submitted = true;
+    // stop here if form is invalid
+      if(this.signupForm.valid){
+        this.router.navigate([this.myRouterLink]);
+        console.log(this.router.url);
+
+      }else{
+        console.log("error");
       }
+
+
+
+  }
 
     // this.submitted = true;
 

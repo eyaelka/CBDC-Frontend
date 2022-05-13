@@ -3,7 +3,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { helpers } from 'chart.js';
 import { GenericUserService } from 'src/app/core/services/generic-user.service';
 import { ActivatedRoute } from '@angular/router';
-import { Merchant } from './merchant.model';
+import { MerchantAccountInfo } from './merchant.model';
+import { MyRouterLink } from '../../core/models/router-links';
 
 @Component({
   selector: 'app-activate-merchant',
@@ -11,58 +12,51 @@ import { Merchant } from './merchant.model';
   styleUrls: ['./activate-merchant.component.scss']
 })
 export class ActivateMerchantComponent implements OnInit {
-
+  error = '';
+  success: true;
+  myRouterLink: MyRouterLink = new MyRouterLink();
   constructor(private activatedRoute: ActivatedRoute,
-    private userService : GenericUserService) {
+    private userService : GenericUserService) {}
+  // bread crumb items
+  breadCrumbItems: Array<{}>;
+  value: number;
+  endUser: MerchantAccountInfo[] = new Array();
 
-}
-
-
-// bread crumb items
-breadCrumbItems: Array<{}>;
-value: number;
-
-merchant: Merchant[] = new Array();
-
-
-
-ngOnInit() {
-
-this.value = 4;
-
-
+  ngOnInit() {
+  this.value = 4;
 /**
 * fetches the data
 */
-this._fetchData();
-let helper = new JwtHelperService();
-let token = this.activatedRoute.snapshot.params.token;
-let decodedToken = helper.decodeToken(token);
-let userToActivate:Merchant = decodedToken.merchant
-console.log(userToActivate);
-this.merchant.push(userToActivate);
+  this._fetchData();
+  let helper = new JwtHelperService();
+  let token = this.activatedRoute.snapshot.params.token;
+  let decodedToken = helper.decodeToken(token);
+  console.log("dans acitvate",decodedToken);
+  let userToActivate:MerchantAccountInfo = decodedToken.endUser;
+  console.log("user dans activate",userToActivate);
+  this.endUser.push(userToActivate);
 
 }
 
-validationFinale(){
-let user:Merchant = this.merchant.pop();
-this.userService.addUser("http://localhost:10054/merchant/create",user).subscribe(
-res =>{
-alert ("Validé");
-
-}
-)
-
-
-
-}
+  validationFinale(){
+  let user:MerchantAccountInfo = this.endUser.pop();
+  user.suspend = false;
+  console.log("heeere",user)
+  this.userService.addUser(this.myRouterLink.linkCreateMerchant,user).subscribe(
+    res =>{
+      if (res){
+        alert ("Validé");
+      }
+      error => {
+        this.error = error ? error : '';
+      }
+    });
+  }
 
 /**
-* Cart data fetch
+* data fetch
 */
-private _fetchData() {
-this.merchant = this.merchant;
-}
-
-
-}
+  private _fetchData() {
+    this.endUser = this.endUser;
+    }
+  }

@@ -1,7 +1,9 @@
-export interface Merchant{
-  address:string;
-  agreement:string;
-  businessName:string;
-  businessType:string;
-  email:string;
+import {MerchantData } from '../../core/models/merchant-data.model';
+
+
+export class MerchantAccountInfo{
+  merchantData: MerchantData;
+  accountType:string;
+  bankIndcation:string;
+  suspend?:boolean;
 }

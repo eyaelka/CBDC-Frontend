@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LoaderService } from '../../../core/services/loader.service';
 import { GenericUserService } from 'src/app/core/services/generic-user.service';
 import bsCustomFileInput from 'bs-custom-file-input';
+import { MyRouterLink } from '../../../core/models/router-links';
+
 
 @Component({
   selector: 'app-merchantform',
@@ -13,7 +15,8 @@ import bsCustomFileInput from 'bs-custom-file-input';
 export class MerchantformComponent implements OnInit {
   // bread crumb items
   breadCrumbItems: Array<{}>;
-  addMerchantForm: FormGroup;
+  merchantForm: FormGroup;
+  myRouterLink: MyRouterLink = new MyRouterLink();
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -25,32 +28,32 @@ export class MerchantformComponent implements OnInit {
 
     this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Elements', active: true }];
     bsCustomFileInput.init();
-    this.addMerchantForm = this.formBuilder.group({
+    this.merchantForm = this.formBuilder.group({
       businessName : ['',[Validators.required]],
       businessType : ['',[Validators.required]],
+      email : ['',[Validators.required]],
       address : ['',[Validators.required]],
-      agreement : ['',[Validators.required]]
+      agreement : ['',[Validators.required]],
+      accountType :  ['',[Validators.required]],
+      bankIndcation :  ['',[Validators.required]]
     })
   }
-
-  addMerchant(){
-    let addRequest = {
-      address : this.addMerchantForm.value.address,
-      agreement : this.addMerchantForm.value.agreement,
-      businessName : this.addMerchantForm.value.businessName,
-      businessType : this.addMerchantForm.value.businessType,
-      email: 'eya.elkamel@etudiant-fst.utm.tn'
-
-    }
-    console.log(addRequest);
-    this.userService.addUser('http://localhost:10054/merchant/create',addRequest).subscribe(
+  validateAccount(){
+    let request = {
+      "merchantData":{
+        businessName : this.merchantForm.value.businessName,
+        businessType : this.merchantForm.value.businessType,
+        email: this.merchantForm.value.email,
+        address : this.merchantForm.value.address,
+        agreement : this.merchantForm.value.agreement
+      },
+      accountType: this.merchantForm.value.accountType,
+      bankIndcation: this.merchantForm.value.bankIndcation
+     }
+    console.log(request);
+    this.userService.notifyAdmin(this.myRouterLink.linkNotifyAdmin,request).subscribe(
       res =>{
         this.router.navigate(['/login-2/features'])
       })
-
-
   }
-
-
-  
 }

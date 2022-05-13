@@ -5,7 +5,7 @@ import { LanguageService } from '../../core/services/language.service';
 
 import { EventService } from '../../core/services/event.service';
 import { AuthenticationService } from '../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
+//import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 
 import { DOCUMENT } from '@angular/common';
 
@@ -42,7 +42,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
 
   // tslint:disable-next-line: max-line-length
   constructor(@Inject(DOCUMENT) private document: any, private router: Router, private eventService: EventService, private authService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService,
+    //private authFackservice: AuthfakeauthenticationService,
     public languageService: LanguageService,
     // tslint:disable-next-line: variable-name
     public _cookiesService: CookieService) {
@@ -82,7 +82,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
     if (environment.defaultauth === 'firebase') {
       this.authService.logout();
     } else {
-      this.authFackservice.logout();
+      //this.authFackservice.logout();
     }
     this.router.navigate(['/account/login']);
   }
