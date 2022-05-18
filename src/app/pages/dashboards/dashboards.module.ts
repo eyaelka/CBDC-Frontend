@@ -15,9 +15,11 @@ import { DefaultComponent } from './default/default.component';
 import { SaasComponent } from './saas/saas.component';
 import { CryptoComponent } from './crypto/crypto.component';
 import { BlogComponent } from './blog/blog.component';
+import { UserComponent } from './user/user.component';
+import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
-  declarations: [DefaultComponent, SaasComponent, CryptoComponent, BlogComponent],
+  declarations: [DefaultComponent, SaasComponent, CryptoComponent, BlogComponent, UserComponent, WalletComponent],
   imports: [
     CommonModule,
     FormsModule,

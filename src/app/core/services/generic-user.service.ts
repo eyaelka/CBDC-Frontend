@@ -32,12 +32,13 @@ export class GenericUserService{
   //Update User
   updateUser(url,data){
     //retrieve the token
-    let token = this.authenticationService.getUserToken();
-    return this.http.post<any>(url,data,{
-      headers: new HttpHeaders({
-        'Authorization': token
-      })
-    });
+    // let token = this.authenticationService.getUserToken();
+    // return this.http.post<any>(url,data,{
+    //   headers: new HttpHeaders({
+    //     'Authorization': token
+    //   })
+    // });
+    return this.http.post<any>(url,data);
   }
 
   //Email Verification
@@ -63,6 +64,10 @@ export class GenericUserService{
     return this.http.post<any>(url,endUser);
 }
 
+//Desactiver User
+deactivateUser(url,endUser){
+  return this.http.post<any>(url,endUser);
+}
 
 
 

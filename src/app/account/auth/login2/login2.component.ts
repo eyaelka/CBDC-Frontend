@@ -75,8 +75,9 @@ export class Login2Component implements OnInit {
         (res) => {
           if (res != null){
             let jwt = res.headers.get('Authorization');
-            //save refresh token to local storage
-            this.authService.saveRefreshTokenLocalStorage(res.headers.get('RefreshToken'));
+            this.authService.saveTokenLocalStorage(jwt);
+            this.router.navigate(['/page/dashboards/*'])
+
           }
         },
         (err) => {

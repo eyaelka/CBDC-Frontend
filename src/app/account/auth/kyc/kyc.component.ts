@@ -4,9 +4,11 @@ import { WebcamImage } from 'ngx-webcam';
 import { Subject, Observable } from 'rxjs';
 import * as faceapi from 'face-api.js';
 import { ActivatedRoute, Router } from '@angular/router';
-import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GenericUserService } from 'src/app/core/services/generic-user.service';
 import { EndUSer } from 'src/app/pages/activate-account/enduser.model';
+import { MyRouterLink } from '../../../core/models/router-links';
+import { nextTick } from 'process';
 
 
 
@@ -18,6 +20,7 @@ import { EndUSer } from 'src/app/pages/activate-account/enduser.model';
 })
 export class KycComponent implements OnInit {
   kycForm: FormGroup;
+  myRouterLink: MyRouterLink = new MyRouterLink();
 
   public webcamImage: WebcamImage = null;
   images: WebcamImage[] = [];
@@ -35,6 +38,7 @@ export class KycComponent implements OnInit {
   noFaceDetectedError = false;
   uploadSuccess = false;
   kycFrom: FormGroup;
+  idForm: FormGroup;
 
   // breadcrumb items
   breadCrumbItems: Array<{}>;
@@ -44,18 +48,37 @@ export class KycComponent implements OnInit {
               private userService: GenericUserService) { }
 
   ngOnInit(): void {
+    this.idForm = this.formBuilder.group({
+      imageUpload: ['',[Validators.required]]
+    })
 
-    this.kycFrom = this.formBuilder.group({
-      cin : ['',[Validators.required]],
-      nom : ['',[Validators.required]],
-      dateNaissance : ['',[Validators.required]],
-      adresse : ['',[Validators.required]],
-      nationalite : ['',[Validators.required]],
-      telephone : ['',[Validators.required]],
-      email : ['',[Validators.required]]
+    // this.kycFrom = this.formBuilder.group({
+    //   cin : ['',[Validators.required]],
+    //   nom : ['',[Validators.required]],
+    //   dateNaissance : ['',[Validators.required]],
+    //   adresse : ['',[Validators.required]],
+    //   nationalite : ['',[Validators.required]],
+    //   telephone : ['',[Validators.required]],
+    //   bankWhoAddUser : ['',[Validators.required]]
+    // })
+
+    this.kycForm = new FormGroup({
+      cin : new FormControl(),
+      nom : new FormControl(),
+      dateNaissance : new FormControl(),
+      adresse : new FormControl(),
+      nationalite : new FormControl(),
+      telephone : new FormControl(),
+      bankWhoAddUser : new FormControl(),
+
+
+
+
+
 
 
     })
+
     this.imageUpload = document.getElementById('imageUpload');
     Promise.all([
       faceapi.nets.tinyFaceDetector.loadFromUri('/assets/models'),
@@ -162,20 +185,21 @@ export class KycComponent implements OnInit {
   }
 
 
-  addUser(){
-    // const currentDate = new Date();
-    // let userDetails = {...this.kycForm.value}
-    // console.log(userDetails)
-    //  let user1 : EndUSer
-    //  this.userService.notifyAdmin('http://localhost:10053/enduser/notify',userDetails).subscribe(
-    //    res => {
-    //     if(res != null){
-    //       alert("Mail envoyer à admin ")
-    //     }else{
-    //       alert("verifier vos données")
-    //     }
-    //   }
-    //  )
+  validateUserAccount(){
+    let request = {
+      cin: this.kycForm.value.cin,
+      nom: this.kycForm.value.nom,
+      dateNaissance: this.kycForm.value.dateNaissance,
+      adresse: this.kycForm.value.adresse,
+      nationalite: this.kycForm.value.nationalite,
+      telephone: this.kycForm.value.telephone,
+      bankWhoAddUser: this.kycForm.value.bankWhoAddUser
+    }
+    console.log(request);
+    this.userService.notifyAdmin(this.myRouterLink.linkUserNotifyAdmin,request).subscribe(
+      res =>{
+        console.log('done')
+      })
 
   }
 

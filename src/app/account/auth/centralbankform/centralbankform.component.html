@@ -1,0 +1,83 @@
+<app-loader></app-loader>
+<div class="container-fluid">
+  <div class="account-pages my-5 pt-sm-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-11">
+          <div class="card overflow-hidden">
+            <div class=" bg-soft bg-primary">
+              <div class="row">
+                <div class="col-7">
+                  <div class="text-primary p-4">
+                    <h5 class="text-primary">Bienvenue Super Admin !</h5>
+                    <p>Ajoutons la Banque Centrale !</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div>
+                <a routerLink="/">
+                  <div class="avatar-md profile-user-wid mb-4">
+                    <span class="avatar-title rounded-circle bg-light">
+                      <img src="assets/images/logo-light.png" alt="" class="circle" height="50">
+                    </span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <form name="centralBankForm" [formGroup]="centralBankForm" novalidate>
+              <div class="row-md">
+                <div class="mb-3">
+                  <label for="nom">Nom Banque Centrale</label>
+                  <input type="text" formControlName="nom" class="form-control" id="nom" placeholder="Nom Banque Centrale">
+                </div>
+                <div class="mb-3">
+                  <label for="pays">Pays</label>
+                  <input type="text" formControlName="pays" class="form-control" id="Pays" placeholder="Pays">
+                </div>
+                <div class="mb-3">
+                  <label for="address">Adresse</label>
+                  <input type="adresse" formControlName="adresse" class="form-control" id="adresse" placeholder="Adresse">
+                </div>
+                <div class="mb-3">
+                  <label for="loiCreation" class="form-label">Loi de Création</label>
+                  <input class="form-control" type="text"  formControlName="loiCreation">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input class="form-control" type="text"  formControlName="email">
+                </div>
+                <div class="mb-3">
+                  <label for="accountType" class="form-label">Type de Compte</label>
+                  <input class="form-control" type="text"  formControlName="accountType">
+                </div>
+
+                <div class="ms-0">
+                  <button  class="btn btn-primary" [disabled]="!centralBankForm.valid" (click)="addCentralBankAccount()">Enregistrer</button>
+                </div>
+            </div>
+            </form>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

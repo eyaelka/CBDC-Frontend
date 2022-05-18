@@ -66,21 +66,20 @@
                           </div>
 
                           <div class="mt-4">
-                              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                              <form [formGroup]="loginForm" (ngSubmit)="onLogin(accountIdAndPassword)">
 
                                   <div class="mb-3">
-                                      <label for="email">Numéro de compte</label>
-                                      <input type="email" class="form-control" id="email" formControlName="email"
-                                          [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                                          placeholder="Numéro de compte">
-                                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                          <div *ngIf="f.email.errors.required">Vous devez saisir votre email</div>
-                                          </div>
+                                      <label for="identifiant">Identifiant</label>
+                                      <input type="identifiant" class="form-control" id="identifiant" formControlName="identifiant"
+                                          placeholder="Identifiant">
+                                          <div *ngIf="submitted && f.identifianterrors" class="invalid-feedback">
+                                            <div *ngIf="f.identifiant.errors.required">Vous devez saisir votre identifiant</div>
+                                            <div *ngIf="f.identifiant.errors.identifiant">Vous devez saisir votre email valide
+                                            </div>
+                                        </div>
                                       </div>
-                                
 
-                                  <div class="mb-3">
-
+                                      <div class="mb-3">
                                       <label for="userpassword">Mot de passe</label>
                                       <div class="input-group auth-pass-inputgroup">
                                           <input type="password" class="form-control" formControlName="password"

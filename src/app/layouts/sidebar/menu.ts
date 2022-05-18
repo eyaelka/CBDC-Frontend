@@ -5,23 +5,39 @@ export const MENU: MenuItem[] = [
     id:1,
     label:'MENUITEMS.DASHBOARDS.TEXT',
     icon: 'bx-home-circle',
-    link:'/centralbank/dashboard',
+    link:'/page/dashboards/default',
     role:'BC'
   },
   {
     id:2,
+    label:'MENUITEMS.MyWALLET.TEXT',
+    icon: 'bx-wallet',
+    link:'/page/dashboards/crypto',
+    role:'ALL'
+  },
+  {
+    id:3,
     label:'MENUITEMS.AdminBC.TEXT',
     icon: 'bx-user-pin',
     link:'/centralbank/add/dashboard',
     role:'BC'
   },
   {
-    id:3,
+    id:4,
     label:'MENUITEMS.ListeBSR.TEXT',
     icon: 'bx-user-plus',
     link:'/page/commercialbank',
     role:'BC'
-  }
+  },
+  {
+    id:5,
+    label:'MENUITEMS.Mail.TEXT',
+    icon: 'bx-mail-send',
+    link:'/page/email',
+    role:'ALL'
+  },
+
+
 
     // {
     //     id: 1,

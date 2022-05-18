@@ -25,10 +25,11 @@ import { MerchantformComponent } from './merchantform/merchantform.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { LoginComponent } from './login/login.component';
 import { LoginFeaturesComponent } from './login2/login-features/login-features.component';
+import { CentralbankformComponent } from './centralbankform/centralbankform.component';
 
 
 @NgModule({
-  declarations: [Login2Component, PasswordresetComponent, Register2Component, Recoverpwd2Component, KycComponent, VerifyemailComponent, ConfirmmailComponent, MerchantformComponent, StartPageComponent, LoginComponent, LoginFeaturesComponent],
+  declarations: [Login2Component, PasswordresetComponent, Register2Component, Recoverpwd2Component, KycComponent, VerifyemailComponent, ConfirmmailComponent, MerchantformComponent, StartPageComponent, LoginComponent, LoginFeaturesComponent, CentralbankformComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AuthenticationService } from '../../../core/services/auth.service';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 // import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
+import { AccountIdAndPassword } from '../../../core/models/account-id-and-password.model';
+
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
+import { MyRouterLink } from 'src/app/core/models/router-links';
 
 @Component({
   selector: 'app-login',
@@ -20,22 +23,21 @@ import { environment } from '../../../../environments/environment';
  */
 export class LoginComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) {}
-    // private authFackservice: AuthfakeauthenticationService) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute,
+              private router: Router, private authService: AuthenticationService) {}
   loginForm: FormGroup;
   submitted = false;
   error = '';
   returnUrl: string;
-
-  accountNumber = "11121301BC"
-  myPassword = "123456"
+  accountIdAndPassword: AccountIdAndPassword = new AccountIdAndPassword();
+  myRouterLink: MyRouterLink = new MyRouterLink();
   // set the currenr year
   year: number = new Date().getFullYear();
 
   ngOnInit(): void {
     document.body.classList.add('auth-body-bg')
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      identifiant: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
 
@@ -65,17 +67,39 @@ export class LoginComponent implements OnInit {
   /**
    * Form submit
    */
-  onSubmit() {
+   onLogin(accountIdAndPassword) {
+    let url;
     this.submitted = true;
-    let email = this.f.email.value
-    let password = this.f.password.value
+    accountIdAndPassword.compteId = this.f.identifiant.value;
+    accountIdAndPassword.password = this.f.password.value;
+    if (accountIdAndPassword.compteId.substring(accountIdAndPassword.compteId.length-2,accountIdAndPassword.compteId.length) == "bc"){//Banque Centrale
+      this.authService.login(this.myRouterLink.linkAddCentralBank,accountIdAndPassword).subscribe(
+        (res) => {
+          if (res != null){
+            let jwt = res.headers.get('Authorization');
+            this.authService.saveTokenLocalStorage(jwt);
+            console.log(jwt)
+            this.router.navigate(['/page/dashboards/default'])
+          }
+        },
+        (err) => {
+          console.log(err);
+        })
+    }else if (accountIdAndPassword.compteId.substring(accountIdAndPassword.compteId.length-2,accountIdAndPassword.compteId.length) == "cb"){//Banque Commerciale
+      this.authService.login("http://localhost:10051/login",accountIdAndPassword).subscribe(
+        (res) => {
+          if ( res != null){
+            console.log(res)
+            let jwt = res.headers.get('Authorization');
+            this.authService.saveTokenLocalStorage(jwt);
+            this.router.navigate(['/page/dashboards/saas'])
+          }
+        },
+        (err) => {
+          console.log(err);
+        })
+    }
 
-    if (email == this.accountNumber && password == this.myPassword){
-      this.router.navigate(['/page/dashboards/crypto'])
-    }
-    else{
-      this.router.navigate(['/page/dashboards/saas'])
-    }
 
 
     // // stop here if form is invalid

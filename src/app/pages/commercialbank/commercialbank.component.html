@@ -17,7 +17,7 @@
             </div>
             <div class="col-sm-8">
               <div class="text-sm-end">
-                <button type="button" class="btn btn-success btn-rounded mb-2 mr-2" (click)="openModal(content)">
+                <button type="button" class="btn btn-primary btn-rounded mb-2 mr-2" (click)="openModal(content)">
                   <i class="mdi mdi-plus me-1"></i> Ajouter
                 </button>
               </div>
@@ -28,11 +28,13 @@
             <table class="table align-middle table-nowrap">
               <thead>
                 <tr>
+                  <!-- <th>Identifiant Banque</th> -->
                   <th>Nom Banque</th>
                   <th>Abreviation</th>
+                  <th>Pays</th>
                   <th>Email / Fax</th>
                   <th>Adresse</th>
-                  <th>Balance</th>
+                  <th>Type compte</th>
                   <th>Date d'Ajout</th>
                   <th>Action</th>
 
@@ -41,31 +43,31 @@
               <tbody>
                 <tr *ngFor="let commercialbanks of commercialBankData ">
 
-                  <td>{{commercialbanks.name}}</td>
-                  <td>{{commercialbanks.abreviation}}</td>
+                  <!-- <td>{{commercialbanks.compteId}}</td> -->
+                  <td>{{commercialbanks.user.commercialBankData.name}}</td>
+                  <td>{{commercialbanks.user.commercialBankData.abreviation}}</td>
+                  <td>{{commercialbanks.user.commercialBankData.pays}}</td>
                   <td>
-                    <p class="mb-0">{{commercialbanks.email}}</p>
-                    <p class="mb-1">{{commercialbanks.fax}}</p>
+                    <p class="mb-0">{{commercialbanks.user.commercialBankData.email}}</p>
+                    <p class="mb-1">{{commercialbanks.user.commercialBankData.fax}}</p>
                   </td>
-                  <td>{{commercialbanks.address}}</td>
-                  <td>{{commercialbanks.balance}}</td>
-                  <td>{{commercialbanks.date | date: 'dd MMM, YYYY'}}</td>
+                  <td>{{commercialbanks.user.commercialBankData.address}}</td>
+                  <td>{{commercialbanks.user.accountType}}</td>
+                  <td>{{commercialbanks.user.date | date: 'dd MMM, YYYY'}}</td>
 
                   <td>
-                    <div class="dropdown" ngbDropdown placement="bottom-right">
-                      <a href="javascript: void(0);" class="dropdown-toggle card-drop" data-toggle="dropdown"
-                        ngbDropdownToggle aria-expanded="false">
-                        <i class="mdi mdi-dots-horizontal font-size-18"></i>
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-                        <li><a href="javascript: void(0);" class="dropdown-item" (click)="openModal(content1)"><i
-                              class="fas fa-pencil-alt text-success me-1"></i>
-                            Modifier</a></li>
-                        <li><a href="javascript: void(0);" class="dropdown-item"><i
-                              class="fas fa-trash-alt text-danger me-1"></i>
-                            Suspendre</a></li>
-                      </ul>
+                    <div class="btn">
+                      <span class="cell-btn" (click)="openModalEdit(content1,commercialbanks)">
+                        <i class="fas fa-pencil-alt text-primary"></i>
+                      </span> &nbsp;&nbsp;
+                      <span class="cell-btn"  *ngIf="!suspendFlag " (click)="openModalDeactivate(content2,commercialbanks)">
+                        <i class="fas fa-ban text-danger"></i>
+                      </span>
+                      <span class="cell-btn" *ngIf="suspendFlag" (click)="openDeleteAlert()">
+                        <i class="fas fa-user-slash text-danger"></i>
+                      </span>
                     </div>
+
                   </td>
                 </tr>
               </tbody>
@@ -106,6 +108,14 @@
             </div>
         </div>
         <div class="mb-3">
+          <label class="control-label">Pays</label>
+          <input class="form-control" placeholder="Saisissez pays" type="text" name="title" autocomplete="off" formControlName="pays"
+              [ngClass]="{'is-invalid': submitted && form.abreviation.errors}" />
+            <div *ngIf="submitted && form.pays.errors" class="invalid-feedback">
+              <span *ngIf="form.pays.errors.required">Vous devez saisir le pays de la banque.</span>
+            </div>
+        </div>
+        <div class="mb-3">
           <label class="control-label">Email</label>
           <input class="form-control" placeholder="Saisissez email" type="text" name="email" autocomplete="off" formControlName="email"
               [ngClass]="{'is-invalid': submitted && form.email.errors}" />
@@ -131,16 +141,16 @@
             </div>
         </div>
         <div class="mb-3">
-          <label class="control-label">Balance</label>
-          <input class="form-control" placeholder="Saisissez balance" type="text" autocomplete="off" name="balance" formControlName="balance"
+          <label class="control-label">Type de compte</label>
+          <input class="form-control" placeholder="Saisissez type" type="text" autocomplete="off" name="accountType" formControlName="accountType"
               [ngClass]="{'is-invalid': submitted && form.balance.errors}" />
             <div *ngIf="submitted && form.balance.errors" class="invalid-feedback">
-              <span *ngIf="form.balance.errors.required">Vous devez saisir le solde de la banque.</span>
+              <span *ngIf="form.accountType.errors.required">Vous devez saisir le type du compte</span>
             </div>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-success" id="btn-save-event">
+    <button type="submit" class="btn btn-primary" id="btn-save-event">
       Ajouter
     </button>
    </form>
@@ -174,6 +184,14 @@
             </div>
         </div>
         <div class="mb-3">
+          <label class="control-label">Pays</label>
+          <input class="form-control" placeholder="Saisissez pays" type="text" name="title" autocomplete="off" formControlName="pays"
+              [ngClass]="{'is-invalid': submitted && form.abreviation.errors}" />
+            <div *ngIf="submitted && form.pays.errors" class="invalid-feedback">
+              <span *ngIf="form.pays.errors.required">Vous devez saisir le pays de la banque.</span>
+            </div>
+        </div>
+        <div class="mb-3">
           <label class="control-label">Email</label>
           <input class="form-control" placeholder="Saisissez email" type="text" name="email" autocomplete="off" formControlName="email"
               [ngClass]="{'is-invalid': submitted && form.email.errors}" />
@@ -199,18 +217,53 @@
             </div>
         </div>
         <div class="mb-3">
-          <label class="control-label">Balance</label>
-          <input class="form-control" placeholder="Saisissez balance" type="text" autocomplete="off" name="balance" formControlName="balance"
+          <label class="control-label">Type de compte</label>
+          <input class="form-control" placeholder="Saisissez type" type="text" autocomplete="off" name="accountType" formControlName="accountType"
               [ngClass]="{'is-invalid': submitted && form.balance.errors}" />
             <div *ngIf="submitted && form.balance.errors" class="invalid-feedback">
-              <span *ngIf="form.balance.errors.required">Vous devez saisir le solde de la banque.</span>
+              <span *ngIf="form.accountType.errors.required">Vous devez saisir le type du compte</span>
             </div>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-success" id="btn-save-event">
-      Ajouter
+    <button type="submit" class="btn btn-primary" id="btn-save-event">
+      Modifier
     </button>
    </form>
   </div>
 </ng-template>
+
+
+
+
+<!-- Deactivate Modal -->
+<ng-template #content2 role="document" let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">Suspendre Banque Commerciale</h5>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+   <form (ngSubmit)="deactivateCustomer()" [formGroup]="formDataDeactivate">
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3">
+          <label class="control-label">Identifant Banque Centrale</label>
+          <input class="form-control" placeholder="Saisissez Identifant BC" type="text" name="title" autocomplete="off" formControlName="bankAccountId"
+              [ngClass]="{'is-invalid': submitted && form.bankAccountId.errors}" />
+            <div *ngIf="submitted && form.bankAccountId.errors" class="invalid-feedback">
+              <span *ngIf="form.bankAccountId.errors.required">Vous devez saisir l'identifiant de la banque centrale.</span>
+            </div>
+        </div>
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" id="suspendFlag" formControlName="suspendFlag" >
+          <label class="form-check-label" for="suspendFlag">Desactiver</label>
+      </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" id="btn-save-event">
+      Valider
+    </button>
+   </form>
+  </div>
+</ng-template>
+

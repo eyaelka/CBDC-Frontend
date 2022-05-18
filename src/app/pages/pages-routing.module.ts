@@ -8,10 +8,12 @@ import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { CommercialbankComponent } from './commercialbank/commercialbank.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { ActivateMerchantComponent } from './activate-merchant/activate-merchant.component';
+import { WalletComponent } from './dashboards/wallet/wallet.component';
 const routes: Routes = [
 
 
   { path: 'dashboard', component: DefaultComponent },
+  { path : 'wallet', component: WalletComponent},
   { path: 'calendar', component: CalendarComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'commercialbank', component:CommercialbankComponent},

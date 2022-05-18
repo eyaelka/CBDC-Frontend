@@ -18,6 +18,8 @@ export class CryptoComponent implements OnInit {
   // bread crumb items
   breadCrumbItems: Array<{}>;
   public activeOptionButton = "all";
+  transactions: Array<[]>;
+
 
   walletRadialChart: ChartType;
   overviewChart: ChartType;

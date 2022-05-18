@@ -9,15 +9,14 @@ import { Subject } from 'rxjs';
 export class LoaderService {
 
   public isLoading = new BehaviorSubject(false);
-  private showSpinner = new Subject();
   getData() {
-    return this.showSpinner;
+    return this.isLoading;
   }
   activate() {
-    this.showSpinner.next(true);
+    this.isLoading.next(true);
   }
   deactivate() {
-    this.showSpinner.next(false);
+    this.isLoading.next(false);
   }
 
   constructor() { }
