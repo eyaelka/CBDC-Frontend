@@ -75,7 +75,7 @@ export class Login2Component implements OnInit {
         (res) => {
           if (res != null){
             let jwt = res.headers.get('Authorization');
-            this.authService.saveTokenLocalStorage(jwt);
+            this.authService.saveTokenLocalStorage("userToken",jwt);
             this.router.navigate(['/page/dashboards/*'])
 
           }
@@ -88,7 +88,7 @@ export class Login2Component implements OnInit {
         (res) => {
           if ( res != null){
             let jwt = res.headers.get('Authorization');
-            this.authService.saveTokenLocalStorage(jwt);
+            this.authService.saveTokenLocalStorage("merchantToken",jwt);
             this.router.navigate(['/page/dashboards/saas'])
 
           }

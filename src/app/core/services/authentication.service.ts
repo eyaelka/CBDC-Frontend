@@ -24,7 +24,16 @@ export class AuthenticationService{
 
   //Login the user
   login(url,userLogin: AccountIdAndPassword){
-    return this.http.post<any>(url,userLogin, {observe:'response'})
+    return this.http.post<any>(url,userLogin, {observe:'response'/*,
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+    'Access-Control-Allow-Headers': 'Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+    'Access-Control-Expose-Headers':'Access-Control-Allow-Origin, Access-Control-Allow-Credentials'
+  })*/
+
+})
   }
 
   //Return true if user is logged in
@@ -49,8 +58,8 @@ export class AuthenticationService{
   }
 
   //Save token
-  saveTokenLocalStorage(jwt){
-    localStorage.setItem("currentUser", jwt);
+  saveTokenLocalStorage(user,jwt){
+    localStorage.setItem(user, jwt);
   }
 
   //Get the authenticated user token : access token

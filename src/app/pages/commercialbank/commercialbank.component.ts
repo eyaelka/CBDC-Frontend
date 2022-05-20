@@ -6,6 +6,11 @@ import { CommercialBankAccountInfo } from '../../core/models/commercialbank-acco
 import { LoaderService } from '../../core/services/loader.service';
 import { MyRouterLink } from '../../core/models/router-links';
 import { AlertService } from '../../core/services/alert.service';
+import Swal from 'sweetalert2';
+
+
+
+
 
 
 @Component({
@@ -32,6 +37,8 @@ export class CommercialbankComponent implements OnInit {
   deactivateData;
   deactivateAccountId;
   suspendFlag: false;
+  editted = false;
+  deactivated= false;
 
 
 
@@ -40,12 +47,9 @@ export class CommercialbankComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder,
               private userService: GenericUserService, private loaderService: LoaderService,
-              private alertService: AlertService
-           ) { }
+              private alertService: AlertService            ) { }
 
   ngOnInit() {
-
-
     this.formData = this.formBuilder.group({
       name: ['', [Validators.required]],
       abreviation: ['', [Validators.required]],
@@ -101,6 +105,7 @@ export class CommercialbankComponent implements OnInit {
   }
 
   openModalEdit(content: any, oldData: any){
+    this.formData.reset;
     this.oldData = oldData;
     this.modalService.open(content);
 
@@ -112,6 +117,7 @@ export class CommercialbankComponent implements OnInit {
   }
 
   saveCustomer() {
+    this.submitted = true;
     const currentDate = new Date();
     let userDetails = {
       "commercialBankData":{
@@ -128,6 +134,7 @@ export class CommercialbankComponent implements OnInit {
     }
      this.userService.addUser(this.myRouterLink.linkAddCommercialBank,userDetails).subscribe(
        res => {
+         this.submitted = false;
         if(res != null){
           let userData = {
             user: userDetails,
@@ -135,11 +142,13 @@ export class CommercialbankComponent implements OnInit {
           };
           console.log(userData);
           this.commercialBankData.push(userData);
+          this.alertService.successAlert('Banque Commerciale Ajoutée ')
           this.modalService.dismissAll();
 
         }
        },
        err => {
+         this.alertService.errorAlert('Erreur d\'Ajout de la banque commerciale')
         this.modalService.dismissAll();
        }
      );
@@ -147,6 +156,7 @@ export class CommercialbankComponent implements OnInit {
 }
 
 editCustomer(){
+   //this.editted = true;
   let user = {
     "commercialBankData":{
       ...this.formData.value,
@@ -168,6 +178,7 @@ editCustomer(){
   }
 
   this.userService.updateUser(this.myRouterLink.linkUpdateCommercialBank,userToEdit).subscribe(
+
     (res) => {
           if (res != null){
             let updatedUser = {
@@ -196,11 +207,12 @@ editCustomer(){
            }
            commercialBankDataTemp.push(updatedUser)
            this.commercialBankData = commercialBankDataTemp
-
+           this.alertService.successAlert('Banque Commerciale Modifiée ')
            this.modalService.dismissAll()
           }
     },
     err =>{
+      this.alertService.errorAlert('Erreur au cours de la modification du compte')
       this.modalService.dismissAll()
     }
   )
@@ -212,10 +224,10 @@ editCustomer(){
  }
 
  deactivateCustomer(){
-
+  this.deactivated = true;
    let user = {
     bankAccountId:this.formDataDeactivate.value.bankAccountId,
-    endUserAccountId: this.deactivateData.compteId,
+    endUserAccountId: this.deactivateAccountId,
     suspendFlag: true,
     newAccountType:"keep the same"
    }
@@ -223,11 +235,15 @@ editCustomer(){
 
    this.userService.deactivateUser(this.myRouterLink.linkDeactivateCommercialBank,user).subscribe(
      res => {
+       this.deactivated = false;
        console.log(res);
+       this.alertService.successAlert('Banque Commerciale Désactivée ')
        this.modalService.dismissAll();
-
-
-     }
+     },
+     err =>{
+       this.alertService.errorAlert('Erreur au cours de la désactivation du compte')
+      this.modalService.dismissAll()
+    }
    )
 
 

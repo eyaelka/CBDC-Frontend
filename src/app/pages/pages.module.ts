@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { NgbNavModule, NgbDropdownModule, NgbModalModule, NgbTooltipModule , NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -40,6 +41,8 @@ import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { CommercialbankComponent } from './commercialbank/commercialbank.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { ActivateMerchantComponent } from './activate-merchant/activate-merchant.component';
+import { RegulateMoneyComponent } from './regulate-money/regulate-money.component';
+
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -48,7 +51,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -81,7 +84,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgbTooltipModule,
     NgbCollapseModule,
     SimplebarAngularModule,
-    LightboxModule
-  ],
+    LightboxModule,
+      ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
+
 })
 export class PagesModule { }

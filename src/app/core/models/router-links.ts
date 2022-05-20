@@ -11,10 +11,12 @@ export class MyRouterLink{
 
   //CentralBank Link
   linkAddCentralBank = "http://localhost:10050/centralbank/save";
+  linkCentralBankLoginPath = "http://localhost:10050/login"
 
   //Commercial Bank Link
   linkAddCommercialBank = "http://localhost:10051/commercialbank/create";
   linkUpdateCommercialBank = "http://localhost:10051/commercialbank/update";
-  linkDeactivateCommercialBank = "http://localhost:10051/commercialbank/deleteoractiveorswithacountytype"
+  linkDeactivateCommercialBank = "http://localhost:10051/commercialbank/deleteoractiveorswithacountytype";
+  linkCommercialBankLoginPath = "http://localhost:10051/login"
 
 }

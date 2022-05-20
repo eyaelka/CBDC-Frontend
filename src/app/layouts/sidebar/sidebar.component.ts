@@ -36,8 +36,48 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
       }
     });
   }
+  private _activateMenuDropdown() {
+    throw new Error('Method not implemented.');
+  }
+
+  routes = [
+    {
+      route : "/page/dashboards/default" ,
+      name : "Tableau de bord" ,
+      icon : "manage_accounts" ,
+      role : 'ADMIN'
+    },
+    {
+      route : "/page/dashboards/crypto" ,
+      name : "Administrateurs" ,
+      icon : "manage_accounts" ,
+      role : 'ADMIN'
+    },
+    {
+      route : "/page/commercialbank" ,
+      name : "Banques Commerciales" ,
+      icon : "manage_accounts" ,
+      role : 'ADMIN'
+    },
+    {
+      route : "admins" ,
+      name : "My Wallet" ,
+      icon : "manage_accounts" ,
+      role : 'ADMIN'
+    },
+    {
+      route : "admins" ,
+      name : "Mail" ,
+      icon : "manage_accounts" ,
+      role : 'ADMIN'
+    }
+
+  ]
 
   ngOnInit() {
+    this.routes = this.routes.filter (route => {
+      return route.role == sessionStorage.getItem('role') || route.role == 'ALL'
+    })
     this.initialize();
     this._scrollElement();
   }
@@ -85,7 +125,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Activate the parent dropdown
    */
-  _activateMenuDropdown() {
+ /* _activateMenuDropdown() {
     this._removeAllClass('mm-active');
     this._removeAllClass('mm-show');
     const links = document.getElementsByClassName('side-nav-link-ref');
@@ -133,7 +173,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
       }
     }
 
-  }
+  }*/
 
   /**
    * Initialize

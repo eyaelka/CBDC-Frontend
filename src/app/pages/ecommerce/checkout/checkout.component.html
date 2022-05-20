@@ -1,13 +1,13 @@
 <div class="container-fluid">
-  <app-page-title title="Checkout" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <app-page-title title="Régulateur Masse Monetaire" [breadcrumbItems]="breadCrumbItems"></app-page-title>
   <div class="checkout-tabs">
     <div class="row">
       <div class="col-xl-2 col-sm-3">
         <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-pills flex-column">
           <li [ngbNavItem]="1">
             <a ngbNavLink>
-              <i class="bx bxs-truck d-block check-nav-icon mt-4 mb-2"></i>
-              <p class="fw-bold mb-4">Shipping Info</p>
+              <i class="fas fa-file-signature d-block check-nav-icon mt-4 mb-2"></i>
+              <p class="fw-bold mb-4">Variable de contrôle</p>
             </a>
             <ng-template ngbNavContent>
               <div class="card">
@@ -16,8 +16,8 @@
                     <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel"
                       aria-labelledby="v-pills-shipping-tab">
                       <div>
-                        <h4 class="card-title">Shipping information</h4>
-                        <p class="card-title-desc">Fill all information below</p>
+                        <h4 class="card-title">Régulation Masse Monétaire</h4>
+                        <p class="card-title-desc">Définir variable de contrôle de la banque centrale</p>
                         <form>
                           <div class="row mb-4">
                             <label for="billing-name" class="col-md-2 col-form-label">Name</label>

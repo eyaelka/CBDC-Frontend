@@ -1,4 +1,6 @@
+
 <div class="container-fluid">
+
 
   <app-page-title title="Liste des Banque Commerciales" [breadcrumbItems]="breadCrumbItems"></app-page-title>
 
@@ -82,14 +84,18 @@
 </div>
 
 <!-- Standard Modal -->
+
 <ng-template #content role="document" let-modal>
+
   <div class="modal-header">
     <h5 class="modal-title mt-0">Ajouter Banque Commerciale</h5>
     <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
+
    <form (ngSubmit)="saveCustomer()" [formGroup]="formData">
     <div class="row">
+
       <div class="col-12">
         <div class="mb-3">
           <label class="control-label">Nom Banque</label>
@@ -143,18 +149,22 @@
         <div class="mb-3">
           <label class="control-label">Type de compte</label>
           <input class="form-control" placeholder="Saisissez type" type="text" autocomplete="off" name="accountType" formControlName="accountType"
-              [ngClass]="{'is-invalid': submitted && form.balance.errors}" />
-            <div *ngIf="submitted && form.balance.errors" class="invalid-feedback">
+              [ngClass]="{'is-invalid': submitted && form.accountType.errors}" />
+            <div *ngIf="submitted && form.accountType.errors" class="invalid-feedback">
               <span *ngIf="form.accountType.errors.required">Vous devez saisir le type du compte</span>
             </div>
         </div>
       </div>
+
     </div>
     <button type="submit" class="btn btn-primary" id="btn-save-event">
       Ajouter
     </button>
+      <div class="spinner-border text-secondary m-1" role="status" *ngIf="this.submitted == true">
+      </div>
    </form>
   </div>
+
 </ng-template>
 
 <!-- Standard Modal -->
@@ -219,16 +229,17 @@
         <div class="mb-3">
           <label class="control-label">Type de compte</label>
           <input class="form-control" placeholder="Saisissez type" type="text" autocomplete="off" name="accountType" formControlName="accountType"
-              [ngClass]="{'is-invalid': submitted && form.balance.errors}" />
-            <div *ngIf="submitted && form.balance.errors" class="invalid-feedback">
+              [ngClass]="{'is-invalid': submitted && form.accountType.errors}" />
+            <div *ngIf="submitted && form.accountType.errors" class="invalid-feedback">
               <span *ngIf="form.accountType.errors.required">Vous devez saisir le type du compte</span>
             </div>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" id="btn-save-event">
-      Modifier
-    </button>
+      <button type="submit" class="btn btn-primary" id="btn-save-event">
+        Modifier
+      </button>
+      <div class="spinner-border text-secondary m-1" role="status" *ngIf="this.editted == true"></div>
    </form>
   </div>
 </ng-template>
@@ -260,9 +271,13 @@
       </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" id="btn-save-event">
-      Valider
-    </button>
+      <button type="submit" class="btn btn-primary" id="btn-save-event">
+        Valider
+      </button>
+      <div class="spinner-border text-secondary m-1" role="status" *ngIf="this.deactivated == true"></div>
+
+
+
    </form>
   </div>
 </ng-template>

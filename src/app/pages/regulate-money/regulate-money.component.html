@@ -1,0 +1,156 @@
+<div class="container-fluid">
+  <div class="checkout-tabs">
+    <div class="row">
+      <div class="col-xl-2 col-sm-3">
+        <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-pills flex-column">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink>
+              <i class="fas fa-file-signature d-block check-nav-icon mt-4 mb-2"></i>
+              <p class="fw-bold mb-4">Variable de contrôle</p>
+            </a>
+            <ng-template ngbNavContent>
+              <div class="card">
+                <div class="card-body">
+                  <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel"
+                      aria-labelledby="v-pills-shipping-tab">
+                      <div>
+                        <h4 class="card-title">Régulation Masse Monétaire</h4>
+                        <p class="card-title-desc">Définir variable de contrôle de la banque centrale</p>
+                        <form [formGroup]="formData">
+                          <div class="row mb-4">
+                            <label for="tauxReserveObligatoir" class="col-md-2 col-form-label">TRO</label>
+                            <div class="col-md-10">
+                              <input type="text" class="form-control" id="tauxReserveObligatoir" placeholder="Taux Réserve Obligatoire">
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <label for="tauxDirecteur" class="col-md-2 col-form-label">TD</label>
+                            <div class="col-md-10">
+                              <input type="email" class="form-control" id="tauxDirecteur"
+                                placeholder="Taux Directeur">
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <label for="tauxNegatif" class="col-md-2 col-form-label">TN</label>
+                            <div class="col-md-10">
+                              <input type="text" class="form-control" id="tauxNegatif"
+                                placeholder="Taux Négatif">
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <label class="col-md-2 col-form-label">Pays</label>
+                            <div class="col-md-10">
+                              <input type="text" class="form-control" id="pays"
+                                placeholder="Pays">
+                            </div>
+                          </div>
+
+                          <div class="row mb-0">
+                            <label for="motifRegulation" class="col-md-2 col-form-label">Justificatif de régulation</label>
+                            <div class="col-md-10">
+                              <textarea class="form-control" id="motifRegulation" rows="3"
+                                placeholder="Explique la nouvelle régulation"></textarea>
+                            </div>
+                          </div>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row my-4">
+                    <div class="col-sm-6">
+
+                    </div> <!-- end col -->
+                    <div class="col-sm-6">
+                      <div class="text-sm-end">
+                        <a  ngbNavLink [routerLink]=2 class="btn btn-primary">
+                          Confirmer</a>
+                      </div>
+                    </div> <!-- end col -->
+                  </div>
+                </div>
+              </div>
+
+
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="2">
+            <a ngbNavLink>
+              <i class="bx bx-badge-check d-block check-nav-icon mt-4 mb-2"></i>
+              <p class="fw-bold mb-4">Confirmation</p>
+            </a>
+            <ng-template ngbNavContent>
+              <div class="card">
+                <div class="card-body">
+                  <div class="card shadow-none border mb-0">
+                    <div class="card-body">
+                      <h4 class="card-title mb-4">Récaputilatif de la nouvelle régulation</h4>
+
+                      <div class="table-responsive">
+                        <table class="table table-centered mb-0 table-nowrap">
+                          <thead class="table-light">
+                            <tr>
+                              <th scope="col">Variables régulatrices</th>
+                              <th scope="col">Valeur</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a routerLink="/ecommerce/product-detail"
+                                    class="text-dark">Half sleeve T-shirt (64GB) </a></h5>
+                                <p class="text-muted mb-0">$ 450 x 1</p>
+                              </td>
+                              <td>$ 450</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a routerLink="/ecommerce/product-detail"
+                                    class="text-dark">Wirless Headphone </a></h5>
+                                <p class="text-muted mb-0">$ 225 x 1</p>
+                              </td>
+                              <td>$ 225</td>
+                            </tr>
+                            <tr>
+                              <td colspan="3">
+                                <div class="bg-soft bg-primary p-3 rounded">
+                                  <h5 class="font-size-14 text-primary mb-0"><i class="fas fa-shipping-fast me-2"></i>
+                                    Shipping
+                                    <span class="float-end">Free</span></h5>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col-sm-6">
+                      <div class="text">
+                        <a routerLink="/ecommerce/checkout" class="btn btn-info">
+                          <i class="mdi mdi-file-pdf me-1"></i> Télecharger </a>
+                      </div>
+                    </div> <!-- end col -->
+                    <div class="col-sm-6">
+                      <div class="text-end">
+                        <a routerLink="/ecommerce/checkout" class="btn btn-primary">
+                          <i class="mdi mdi-check-outline me-1"></i> Valider</a>
+                      </div>
+                    </div> <!-- end col -->
+                  </div>
+                </div>
+              </div>
+
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-10">
+        <div [ngbNavOutlet]="nav"></div>
+      </div>
+    </div>
+  </div>
+</div>

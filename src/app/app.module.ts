@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
@@ -22,6 +22,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ErrorInterceptor } from './core/helpers/error.interceptor';
 //import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
+import { NgxSpinnerModule } from "ngx-spinner";
+
+
+
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -42,6 +46,7 @@ export function createTranslateLoader(http: HttpClient): any {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -58,8 +63,10 @@ export function createTranslateLoader(http: HttpClient): any {
     NgbNavModule,
     NgbTooltipModule,
     ScrollToModule.forRoot(),
-    NgbModule
-  ],
+    NgbModule  ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
+
   bootstrap: [AppComponent],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
