@@ -16,6 +16,8 @@ export class CentralbankformComponent implements OnInit {
 breadCrumbItems: Array<{}>;
 centralBankForm: FormGroup;
 myRouterLink: MyRouterLink = new MyRouterLink();
+submitted = false;
+
 
 constructor(private formBuilder: FormBuilder,
             private router: Router,
@@ -33,10 +35,13 @@ ngOnInit() {
     adresse : ['',[Validators.required]],
     loiCreation : ['',[Validators.required]],
     email : ['',[Validators.required]],
-    accountType :  ['',[Validators.required]],
+    accountType :  [''],
+    abreviation :  ['',[Validators.required]],
+    phone :  ['',[Validators.required]]
   })
 }
 addCentralBankAccount(){
+  this.submitted = true;
   let request = {
     "centralBankData":{
       nom : this.centralBankForm.value.nom,
@@ -45,13 +50,18 @@ addCentralBankAccount(){
       loiCreation : this.centralBankForm.value.loiCreation,
       email : this.centralBankForm.value.email
     },
-    accountType: this.centralBankForm.value.accountType,
+    accountType: "courant",
    }
   console.log(request);
   this.userService.addUser(this.myRouterLink.linkAddCentralBank,request).subscribe(
     res =>{
+      this.submitted = false;
       this.router.navigate(['/login'])
     })
+}
+
+get form() {
+  return this.centralBankForm.controls;
 }
 
 

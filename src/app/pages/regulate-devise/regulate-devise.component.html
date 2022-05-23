@@ -1,0 +1,202 @@
+<div class="container-fluid">
+  <div class="checkout-tabs">
+    <div class="row">
+      <div class="col-xl-2 col-sm-3">
+        <ul ngbNav #nav="ngbNav" [activeId]="activeID" class="nav-pills flex-column">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink>
+              <i class="fas fa-file-signature d-block check-nav-icon mt-4 mb-2"></i>
+              <p class="fw-bold mb-4">Réguler Devises</p>
+            </a>
+            <ng-template ngbNavContent>
+              <div class="card">
+                <div class="card-body">
+                  <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel"
+                      aria-labelledby="v-pills-shipping-tab">
+                      <div>
+                        <h4 class="card-title">Régulation Devise</h4>
+                        <p class="card-title-desc">Définir variable régulateur des devises</p>
+                        <form [formGroup]="formData">
+                          <div class="row mb-4">
+                            <label for="nom" class="col-md-2 col-form-label">Nom Devise</label>
+                            <div class="col-md-10">
+                              <input type="text" class="form-control" id="nom"
+                                placeholder="Nom Devise" formControlName="nom"
+                                [ngClass]="{'is-invalid': submitted && form.nom.errors}">
+                                <div *ngIf="submitted && form.nom.errors" class="invalid-feedback">
+                                  <span *ngIf="form.nom.errors.required">Vous devez saisir le nom du devise.</span>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <label class="col-md-2 col-form-label">Pays</label>
+                            <div class="col-md-10">
+                              <input type="text" class="form-control" id="pays"
+                                placeholder="Pays" formControlName="pays"
+                                [ngClass]="{'is-invalid': submitted && form.pays.errors}">
+                                <div *ngIf="submitted && form.pays.errors" class="invalid-feedback">
+                                  <span *ngIf="form.pays.errors.required">Vous devez saisir un pays.</span>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <label for="tauxAchat" class="col-md-2 col-form-label">Taux Achat</label>
+                            <div class="col-md-10">
+                              <input type="number" class="form-control" id="tauxAchat" placeholder="Taux Achat"
+                              formControlName="tauxAchat"
+                              [ngClass]="{'is-invalid': submitted && form.tauxAchat.errors}">
+                              <div *ngIf="submitted && form.tauxAchat.errors" class="invalid-feedback">
+                                <span *ngIf="form.tauxAchat.errors.required">Vous devez saisir le Taux d'Achat.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <label for="tauxVente" class="col-md-2 col-form-label">Taux Vente</label>
+                            <div class="col-md-10">
+                              <input type="number" class="form-control" id="tauxVente"
+                                placeholder="Taux Vente" formControlName="tauxVente"
+                                [ngClass]="{'is-invalid': submitted && form.tauxVente.errors}">
+                                <div *ngIf="submitted && form.tauxVente.errors" class="invalid-feedback">
+                                  <span *ngIf="form.tauxVente.errors.required">Vous devez saisir un Taux de Vente.</span>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="row mb-4">
+                            <label for="date" class="col-md-2 col-form-label">Date</label>
+                            <div class="col-md-10">
+                              <input type="date" class="form-control" id="date"
+                                placeholder="Date" formControlName="date"
+                                [ngClass]="{'is-invalid': submitted && form.date.errors}">
+                                <div *ngIf="submitted && form.date.errors" class="invalid-feedback">
+                                  <span *ngIf="form.date.errors.required">Vous devez saisir un Taux de Vente.</span>
+                                </div>
+                            </div>
+                          </div>
+
+                          <div class="row mb-0">
+                            <label for="motifVariation" class="col-md-2 col-form-label">Justificatif de Variation</label>
+                            <div class="col-md-10">
+                              <textarea class="form-control" id="motifVariation" rows="3" formControlName="motifVariation"
+                              [ngClass]="{'is-invalid': submitted && form.motifVariation.errors}"
+                              placeholder="Explique la nouvelle variation"></textarea>
+                            </div>
+                          </div>
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row my-4">
+                    <div class="col-sm-6">
+
+                    </div> <!-- end col -->
+                    <div class="col-sm-6">
+                      <div class="text-sm-end">
+                        <a class="btn btn-primary" type="button" (click)="goToConfirm()">
+                          Confirmer</a>
+                      </div>
+                    </div> <!-- end col -->
+                  </div>
+                </div>
+              </div>
+
+
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="2" >
+            <a ngbNavLink >
+              <i class="bx bx-badge-check d-block check-nav-icon mt-4 mb-2"></i>
+              <p class="fw-bold mb-4">Confirmation</p>
+            </a>
+            <ng-template ngbNavContent >
+              <div class="card">
+                <div class="card-body">
+                  <div class="card shadow-none border mb-0">
+                    <div class="card-body">
+                      <h4 class="card-title mb-4">Récaputilatif de la nouvelle régulation</h4>
+
+                      <div class="table-responsive">
+                        <table id="table" class="table table-centered mb-0 table-nowrap">
+                          <thead class="table-light">
+                            <tr>
+                              <th scope="col">Variables régulatrices</th>
+                              <th scope="col">Valeur</th>
+                            </tr>
+                          </thead>
+                          <tbody >
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark"></a> Nom Devise</h5>
+
+                              </td>
+                              <td>{{reg.nom}}</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Pays</a></h5>
+                              </td>
+                              <td>{{reg.pays}}</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Taux Achat</a></h5>
+                              </td>
+                              <td>{{reg.tauxAchat}}</td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Taux Vente</a></h5>
+                              </td>
+                              <td>{{reg.tauxVente}}</td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Date</a></h5>
+                              </td>
+                              <td>{{reg.date}}</td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Justificatif de variation</a></h5>
+                              </td>
+                              <td>{{reg.motifVariation}}</td>
+                            </tr>
+
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col-sm-6">
+                      <div class="text">
+                        <a  class="btn btn-info" (click)="generatePDF()">
+                          <i class="mdi mdi-file-pdf me-1"></i> Télecharger </a>
+                      </div>
+                    </div> <!-- end col -->
+                    <div class="col-sm-6">
+                      <div class="text-end">
+                        <a class="btn btn-primary" (click)="onSubmit()">
+                          <i class="mdi mdi-check-outline me-1"></i> Valider</a>
+                      </div>
+                    </div> <!-- end col -->
+                  </div>
+                </div>
+              </div>
+
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-10">
+        <div [ngbNavOutlet]="nav"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+
+import { NgApexchartsModule } from 'ng-apexcharts';
+//import { CentralbankWalletComponent } from './centralbank-wallet/centralbank-wallet.component';
+import { UserWalletComponent } from './user-wallet/user-wallet.component';
+import { MerchantWalletComponent } from './merchant-wallet/merchant-wallet.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
 import { DefaultComponent } from './dashboards/default/default.component';
@@ -8,23 +13,26 @@ import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { CommercialbankComponent } from './commercialbank/commercialbank.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { ActivateMerchantComponent } from './activate-merchant/activate-merchant.component';
-import { WalletComponent } from './dashboards/wallet/wallet.component';
 import { RegulateMoneyComponent } from './regulate-money/regulate-money.component';
+import { RegulateDeviseComponent } from './regulate-devise/regulate-devise.component';
 const routes: Routes = [
 
 
   { path: 'dashboard', component: DefaultComponent },
-  { path : 'wallet', component: WalletComponent},
   { path: 'calendar', component: CalendarComponent },
   { path: 'chat', component: ChatComponent },
+  { path: 'user-wallet', component:UserWalletComponent },
+  { path: 'merchant-wallet',component:MerchantWalletComponent },
+  { path: 'regulatedevise', component:RegulateDeviseComponent},
+  //{ path: 'centralbank-wallet', component:CentralbankWalletComponent},
   { path: 'commercialbank', component:CommercialbankComponent},
   { path: 'enduser/activation/:token', component:ActivateAccountComponent},
   { path: 'merchant/activation/:token', component:ActivateMerchantComponent},
   { path: 'regulatemoney', component:RegulateMoneyComponent},
   { path: 'filemanager', component: FilemanagerComponent },
-  { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
+  //{ path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
   { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
-  { path: 'crypto', loadChildren: () => import('./crypto/crypto.module').then(m => m.CryptoModule) },
+  //{ path: 'crypto', loadChildren: () => import('./crypto/crypto.module').then(m => m.CryptoModule) },
   { path: 'email', loadChildren: () => import('./email/email.module').then(m => m.EmailModule) },
   { path: 'invoices', loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule) },
   { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule) },

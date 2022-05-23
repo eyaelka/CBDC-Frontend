@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DefaultComponent } from './default/default.component';
-import { SaasComponent } from './saas/saas.component';
-import { CryptoComponent } from './crypto/crypto.component';
-import { BlogComponent } from './blog/blog.component';
+//import { SaasComponent } from './saas/saas.component';
+//import { CryptoComponent } from './crypto/crypto.component';
+//import { BlogComponent } from './blog/blog.component';
 
 const routes: Routes = [
     {
@@ -13,15 +13,15 @@ const routes: Routes = [
     },
     {
         path: 'saas',
-        component: SaasComponent
+       // component: SaasComponent
     },
     {
         path: 'crypto',
-        component: CryptoComponent
+       // component: CryptoComponent
     },
     {
         path: 'blog',
-        component: BlogComponent
+       // component: BlogComponent
     }
 ];
 

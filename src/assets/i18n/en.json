@@ -81,6 +81,9 @@
     "Mail":{
       "TEXT":"Mail"
     },
+    "RegMasseMonetaire":{
+      "TEXT":"Régulation Monétaire"
+    },
     "DASHBOARDS": {
       "TEXT": "Tableau de bord",
       "LIST": {

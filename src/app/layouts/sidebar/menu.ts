@@ -3,39 +3,54 @@ import { MenuItem } from './menu.model';
 export const MENU: MenuItem[] = [
   {
     id:1,
-    label:'MENUITEMS.DASHBOARDS.TEXT',
+    label:'Tableau de bord',
     icon: 'bx-home-circle',
     link:'/page/dashboards/default',
     role:'BC'
   },
   {
     id:2,
-    label:'MENUITEMS.MyWALLET.TEXT',
+    label:'Portefeuille',
     icon: 'bx-wallet',
-    link:'/page/dashboards/crypto',
+    link:'/page/cb-wallet',
     role:'ALL'
   },
   {
     id:3,
-    label:'MENUITEMS.AdminBC.TEXT',
+    label:'Administrateurs',
     icon: 'bx-user-pin',
     link:'/centralbank/add/dashboard',
     role:'BC'
   },
   {
     id:4,
-    label:'MENUITEMS.ListeBSR.TEXT',
+    label:'Banques Commerciales',
     icon: 'bx-user-plus',
     link:'/page/commercialbank',
     role:'BC'
   },
   {
     id:5,
-    label:'MENUITEMS.Mail.TEXT',
+    label:'Régulation Monetaire',
+    icon: 'bxs-file-blank ',
+    link:'/page/regulatemoney',
+    role:'BC'
+
+  },
+  {
+    id:6,
+    label:'E-mail',
     icon: 'bx-mail-send',
     link:'/page/email',
     role:'ALL'
   },
+  {
+    id:7,
+    label:'Régulation Devise',
+    icon: 'bx bx-transfer',
+    link:'/page/regulatedevise',
+    role:'ALL'
+  }
 
 
 

@@ -3,6 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
 
+////////
+
+
+
+import { ArchwizardModule } from 'angular-archwizard';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+///////
+import {DecimalPipe} from '@angular/common';
+
 import { NgbNavModule, NgbDropdownModule, NgbModalModule, NgbTooltipModule , NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -17,9 +26,9 @@ import { UIModule } from '../shared/ui/ui.module';
 
 import { PagesRoutingModule } from './pages-routing.module';
 
-import { DashboardsModule } from './dashboards/dashboards.module';
+//import { DashboardsModule } from './dashboards/dashboards.module';
 import { EcommerceModule } from './ecommerce/ecommerce.module';
-import { CryptoModule } from './crypto/crypto.module';
+//import { CryptoModule } from './crypto/crypto.module';
 import { EmailModule } from './email/email.module';
 import { InvoicesModule } from './invoices/invoices.module';
 import { ProjectsModule } from './projects/projects.module';
@@ -42,6 +51,10 @@ import { CommercialbankComponent } from './commercialbank/commercialbank.compone
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { ActivateMerchantComponent } from './activate-merchant/activate-merchant.component';
 import { RegulateMoneyComponent } from './regulate-money/regulate-money.component';
+//import { CentralbankWalletComponent } from './centralbank-wallet/centralbank-wallet.component';
+import { UserWalletComponent } from './user-wallet/user-wallet.component';
+import { MerchantWalletComponent } from './merchant-wallet/merchant-wallet.component';
+import { RegulateDeviseComponent } from './regulate-devise/regulate-devise.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -51,7 +64,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent, UserWalletComponent, MerchantWalletComponent, RegulateDeviseComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -60,14 +73,15 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     PagesRoutingModule,
     NgApexchartsModule,
     ReactiveFormsModule,
-    DashboardsModule,
-    CryptoModule,
+    //DashboardsModule,
+    //CryptoModule,
     EcommerceModule,
     EmailModule,
     InvoicesModule,
     HttpClientModule,
     ProjectsModule,
     UIModule,
+    DropzoneModule,
     TasksModule,
     ContactsModule,
     BlogModule,
@@ -85,8 +99,11 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgbCollapseModule,
     SimplebarAngularModule,
     LightboxModule,
+    ArchwizardModule
       ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [DecimalPipe]
+
 
 
 })

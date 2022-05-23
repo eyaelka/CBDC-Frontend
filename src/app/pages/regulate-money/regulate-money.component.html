@@ -2,7 +2,7 @@
   <div class="checkout-tabs">
     <div class="row">
       <div class="col-xl-2 col-sm-3">
-        <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav-pills flex-column">
+        <ul ngbNav #nav="ngbNav" [activeId]="activeID" class="nav-pills flex-column">
           <li [ngbNavItem]="1">
             <a ngbNavLink>
               <i class="fas fa-file-signature d-block check-nav-icon mt-4 mb-2"></i>
@@ -21,36 +21,54 @@
                           <div class="row mb-4">
                             <label for="tauxReserveObligatoir" class="col-md-2 col-form-label">TRO</label>
                             <div class="col-md-10">
-                              <input type="text" class="form-control" id="tauxReserveObligatoir" placeholder="Taux Réserve Obligatoire">
+                              <input type="number" class="form-control" id="tauxReserveObligatoir" placeholder="Taux Réserve Obligatoire"
+                              formControlName="tauxReserveObligatoir"
+                              [ngClass]="{'is-invalid': submitted && form.tauxReserveObligatoir.errors}">
+                              <div *ngIf="submitted && form.tauxReserveObligatoir.errors" class="invalid-feedback">
+                                <span *ngIf="form.tauxReserveObligatoir.errors.required">Vous devez saisir un TRO.</span>
+                              </div>
                             </div>
                           </div>
                           <div class="row mb-4">
                             <label for="tauxDirecteur" class="col-md-2 col-form-label">TD</label>
                             <div class="col-md-10">
-                              <input type="email" class="form-control" id="tauxDirecteur"
-                                placeholder="Taux Directeur">
+                              <input type="number" class="form-control" id="tauxDirecteur"
+                                placeholder="Taux Directeur" formControlName="tauxDirecteur"
+                                [ngClass]="{'is-invalid': submitted && form.tauxDirecteur.errors}">
+                                <div *ngIf="submitted && form.tauxDirecteur.errors" class="invalid-feedback">
+                                  <span *ngIf="form.tauxDirecteur.errors.required">Vous devez saisir un TD.</span>
+                                </div>
                             </div>
                           </div>
                           <div class="row mb-4">
                             <label for="tauxNegatif" class="col-md-2 col-form-label">TN</label>
                             <div class="col-md-10">
-                              <input type="text" class="form-control" id="tauxNegatif"
-                                placeholder="Taux Négatif">
+                              <input type="number" class="form-control" id="tauxNegatif"
+                                placeholder="Taux Négatif" formControlName="tauxNegatif"
+                                [ngClass]="{'is-invalid': submitted && form.tauxNegatif.errors}">
+                                <div *ngIf="submitted && form.tauxNegatif.errors" class="invalid-feedback">
+                                  <span *ngIf="form.tauxNegatif.errors.required">Vous devez saisir un TN.</span>
+                                </div>
                             </div>
                           </div>
                           <div class="row mb-4">
                             <label class="col-md-2 col-form-label">Pays</label>
                             <div class="col-md-10">
                               <input type="text" class="form-control" id="pays"
-                                placeholder="Pays">
+                                placeholder="Pays" formControlName="pays"
+                                [ngClass]="{'is-invalid': submitted && form.pays.errors}">
+                                <div *ngIf="submitted && form.pays.errors" class="invalid-feedback">
+                                  <span *ngIf="form.pays.errors.required">Vous devez saisir un pays.</span>
+                                </div>
                             </div>
                           </div>
 
                           <div class="row mb-0">
                             <label for="motifRegulation" class="col-md-2 col-form-label">Justificatif de régulation</label>
                             <div class="col-md-10">
-                              <textarea class="form-control" id="motifRegulation" rows="3"
-                                placeholder="Explique la nouvelle régulation"></textarea>
+                              <textarea class="form-control" id="motifRegulation" rows="3" formControlName="motifRegulation"
+                              [ngClass]="{'is-invalid': submitted && form.motifRegulation.errors}"
+                              placeholder="Explique la nouvelle régulation"></textarea>
                             </div>
                           </div>
 
@@ -64,7 +82,7 @@
                     </div> <!-- end col -->
                     <div class="col-sm-6">
                       <div class="text-sm-end">
-                        <a  ngbNavLink [routerLink]=2 class="btn btn-primary">
+                        <a class="btn btn-primary" type="button" (click)="goToConfirm()">
                           Confirmer</a>
                       </div>
                     </div> <!-- end col -->
@@ -76,12 +94,12 @@
             </ng-template>
           </li>
 
-          <li [ngbNavItem]="2">
-            <a ngbNavLink>
+          <li [ngbNavItem]="2" >
+            <a ngbNavLink >
               <i class="bx bx-badge-check d-block check-nav-icon mt-4 mb-2"></i>
               <p class="fw-bold mb-4">Confirmation</p>
             </a>
-            <ng-template ngbNavContent>
+            <ng-template ngbNavContent >
               <div class="card">
                 <div class="card-body">
                   <div class="card shadow-none border mb-0">
@@ -89,39 +107,49 @@
                       <h4 class="card-title mb-4">Récaputilatif de la nouvelle régulation</h4>
 
                       <div class="table-responsive">
-                        <table class="table table-centered mb-0 table-nowrap">
+                        <table id="table" class="table table-centered mb-0 table-nowrap">
                           <thead class="table-light">
                             <tr>
                               <th scope="col">Variables régulatrices</th>
                               <th scope="col">Valeur</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody >
                             <tr>
                               <td>
-                                <h5 class="font-size-14 text-truncate"><a routerLink="/ecommerce/product-detail"
-                                    class="text-dark">Half sleeve T-shirt (64GB) </a></h5>
-                                <p class="text-muted mb-0">$ 450 x 1</p>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark"></a> Taux de Réserve Obligatoire</h5>
+
                               </td>
-                              <td>$ 450</td>
+                              <td>{{reg.tauxReserveObligatoir}}</td>
                             </tr>
                             <tr>
                               <td>
-                                <h5 class="font-size-14 text-truncate"><a routerLink="/ecommerce/product-detail"
-                                    class="text-dark">Wirless Headphone </a></h5>
-                                <p class="text-muted mb-0">$ 225 x 1</p>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Taux Directeur</a></h5>
                               </td>
-                              <td>$ 225</td>
+                              <td>{{reg.tauxDirecteur}}</td>
                             </tr>
                             <tr>
-                              <td colspan="3">
-                                <div class="bg-soft bg-primary p-3 rounded">
-                                  <h5 class="font-size-14 text-primary mb-0"><i class="fas fa-shipping-fast me-2"></i>
-                                    Shipping
-                                    <span class="float-end">Free</span></h5>
-                                </div>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Taux Négatif</a></h5>
                               </td>
+                              <td>{{reg.tauxNegatif}}</td>
                             </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Pays</a></h5>
+                              </td>
+                              <td>{{reg.pays}}</td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Justificatif de régulation</a></h5>
+                              </td>
+                              <td>{{reg.motifRegulation}}</td>
+                            </tr>
+
+
                           </tbody>
                         </table>
                       </div>
@@ -130,13 +158,13 @@
                   <div class="row mt-4">
                     <div class="col-sm-6">
                       <div class="text">
-                        <a routerLink="/ecommerce/checkout" class="btn btn-info">
+                        <a  class="btn btn-info" (click)="generatePDF()">
                           <i class="mdi mdi-file-pdf me-1"></i> Télecharger </a>
                       </div>
                     </div> <!-- end col -->
                     <div class="col-sm-6">
                       <div class="text-end">
-                        <a routerLink="/ecommerce/checkout" class="btn btn-primary">
+                        <a class="btn btn-primary" (click)="onSubmit()">
                           <i class="mdi mdi-check-outline me-1"></i> Valider</a>
                       </div>
                     </div> <!-- end col -->

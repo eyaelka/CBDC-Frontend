@@ -33,7 +33,7 @@ export class ActivateMerchantComponent implements OnInit {
   let decodedToken = helper.decodeToken(token);
   console.log("dans acitvate",decodedToken);
   let userToActivate:MerchantAccountInfo = decodedToken.endUser;
-  console.log("user dans activate",userToActivate);
+  console.log("user dans  let regulatoractivate",userToActivate);
   this.endUser.push(userToActivate);
 
 }

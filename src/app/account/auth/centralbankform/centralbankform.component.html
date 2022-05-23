@@ -30,28 +30,64 @@
               <div class="row-md">
                 <div class="mb-3">
                   <label for="nom">Nom Banque Centrale</label>
-                  <input type="text" formControlName="nom" class="form-control" id="nom" placeholder="Nom Banque Centrale">
+                  <input type="text" formControlName="nom" class="form-control" id="nom" placeholder="Nom"
+                  [ngClass]="{'is-invalid': submitted && form.nom.errors}">
+                  <div *ngIf="submitted && form.nom.errors" class="invalid-feedback">
+                    <span *ngIf="form.nom.errors.required">Vous devez saisir le nom de la banque centrale.</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="abreviation">Abréviation Banque Centrale</label>
+                  <input type="text"  formControlName="abreviation" class="form-control" id="abreviation" placeholder="Abréviation"
+                  [ngClass]="{'is-invalid': submitted && form.abreviation.errors}">
+                  <div *ngIf="submitted && form.abreviation.errors" class="invalid-feedback">
+                    <span *ngIf="form.abreviation.errors.required">Vous devez saisir l'abréviation de la banque centrale.</span>
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="pays">Pays</label>
-                  <input type="text" formControlName="pays" class="form-control" id="Pays" placeholder="Pays">
+                  <input type="text" formControlName="pays" class="form-control" id="Pays" placeholder="Pays"
+                  [ngClass]="{'is-invalid': submitted && form.pays.errors}">
+                  <div *ngIf="submitted && form.pays.errors" class="invalid-feedback">
+                    <span *ngIf="form.pays.errors.required">Vous devez saisir le pays de la banque centrale.</span>
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="address">Adresse</label>
-                  <input type="adresse" formControlName="adresse" class="form-control" id="adresse" placeholder="Adresse">
+                  <input type="adresse" formControlName="adresse" class="form-control" id="adresse" placeholder="Adresse"
+                  [ngClass]="{'is-invalid': submitted && form.adresse.errors}">
+                  <div *ngIf="submitted && form.adresse.errors" class="invalid-feedback">
+                    <span *ngIf="form.adresse.errors.required">Vous devez saisir l'adresse de la banque centrale.</span>
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="loiCreation" class="form-label">Loi de Création</label>
-                  <input class="form-control" type="text"  formControlName="loiCreation">
+                  <input class="form-control" type="text"  formControlName="loiCreation"  id="loiCreation" placeholder="Loi de Création"
+                  [ngClass]="{'is-invalid': submitted && form.loiCreation.errors}">
+                  <div *ngIf="submitted && form.loiCreation.errors" class="invalid-feedback">
+                    <span *ngIf="form.loiCreation.errors.required">Vous devez saisir loi de création de la banque centrale.</span>
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input class="form-control" type="text"  formControlName="email">
+                  <input class="form-control" type="text"  formControlName="email" placeholder="Email" id="email"
+                  [ngClass]="{'is-invalid': submitted && form.email.errors}">
+                  <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                    <span *ngIf="form.email.errors.required">Vous devez saisir l'email de la banque centrale.</span>
+                  </div>
                 </div>
                 <div class="mb-3">
+                  <label for="phone" class="form-label">Télephone</label>
+                  <input class="form-control" type="text" formControlName="phone" id="phone" placeholder="Télephone"
+                  [ngClass]="{'is-invalid': submitted && form.phone.errors}">
+                  <div *ngIf="submitted && form.phone.errors" class="invalid-feedback">
+                    <span *ngIf="form.phone.errors.required">Vous devez saisir le télephone de la banque centrale.</span>
+                  </div>
+                </div>
+                <!-- <div class="mb-3">
                   <label for="accountType" class="form-label">Type de Compte</label>
                   <input class="form-control" type="text"  formControlName="accountType">
-                </div>
+                </div> -->
 
                 <div class="ms-0">
                   <button  class="btn btn-primary" [disabled]="!centralBankForm.valid" (click)="addCentralBankAccount()">Enregistrer</button>

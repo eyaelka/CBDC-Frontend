@@ -4,6 +4,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
+import {DecimalPipe} from '@angular/common';
 
 import { NgbNavModule, NgbAccordionModule, NgbTooltipModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -23,6 +24,7 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 //import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 
@@ -63,7 +65,8 @@ export function createTranslateLoader(http: HttpClient): any {
     NgbNavModule,
     NgbTooltipModule,
     ScrollToModule.forRoot(),
-    NgbModule  ],
+    NgbModule,
+    NgApexchartsModule  ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
 
@@ -72,6 +75,8 @@ export function createTranslateLoader(http: HttpClient): any {
     //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
+    DecimalPipe
+
     // LoaderService,
     // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],

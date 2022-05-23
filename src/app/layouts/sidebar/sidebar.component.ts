@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,12 +24,15 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isCondensed = false;
   menu: any;
   data: any;
+  loggedIn = false;
 
   menuItems = [];
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
-  constructor(private eventService: EventService, private router: Router, public translate: TranslateService, private http: HttpClient) {
+  constructor(private eventService: EventService, private router: Router, public translate: TranslateService,
+    private http: HttpClient, private authService:AuthenticationService
+    ) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this._activateMenuDropdown();
@@ -40,44 +44,10 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     throw new Error('Method not implemented.');
   }
 
-  routes = [
-    {
-      route : "/page/dashboards/default" ,
-      name : "Tableau de bord" ,
-      icon : "manage_accounts" ,
-      role : 'ADMIN'
-    },
-    {
-      route : "/page/dashboards/crypto" ,
-      name : "Administrateurs" ,
-      icon : "manage_accounts" ,
-      role : 'ADMIN'
-    },
-    {
-      route : "/page/commercialbank" ,
-      name : "Banques Commerciales" ,
-      icon : "manage_accounts" ,
-      role : 'ADMIN'
-    },
-    {
-      route : "admins" ,
-      name : "My Wallet" ,
-      icon : "manage_accounts" ,
-      role : 'ADMIN'
-    },
-    {
-      route : "admins" ,
-      name : "Mail" ,
-      icon : "manage_accounts" ,
-      role : 'ADMIN'
-    }
-
-  ]
 
   ngOnInit() {
-    this.routes = this.routes.filter (route => {
-      return route.role == sessionStorage.getItem('role') || route.role == 'ALL'
-    })
+    this.loggedIn = this.authService.isLoggedInDecode();
+
     this.initialize();
     this._scrollElement();
   }

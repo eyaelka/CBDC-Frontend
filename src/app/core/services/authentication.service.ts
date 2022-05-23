@@ -13,6 +13,7 @@ export class AuthenticationService{
   isCentralBank = false;
   isCommercialBank = false;
   isUser = false;
+  isMerchant = false;
 
 
   constructor (private router: Router, private http: HttpClient){}
@@ -47,15 +48,18 @@ export class AuthenticationService{
     let helper = new JwtHelperService();
     let decodedToken = helper.decodeToken(myToken);
     if (myToken) {
-      if (decodedToken.role == 'BC'){
+      if (decodedToken.roles == 'centralbank'){
         return this.isCentralBank = true;
-      }else if (decodedToken.role == 'BSR'){
+      }else if (decodedToken.roles == 'commercialbank'){
        return this.isCommercialBank = true;
-      }else{
-        return this.isUser = true
+      }else if (decodedToken.roles =='user'){
+        return this.isUser = true;
+      }else if (decodedToken.roles =='merchant'){
+        return this.isMerchant = true;
       }
     }
   }
+
 
   //Save token
   saveTokenLocalStorage(user,jwt){
