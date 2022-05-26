@@ -32,7 +32,7 @@ export const MENU: MenuItem[] = [
   {
     id:5,
     label:'Régulation Monetaire',
-    icon: 'bxs-file-blank ',
+    icon: 'bx bx-edit',
     link:'/page/regulatemoney',
     role:'BC'
 
@@ -47,10 +47,18 @@ export const MENU: MenuItem[] = [
   {
     id:7,
     label:'Régulation Devise',
-    icon: 'bx bx-transfer',
+    icon: 'bx bx-stats',
     link:'/page/regulatedevise',
     role:'ALL'
+  },
+  {
+    id:8,
+    label:'Régulation Transfert',
+    icon: 'bx bx-transfer',
+    link:'/page/regulatetransfer',
+    role:'ALL'
   }
+
 
 
 

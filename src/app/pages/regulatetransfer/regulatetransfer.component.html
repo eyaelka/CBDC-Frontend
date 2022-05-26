@@ -1,0 +1,526 @@
+<div class="row">
+  <div class="col-sm-6">
+      <div class="card p-1 border shadow-none">
+          <div class="p-3">
+              <h5><a  class="text-dark d-flex justify-content-center">Réguler Transfert Local</a></h5>
+          </div>
+
+          <div class="position-relative">
+              <img src="assets/images/local.png"  alt="" class="img-thumbnail">
+          </div>
+
+          <div class="p-3">
+              <div class="text-center">
+                <a class="btn btn-light" (click)="openModal(content)">
+                  <i class="mdi mdi-book-edit-outline me-1"></i> Modifier réglementation</a>
+              </div>
+            </div>
+      </div>
+  </div>
+
+  <div class="col-sm-6">
+      <div class="card p-1 border shadow-none">
+          <div class="p-3">
+              <h5><a  class="text-dark d-flex justify-content-center">Réguler Transfert Transfrontalier</a></h5>
+          </div>
+
+          <div class="position-relative">
+              <img src="assets/images/transfrontalier.png" alt="" class="img-thumbnail">
+          </div>
+          <div class="p-3">
+              <div class="text-center">
+                <a class="btn btn-light" (click)="openModal(content2)">
+                  <i class="mdi mdi-book-edit-outline me-1"></i> Modifier réglementation</a>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- content for local -->
+<ng-template #content>
+  <div class="container-fluid" >
+    <div class="checkout-tabs">
+      <div class="row">
+        <div class="col-xl-2 col-sm-3">
+          <ul ngbNav #nav="ngbNav" [activeId]="activeID" class="nav-pills flex-column">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>
+                <i class="fas fa-file-signature d-block check-nav-icon mt-4 mb-2"></i>
+                <p class="fw-bold mb-4">Variable de contrôle</p>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="tab-content" id="v-pills-tabContent">
+                      <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel"
+                        aria-labelledby="v-pills-shipping-tab">
+                        <div>
+                          <h4 class="card-title">Contrôle de Transaction Locale</h4>
+                          <p class="card-title-desc">Définir variable de contrôle des transactions locaux</p>
+                          <form [formGroup]="formData">
+                            <div class="row mb-4">
+                              <label for="seuilMaximumInterbank" class="col-md-2 col-form-label">SMI</label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="seuilMaximumInterbank" placeholder="Seuil Maximal Interbanque"
+                                formControlName="seuilMaximumInterbank"
+                                [ngClass]="{'is-invalid': submitted && form.seuilMaximumInterbank.errors}">
+                                <div *ngIf="submitted && form.seuilMaximumInterbank.errors" class="invalid-feedback">
+                                  <span *ngIf="form.seuilMaximumInterbank.errors.required">Vous devez saisir le seuil Maximum Interbanque.</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label for="seuilMaximumAutresTX" class="col-md-2 col-form-label">SMT</label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="seuilMaximumAutresTX"
+                                  placeholder="Seuil Maximal Transaction de Détail" formControlName="seuilMaximumAutresTX"
+                                  [ngClass]="{'is-invalid': submitted && form.seuilMaximumAutresTX.errors}">
+                                  <div *ngIf="submitted && form.seuilMaximumAutresTX.errors" class="invalid-feedback">
+                                    <span *ngIf="form.seuilMaximumAutresTX.errors.required">Vous devez saisir le seuil Maximal des transactions.</span>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label for="borneMinimum" class="col-md-2 col-form-label">MMT</label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="borneMinimum"
+                                  placeholder="Montant Minimal de Transaction" formControlName="borneMinimum"
+                                  [ngClass]="{'is-invalid': submitted && form.borneMinimum.errors}">
+                                  <div *ngIf="submitted && form.borneMinimum.errors" class="invalid-feedback">
+                                    <span *ngIf="form.borneMinimum.errors.required">Vous devez saisir un Montant Minimal de Transaction.</span>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label class="col-md-2 col-form-label">Pays</label>
+                              <div class="col-md-10">
+                                <input type="text" class="form-control" id="pays"
+                                  placeholder="Pays" formControlName="pays"
+                                  [ngClass]="{'is-invalid': submitted && form.pays.errors}">
+                                  <div *ngIf="submitted && form.pays.errors" class="invalid-feedback">
+                                    <span *ngIf="form.pays.errors.required">Vous devez saisir un pays.</span>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label class="col-md-2 col-form-label">Période</label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="periode"
+                                  placeholder="Période" formControlName="periode"
+                                  [ngClass]="{'is-invalid': submitted && form.periode.errors}">
+                                  <div *ngIf="submitted && form.periode.errors" class="invalid-feedback">
+                                    <span *ngIf="form.periode.errors.required">Vous devez saisir une periode.</span>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="row mb-4">
+                              <label class="col-md-2 col-form-label">Date Régulation</label>
+                              <div class="col-md-10">
+                                <input type="date" class="form-control" id="date"
+                                  placeholder="Date" formControlName="date"
+                                  [ngClass]="{'is-invalid': submitted && form.date.errors}">
+                                  <div *ngIf="submitted && form.date.errors" class="invalid-feedback">
+                                    <span *ngIf="form.date.errors.required">Vous devez saisir une date.</span>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="row mb-0">
+                              <label for="motifRegulation" class="col-md-2 col-form-label">Justificatif de régulation</label>
+                              <div class="col-md-10">
+                                <textarea class="form-control" id="motifRegulation" rows="3" formControlName="motifRegulation"
+                                [ngClass]="{'is-invalid': submitted && form.motifRegulation.errors}"
+                                placeholder="Explique la nouvelle régulation"></textarea>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row my-4">
+                      <div class="col-sm-6">
+
+                      </div> <!-- end col -->
+                      <div class="col-sm-6">
+                        <div class="text-sm-end">
+                          <a class="btn btn-primary" type="button" (click)="goToConfirm()">
+                            Confirmer</a>
+                        </div>
+                      </div> <!-- end col -->
+                    </div>
+                  </div>
+                </div>
+
+
+              </ng-template>
+            </li>
+
+            <li [ngbNavItem]="2" >
+              <a ngbNavLink >
+                <i class="bx bx-badge-check d-block check-nav-icon mt-4 mb-2"></i>
+                <p class="fw-bold mb-4">Confirmation</p>
+              </a>
+              <ng-template ngbNavContent >
+                <div class="card">
+                  <div class="card-body">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body">
+                        <h4 class="card-title mb-4">Récaputilatif de la nouvelle régulation</h4>
+
+                        <div class="table-responsive">
+                          <table id="table" class="table table-centered mb-0 table-nowrap">
+                            <thead class="table-light">
+                              <tr>
+                                <th scope="col">Variables régulatrices</th>
+                                <th scope="col">Valeur</th>
+                              </tr>
+                            </thead>
+                            <tbody >
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark"></a> Seuil Maximal Interbanque</h5>
+
+                                </td>
+                                <td>{{reg.seuilMaximumInterbank}}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Seuil Maximal Transaction de Détail</a></h5>
+                                </td>
+                                <td>{{reg.seuilMaximumAutresTX}}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Montant Minimal de Transaction</a></h5>
+                                </td>
+                                <td>{{reg.borneMinimum}}</td>
+                              </tr>
+
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Pays</a></h5>
+                                </td>
+                                <td>{{reg.pays}}</td>
+                              </tr>
+                              <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Période</a></h5>
+                              </td>
+                              <td>{{reg.periode}}</td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Date Régulation</a></h5>
+                              </td>
+                              <td>{{reg.date}}</td>
+                            </tr>
+
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Justificatif de régulation</a></h5>
+                                </td>
+                                <td>{{reg.motifRegulation}}</td>
+                              </tr>
+
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-sm-6">
+                        <div class="text">
+                          <a  class="btn btn-info" (click)="generatePDF()">
+                            <i class="mdi mdi-file-pdf me-1"></i> Télecharger </a>
+                        </div>
+                      </div> <!-- end col -->
+                      <div class="col-sm-6">
+                        <div class="text-end">
+                          <a class="btn btn-primary" (click)="onSubmit()">
+                            <i class="mdi mdi-check-outline me-1"></i> Valider</a>
+                        </div>
+                      </div> <!-- end col -->
+                    </div>
+                  </div>
+                </div>
+
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-10">
+          <div [ngbNavOutlet]="nav"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</ng-template>
+
+<!-- content for local -->
+<ng-template #content2>
+  <div class="container-fluid" >
+    <div class="checkout-tabs">
+      <div class="row">
+        <div class="col-xl-2 col-sm-3">
+          <ul ngbNav #nav="ngbNav" [activeId]="activeID" class="nav-pills flex-column">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>
+                <i class="fas fa-file-signature d-block check-nav-icon mt-4 mb-2"></i>
+                <p class="fw-bold mb-4">Variable de contrôle</p>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="tab-content" id="v-pills-tabContent">
+                      <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel"
+                        aria-labelledby="v-pills-shipping-tab">
+                        <div>
+                          <h4 class="card-title">Contrôle de Transaction Transfrontalier</h4>
+                          <p class="card-title-desc">Définir variable de contrôle des transactions transfrontalier</p>
+                          <form [formGroup]="formData">
+                            <div class="row mb-4">
+                              <label for="seuilMaximumInterbank" class="col-md-2 col-form-label">SMI</label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="seuilMaximumInterbank" placeholder="Seuil Maximal Interbanque"
+                                formControlName="seuilMaximumInterbank"
+                                [ngClass]="{'is-invalid': submitted && form.seuilMaximumInterbank.errors}">
+                                <div *ngIf="submitted && form.seuilMaximumInterbank.errors" class="invalid-feedback">
+                                  <span *ngIf="form.seuilMaximumInterbank.errors.required">Vous devez saisir le seuil Maximum Interbanque.</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label for="seuilMaximumAutresTX" class="col-md-2 col-form-label">SMT</label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="seuilMaximumAutresTX"
+                                  placeholder="Seuil Maximal Transaction de Détail" formControlName="seuilMaximumAutresTX"
+                                  [ngClass]="{'is-invalid': submitted && form.seuilMaximumAutresTX.errors}">
+                                  <div *ngIf="submitted && form.seuilMaximumAutresTX.errors" class="invalid-feedback">
+                                    <span *ngIf="form.seuilMaximumAutresTX.errors.required">Vous devez saisir le seuil Maximal des transactions.</span>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label for="borneMinimum" class="col-md-2 col-form-label">MMT</label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="borneMinimum"
+                                  placeholder="Montant Minimal de Transaction" formControlName="borneMinimum"
+                                  [ngClass]="{'is-invalid': submitted && form.borneMinimum.errors}">
+                                  <div *ngIf="submitted && form.borneMinimum.errors" class="invalid-feedback">
+                                    <span *ngIf="form.borneMinimum.errors.required">Vous devez saisir un Montant Minimal de Transaction.</span>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label for="centralBankFees" class="col-md-2 col-form-label">Frais </label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="centralBankFees"
+                                  placeholder="Frais Banque Centrale" formControlName="centralBankFees"
+                                  [ngClass]="{'is-invalid': submitted && form.centralBankFees.errors}">
+                                  <div *ngIf="submitted && form.centralBankFees.errors" class="invalid-feedback">
+                                    <span *ngIf="form.centralBankFees.errors.required">Vous devez saisir Frais Banque Centrale.</span>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label class="col-md-2 col-form-label">Pays BC</label>
+                              <div class="col-md-10">
+                                <input type="text" class="form-control" id="paysBanqueCentral"
+                                  placeholder="Pays Banque Centrale" formControlName="paysBanqueCentral"
+                                  [ngClass]="{'is-invalid': submitted && form.paysBanqueCentral.errors}">
+                                  <div *ngIf="submitted && form.paysBanqueCentral.errors" class="invalid-feedback">
+                                    <span *ngIf="form.paysBanqueCentral.errors.required">Vous devez saisir votre pays.</span>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label class="col-md-2 col-form-label">Pays Etranger</label>
+                              <div class="col-md-10">
+                                <input type="text" class="form-control" id="pays"
+                                  placeholder="Pays Etranger" formControlName="pays"
+                                  [ngClass]="{'is-invalid': submitted && form.pays.errors}">
+                                  <div *ngIf="submitted && form.pays.errors" class="invalid-feedback">
+                                    <span *ngIf="form.pays.errors.required">Vous devez saisir un pays.</span>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row mb-4">
+                              <label class="col-md-2 col-form-label">Période</label>
+                              <div class="col-md-10">
+                                <input type="number" class="form-control" id="periode"
+                                  placeholder="Période" formControlName="periode"
+                                  [ngClass]="{'is-invalid': submitted && form.periode.errors}">
+                                  <div *ngIf="submitted && form.periode.errors" class="invalid-feedback">
+                                    <span *ngIf="form.periode.errors.required">Vous devez saisir une periode.</span>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="row mb-4">
+                              <label class="col-md-2 col-form-label">Date Régulation</label>
+                              <div class="col-md-10">
+                                <input type="date" class="form-control" id="date"
+                                  placeholder="Date" formControlName="date"
+                                  [ngClass]="{'is-invalid': submitted && form.date.errors}">
+                                  <div *ngIf="submitted && form.date.errors" class="invalid-feedback">
+                                    <span *ngIf="form.date.errors.required">Vous devez saisir une date.</span>
+                                  </div>
+                              </div>
+                            </div>
+
+                            <div class="row mb-0">
+                              <label for="motifRegulation" class="col-md-2 col-form-label">Justificatif de régulation</label>
+                              <div class="col-md-10">
+                                <textarea class="form-control" id="motifRegulation" rows="3" formControlName="motifRegulation"
+                                [ngClass]="{'is-invalid': submitted && form.motifRegulation.errors}"
+                                placeholder="Explique la nouvelle régulation"></textarea>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row my-4">
+                      <div class="col-sm-6">
+
+                      </div> <!-- end col -->
+                      <div class="col-sm-6">
+                        <div class="text-sm-end">
+                          <a class="btn btn-primary" type="button" (click)="goToConfirmEtrange()">
+                            Confirmer</a>
+                        </div>
+                      </div> <!-- end col -->
+                    </div>
+                  </div>
+                </div>
+
+
+              </ng-template>
+            </li>
+
+            <li [ngbNavItem]="2" >
+              <a ngbNavLink >
+                <i class="bx bx-badge-check d-block check-nav-icon mt-4 mb-2"></i>
+                <p class="fw-bold mb-4">Confirmation</p>
+              </a>
+              <ng-template ngbNavContent >
+                <div class="card">
+                  <div class="card-body">
+                    <div class="card shadow-none border mb-0">
+                      <div class="card-body">
+                        <h4 class="card-title mb-4">Récaputilatif de la nouvelle régulation</h4>
+
+                        <div class="table-responsive">
+                          <table id="table" class="table table-centered mb-0 table-nowrap">
+                            <thead class="table-light">
+                              <tr>
+                                <th scope="col">Variables régulatrices</th>
+                                <th scope="col">Valeur</th>
+                              </tr>
+                            </thead>
+                            <tbody >
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark"></a> Seuil Maximal Interbanque</h5>
+
+                                </td>
+                                <td>{{reg.seuilMaximumInterbank}}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Seuil Maximal Transaction de Détail</a></h5>
+                                </td>
+                                <td>{{reg.seuilMaximumAutresTX}}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Montant Minimal de Transaction</a></h5>
+                                </td>
+                                <td>{{reg.borneMinimum}}</td>
+                              </tr>
+
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Frais Banque Centrale</a></h5>
+                                </td>
+                                <td>{{reg.centralBankFees}}</td>
+                              </tr>
+
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Pays BC</a></h5>
+                                </td>
+                                <td>{{reg.paysBanqueCentral}}</td>
+                              </tr>
+
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Pays Etranger</a></h5>
+                                </td>
+                                <td>{{reg.pays}}</td>
+                              </tr>
+                              <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Période</a></h5>
+                              </td>
+                              <td>{{reg.periode}}</td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 text-truncate"><a class="text-dark">Date Régulation</a></h5>
+                              </td>
+                              <td>{{reg.date}}</td>
+                            </tr>
+
+                              <tr>
+                                <td>
+                                  <h5 class="font-size-14 text-truncate"><a class="text-dark">Justificatif de régulation</a></h5>
+                                </td>
+                                <td>{{reg.motifRegulation}}</td>
+                              </tr>
+
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-sm-6">
+                        <div class="text">
+                          <a  class="btn btn-info" (click)="generatePDF()">
+                            <i class="mdi mdi-file-pdf me-1"></i> Télecharger </a>
+                        </div>
+                      </div> <!-- end col -->
+                      <div class="col-sm-6">
+                        <div class="text-end">
+                          <a class="btn btn-primary" (click)="onSubmitEtrange()">
+                            <i class="mdi mdi-check-outline me-1"></i> Valider</a>
+                        </div>
+                      </div> <!-- end col -->
+                    </div>
+                  </div>
+                </div>
+
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-10">
+          <div [ngbNavOutlet]="nav"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</ng-template>
+

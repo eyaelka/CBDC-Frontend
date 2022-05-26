@@ -14,6 +14,8 @@ export class MyRouterLink{
   linkCentralBankLoginPath = "http://localhost:10050/login";
   linkDefineRegulationMoney ="http://localhost:10050/politique/createmassemonnetaire";
   linkDefineRegulationDevise ="http://localhost:10050/politique/createdeviseregulation";
+  linkDefineRegulationLocalTransfer= "http://localhost:10050/politique/createtxregulationlocal";
+  linkDefineRegulationTransferAbroad= "http://localhost:10050/politique/createtxregulationinterpays";
 
 
   //Commercial Bank Link

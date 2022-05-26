@@ -55,6 +55,8 @@ import { RegulateMoneyComponent } from './regulate-money/regulate-money.componen
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
 import { MerchantWalletComponent } from './merchant-wallet/merchant-wallet.component';
 import { RegulateDeviseComponent } from './regulate-devise/regulate-devise.component';
+import { RegulatetransferComponent } from './regulatetransfer/regulatetransfer.component';
+//import { TransferlocalComponent } from './regulatetransfer/transferlocal/transferlocal.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -64,7 +66,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent, UserWalletComponent, MerchantWalletComponent, RegulateDeviseComponent],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent, UserWalletComponent, MerchantWalletComponent, RegulateDeviseComponent,RegulatetransferComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -102,7 +104,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ArchwizardModule
       ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [DecimalPipe]
+    providers: [DecimalPipe],
 
 
 

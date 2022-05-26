@@ -26,4 +26,11 @@ export class CentralBankService{
     return this.http.post<any>(url,regulatory)
   }
 
+  defineRegulationTransferLocal(url,regulatory){
+    return this.http.post<any>(url,regulatory)
+  }
+
+  defineRegulationTransferEtranger(url,regulatory){
+    return this.http.post<any>(url,regulatory)
+  }
 }
