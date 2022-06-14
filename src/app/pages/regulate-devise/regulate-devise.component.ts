@@ -8,6 +8,7 @@ import  { RegulatorMoney } from '../../core/models/regulator-money.model';
 import { MyRouterLink } from 'src/app/core/models/router-links';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 
@@ -41,7 +42,8 @@ export class RegulateDeviseComponent implements OnInit {
 
    constructor(private formBuilder: FormBuilder,
               private centralbankService: CentralBankService,
-              private alertService: AlertService
+              private alertService: AlertService,
+              private spinner: NgxSpinnerService
               ) { }
 
    ngOnInit() {
@@ -86,13 +88,15 @@ export class RegulateDeviseComponent implements OnInit {
 
    onSubmit(){
      console.log(this.reg)
+     this.spinner.show();
     this.centralbankService.defineRegulationDevise(this.myRouterLink.linkDefineRegulationDevise,this.reg).subscribe(
       res => {
         this.alertService.successAlert('Régulation Devise ajoutée ')
-        console.log(res)
+        this.spinner.hide();
       },
       err =>{
         this.alertService.errorAlert('Erreur d\'Ajout du régulateur devise')
+        this.spinner.show();
 
       }
       )

@@ -7,6 +7,7 @@ import  { RegulatorMoney } from '../../core/models/regulator-money.model';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { MyRouterLink } from 'src/app/core/models/router-links';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-regulate-money',
   templateUrl: './regulate-money.component.html',
@@ -34,7 +35,8 @@ export class RegulateMoneyComponent implements OnInit {
 
    constructor(private formBuilder: FormBuilder,
               private centralbankService: CentralBankService,
-              private alertService: AlertService
+              private alertService: AlertService,
+              private spinner: NgxSpinnerService
               ) { }
 
    ngOnInit() {
@@ -43,6 +45,7 @@ export class RegulateMoneyComponent implements OnInit {
       tauxDirecteur: ['', [Validators.required]],
       tauxNegatif: ['', [Validators.required]],
       pays: ['', [Validators.required]],
+      date: ['', [Validators.required]],
       motifRegulation: ['', [Validators.required]],
     });
 
@@ -61,9 +64,11 @@ export class RegulateMoneyComponent implements OnInit {
       tauxDirecteur: this.formData.value.tauxDirecteur,
       tauxNegatif: this.formData.value.tauxNegatif,
       pays: this.formData.value.pays,
+      date: this.formData.value.date,
       motifRegulation: this.formData.value.motifRegulation
     }
-    if (regulator.motifRegulation  && regulator.pays && regulator.tauxDirecteur && regulator.tauxNegatif && regulator.tauxReserveObligatoir ){
+    if (regulator.motifRegulation  && regulator.pays && regulator.tauxDirecteur && regulator.tauxNegatif && regulator.tauxReserveObligatoir
+      && regulator.date ){
       this.activeID = 2;
       this.reg = regulator;
      }
@@ -75,16 +80,18 @@ export class RegulateMoneyComponent implements OnInit {
 
    onSubmit(){
      console.log(this.reg)
+     this.spinner.show();
     this.centralbankService.defineRegulationMoney(this.myRouterLink.linkDefineRegulationMoney,this.reg).subscribe(
       res => {
-        this.alertService.successAlert('Régulation masse monétaire ajoutée ')
-        console.log(res)
-      },
-      err =>{
-        this.alertService.errorAlert('Erreur d\'Ajout du régulateur masse monétaire')
-
-      }
-      )
+        if (res != null){
+          this.alertService.successAlert('Régulation masse monétaire ajoutée ');
+          console.log(res)
+          this.spinner.hide();
+        }else{
+          this.alertService.errorAlert('Erreur d\'Ajout du régulateur masse monétaire');
+          this.spinner.hide();
+        }
+      })
 
    }
 

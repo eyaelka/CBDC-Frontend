@@ -77,44 +77,18 @@ export class LoginComponent implements OnInit {
         (res) => {
           if (res != null){
             let jwt = res.headers.get('Authorization');
-            this.authService.saveTokenLocalStorage("centralbankTokenBC",jwt);
+            this.authService.saveTokenLocalStorage("currentUser",jwt);
             console.log(jwt)
+            this.router.navigate(["/page/dashboards/centralbank"])
             /////////erreeeuurrr retourne meme authority du token psk c le meme accountId qu'on fait passé
             ///////on doit passé le compteId de la banque commercial, mais qui peut ne pas etre encore créer!!!
-            this.authService.login(this.myRouterLink.linkCommercialBankLoginPath,accountIdAndPassword).subscribe(
-              (res) => {
-                if (res != null){
-                  let jwt2 = res.headers.get('Authorization');
-                  this.authService.saveTokenLocalStorage("centralbankTokenBSR",jwt2);
-                }
-              } )
-              this.router.navigate(['/page/dashboards/default'])
-          }
-        },
-        (err) => {
-          console.log(err);
-        })
-    }else if (accountIdAndPassword.compteId.substring(accountIdAndPassword.compteId.length-2,accountIdAndPassword.compteId.length) == "cb"){//Banque Commerciale
-      this.authService.login(this.myRouterLink.linkCommercialBankLoginPath,accountIdAndPassword).subscribe(
-        (res) => {
-          if ( res != null){
-            console.log(res)
-            let jwt = res.headers.get('Authorization');
-            this.authService.saveTokenLocalStorage("commercialbankTokenBSR",jwt);
-            this.authService.login(this.myRouterLink.linkCentralBankLoginPath,accountIdAndPassword).subscribe(
-              (res) => {
-                if (res != null){
-                  let jwt2 = res.headers.get('Authorization');
-                  this.authService.saveTokenLocalStorage("commercialbankTokenBC",jwt2);
-                }
-              })
-                this.router.navigate(['/page/dashboards/saas'])
 
           }
         },
         (err) => {
           console.log(err);
         })
+
     }else if (accountIdAndPassword.compteId.substring(accountIdAndPassword.compteId.length-2,accountIdAndPassword.compteId.length) == "ad"){
       this.authService.login("http://localhost:10050/login",accountIdAndPassword).subscribe(
         (res) => {

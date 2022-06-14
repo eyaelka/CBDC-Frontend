@@ -8,6 +8,21 @@ import { Subject } from 'rxjs';
 })
 export class LoaderService {
 
+  // private _loading = new BehaviorSubject<boolean>(false);
+  // public readonly loading$ = this._loading.asObservable();
+
+  constructor() {}
+
+  // show() {
+  //   this._loading.next(true);
+  // }
+
+  // hide() {
+  //   this._loading.next(false);
+  // }
+
+
+
   public isLoading = new BehaviorSubject(false);
   getData() {
     return this.isLoading;
@@ -19,5 +34,5 @@ export class LoaderService {
     this.isLoading.next(false);
   }
 
-  constructor() { }
+  //constructor() { }
 }

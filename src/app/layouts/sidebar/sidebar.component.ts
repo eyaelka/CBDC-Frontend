@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 
 
   ngOnInit() {
-    this.loggedIn = this.authService.isLoggedInDecode();
+    this.authService.decodeUserAccesToken();
 
     this.initialize();
     this._scrollElement();

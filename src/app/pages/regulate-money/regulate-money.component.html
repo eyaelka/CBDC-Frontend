@@ -63,6 +63,19 @@
                             </div>
                           </div>
 
+
+                          <div class="row mb-4">
+                            <label class="col-md-2 col-form-label">Date</label>
+                            <div class="col-md-10">
+                              <input type="date" class="form-control" id="date"
+                                placeholder="Date" formControlName="date"
+                                [ngClass]="{'is-invalid': submitted && form.date.errors}">
+                                <div *ngIf="submitted && form.date.errors" class="invalid-feedback">
+                                  <span *ngIf="form.date.errors.required">Vous devez saisir une date.</span>
+                                </div>
+                            </div>
+                          </div>
+
                           <div class="row mb-0">
                             <label for="motifRegulation" class="col-md-2 col-form-label">Justificatif de régulation</label>
                             <div class="col-md-10">
@@ -102,6 +115,15 @@
             <ng-template ngbNavContent >
               <div class="card">
                 <div class="card-body">
+                  <ngx-spinner
+                      bdColor="rgba(51,51,51,0.8)"
+                      size="default"
+                      color="#fff"
+                      type="ball-circus"
+                      showSpinner="true"
+                  >
+                  <p style="font-size: 20px; color: white">Patientez...</p>
+                  </ngx-spinner>
                   <div class="card shadow-none border mb-0">
                     <div class="card-body">
                       <h4 class="card-title mb-4">Récaputilatif de la nouvelle régulation</h4>

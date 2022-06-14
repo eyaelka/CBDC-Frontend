@@ -33,7 +33,10 @@
               "src/styles.scss",
               "src/assets/scss/bootstrap.scss",
               "src/assets/scss/app.scss",
-              "src/assets/scss/icons.scss"
+              "src/assets/scss/icons.scss",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "node_modules/ngx-spinner/animations/ball-circus.css",
+              "node_modules/apexcharts/dist/apexcharts.min.js"
             ],
             "scripts": [],
             "vendorChunk": true,

@@ -43,19 +43,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let commercialbanks of commercialBankData ">
+                <tr *ngFor="let commercialbanks of commercialbank ">
 
                   <!-- <td>{{commercialbanks.compteId}}</td> -->
-                  <td>{{commercialbanks.user.commercialBankData.name}}</td>
-                  <td>{{commercialbanks.user.commercialBankData.abreviation}}</td>
-                  <td>{{commercialbanks.user.commercialBankData.pays}}</td>
+                  <td>{{commercialbanks.commercialBankData.name}}</td>
+                  <td>{{commercialbanks.commercialBankData.abreviation}}</td>
+                  <td>{{commercialbanks.commercialBankData.pays}}</td>
                   <td>
-                    <p class="mb-0">{{commercialbanks.user.commercialBankData.email}}</p>
-                    <p class="mb-1">{{commercialbanks.user.commercialBankData.fax}}</p>
+                    <p class="mb-0">{{commercialbanks.commercialBankData.email}}</p>
+                    <p class="mb-1">{{commercialbanks.commercialBankData.fax}}</p>
                   </td>
-                  <td>{{commercialbanks.user.commercialBankData.address}}</td>
-                  <td>{{commercialbanks.user.accountType}}</td>
-                  <td>{{commercialbanks.user.date | date: 'dd MMM, YYYY'}}</td>
+                  <td>{{commercialbanks.commercialBankData.address}}</td>
+                  <td>{{commercialbanks.commercialBankAccounts[0].accountType}}</td>
+                  <td>{{commercialbanks.commercialBankAccounts[0].cruddate | date: 'dd MMM, YYYY'}}</td>
 
                   <td>
                     <div class="btn">

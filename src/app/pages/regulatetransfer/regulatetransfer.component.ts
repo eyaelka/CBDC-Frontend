@@ -8,6 +8,8 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { MyRouterLink } from 'src/app/core/models/router-links';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-regulatetransfer',
@@ -46,7 +48,8 @@ myRouterLink: MyRouterLink = new MyRouterLink();
    constructor(private formBuilder: FormBuilder,
               private centralbankService: CentralBankService,
               private alertService: AlertService,
-              private modalService : NgbModal
+              private modalService : NgbModal,
+              private spinner : NgxSpinnerService
               ) { }
 
    ngOnInit() {
@@ -58,6 +61,8 @@ myRouterLink: MyRouterLink = new MyRouterLink();
       periode: ['', [Validators.required]],
       date: ['', [Validators.required]],
       motifRegulation: ['', [Validators.required]],
+      centralBankFees: ['', [Validators.required]],
+      paysBanqueCentral: ['', [Validators.required]]
     });
 
    }
@@ -124,10 +129,11 @@ myRouterLink: MyRouterLink = new MyRouterLink();
       motifRegulation: ['', [Validators.required]],
     });
      console.log(this.reg)
+     this.spinner.show();
     this.centralbankService.defineRegulationTransferLocal(this.myRouterLink.linkDefineRegulationLocalTransfer,this.reg).subscribe(
       res => {
         this.submitted = false;
-
+        this.spinner.hide()
         this.alertService.successAlert('Régulation de Transfert Local ajoutée ')
         console.log(res)
         this.modalService.dismissAll();
@@ -135,6 +141,7 @@ myRouterLink: MyRouterLink = new MyRouterLink();
 
       },
       err =>{
+        this.spinner.hide();
         this.alertService.errorAlert('Erreur d\'Ajout du régulateur Transfert Local')
         this.modalService.dismissAll();
         this.activeID = 1;

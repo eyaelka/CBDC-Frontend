@@ -7,5 +7,6 @@ export class CommercialBankAccountInfo {
   pays:string;
   suspend?:boolean;
   accountType?:string;
+  cruddate?:string;
 
 }

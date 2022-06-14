@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DefaultComponent } from './default/default.component';
+import { CentralbankDashboardComponent } from './centralbank-dashboard/centralbank-dashboard.component';
 //import { SaasComponent } from './saas/saas.component';
 //import { CryptoComponent } from './crypto/crypto.component';
 //import { BlogComponent } from './blog/blog.component';
@@ -11,6 +12,10 @@ const routes: Routes = [
         path: 'default',
         component: DefaultComponent
     },
+    {
+      path: 'centralbank',
+      component: CentralbankDashboardComponent
+  },
     {
         path: 'saas',
        // component: SaasComponent

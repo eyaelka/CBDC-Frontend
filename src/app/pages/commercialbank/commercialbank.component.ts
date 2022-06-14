@@ -6,12 +6,7 @@ import { CommercialBankAccountInfo } from '../../core/models/commercialbank-acco
 import { LoaderService } from '../../core/services/loader.service';
 import { MyRouterLink } from '../../core/models/router-links';
 import { AlertService } from '../../core/services/alert.service';
-import Swal from 'sweetalert2';
-
-
-
-
-
+import { CentralBankService } from 'src/app/core/services/centralbank.service';
 
 @Component({
   selector: 'app-commercialbank',
@@ -39,6 +34,7 @@ export class CommercialbankComponent implements OnInit {
   suspendFlag: false;
   editted = false;
   deactivated= false;
+  commercialbank: CommercialBankAccountInfo;
 
 
 
@@ -47,7 +43,7 @@ export class CommercialbankComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder,
               private userService: GenericUserService, private loaderService: LoaderService,
-              private alertService: AlertService            ) { }
+              private alertService: AlertService, private centralbankService: CentralBankService) { }
 
   ngOnInit() {
     this.formData = this.formBuilder.group({
@@ -81,6 +77,17 @@ export class CommercialbankComponent implements OnInit {
    */
   private _fetchData() {
     this.commercialBankData ;
+    this.centralbankService.getAllCommercialBanks(this.myRouterLink.linkGetAllCommercialBanks).subscribe(
+      res => {
+        console.log(res)
+        if (res != null){
+          this.commercialbank = res
+        }else{
+          alert("error");
+        }
+      }
+    )
+
   }
   get form() {
     return this.formData.controls;

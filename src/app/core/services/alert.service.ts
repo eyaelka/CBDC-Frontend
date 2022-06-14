@@ -39,4 +39,33 @@ export class AlertService {
     });
   }
 
-}
+
+  // warningAlert(msg,textToCopy){
+  //   Swal.fire({
+  //     title:msg,
+  //     input: 'text',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Submit',
+  //     showLoaderOnConfirm: true,
+  //     confirmButtonColor: '#556ee6',
+  //     cancelButtonColor: '#f46a6a',
+  //     preConfirm: text => {
+  //       // eslint-disable-next-line no-unused-vars
+  //       return new Promise<void>(() => {
+  //         setTimeout(() => {
+  //           if (text === textToCopy ) {
+  //             console.log("ok");
+  //           }
+  //         }, 2000);
+  //       });
+  //     },
+  //     allowOutsideClick: false
+  //   })
+  //   };
+
+  }
+
+
+
+
+

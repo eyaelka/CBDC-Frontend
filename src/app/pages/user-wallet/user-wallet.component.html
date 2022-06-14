@@ -118,22 +118,22 @@
                                   </thead>
                                   <tbody>
                                       <tr *ngFor="let table of activities$ | async">
-                                          <td>
+                                          <!-- <td>
                                               <ngb-highlight [result]="table.id" [term]="service.searchTerm"
                                                   class="text-body fw-bold"></ngb-highlight>
                                           </td>
                                           <td>
                                               <ngb-highlight [result]="table.date" [term]="service.searchTerm">
                                               </ngb-highlight>
-                                          </td>
-                                          <td>
+                                          </td> -->
+                                          <!-- <td>
                                               <ngb-highlight [result]="table.type" [term]="service.searchTerm">
                                               </ngb-highlight>
                                           </td>
                                           <td>
                                               <ngb-highlight [result]="table.amount" [term]="service.searchTerm">
                                               </ngb-highlight>
-                                          </td>
+                                          </td> -->
                                       </tr>
                                   </tbody>
                               </table>
@@ -151,9 +151,9 @@
                                   <!-- Pagination-->
                                   <div class="col-sm-12 col-md-5">
                                       <div class="text-md-right float-md-end pagination-rounded">
-                                          <ngb-pagination [collectionSize]="total$ | async" [(page)]="service.page"
+                                          <!-- <ngb-pagination [collectionSize]="total$ | async" [(page)]="service.page"
                                               [pageSize]="service.pageSize">
-                                          </ngb-pagination>
+                                          </ngb-pagination> -->
                                       </div>
                                   </div>
                                   <!-- End Pagination>-->

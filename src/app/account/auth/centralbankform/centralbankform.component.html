@@ -20,7 +20,7 @@
                 <a routerLink="/">
                   <div class="avatar-md profile-user-wid mb-4">
                     <span class="avatar-title rounded-circle bg-light">
-                      <img src="assets/images/logo-light.png" alt="" class="circle" height="50">
+                      <img src="assets/images/logo.png" alt="" class="circle" height="50">
                     </span>
                   </div>
                 </a>
@@ -90,6 +90,7 @@
                 </div> -->
 
                 <div class="ms-0">
+                  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
                   <button  class="btn btn-primary" [disabled]="!centralBankForm.valid" (click)="addCentralBankAccount()">Enregistrer</button>
                 </div>
             </div>

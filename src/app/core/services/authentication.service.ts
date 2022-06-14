@@ -14,6 +14,8 @@ export class AuthenticationService{
   isCommercialBank = false;
   isUser = false;
   isMerchant = false;
+  pays;
+  accountId
 
 
   constructor (private router: Router, private http: HttpClient){}
@@ -42,23 +44,23 @@ export class AuthenticationService{
     return (localStorage.getItem("currentUser") != null);
   }
 
-  //Who is logged in ?
-  isLoggedInDecode() {
-    let myToken = localStorage.getItem("currentUser");
-    let helper = new JwtHelperService();
-    let decodedToken = helper.decodeToken(myToken);
-    if (myToken) {
-      if (decodedToken.roles == 'centralbank'){
-        return this.isCentralBank = true;
-      }else if (decodedToken.roles == 'commercialbank'){
-       return this.isCommercialBank = true;
-      }else if (decodedToken.roles =='user'){
-        return this.isUser = true;
-      }else if (decodedToken.roles =='merchant'){
-        return this.isMerchant = true;
-      }
-    }
-  }
+  // //Who is logged in ?
+  // isLoggedInDecode() {
+  //   let myToken = localStorage.getItem("currentUser");
+  //   let helper = new JwtHelperService();
+  //   let decodedToken = helper.decodeToken(myToken);
+  //   if (myToken) {
+  //     if (decodedToken.roles == 'centralbank'){
+  //       return this.isCentralBank = true;
+  //     }else if (decodedToken.roles == 'commercialbank'){
+  //      return this.isCommercialBank = true;
+  //     }else if (decodedToken.roles =='user'){
+  //       return this.isUser = true;
+  //     }else if (decodedToken.roles =='merchant'){
+  //       return this.isMerchant = true;
+  //     }
+  //   }
+  // }
 
 
   //Save token
@@ -91,6 +93,46 @@ export class AuthenticationService{
   //Remove refresh token
   public removeUserRefreshToken(): any{
     return localStorage.removeItem("refreshToken");
+  }
+
+  public getCountry() {
+    let mytoken = localStorage.getItem("currentUser");
+    let helper = new JwtHelperService();
+    let decodedToken = helper.decodeToken(mytoken);
+    if (decodedToken) {
+      return decodedToken.getCountry;
+    } else {
+      return 'null'
+    }
+  }
+
+  /**
+   * decoding user access token to know who is logged in
+   */
+   public decodeUserAccesToken(){
+    let accessToken: string= this.getUserToken();
+    if(accessToken!=null){
+      accessToken = accessToken.replace("Bearer ","");//remove header Bearer
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(accessToken);
+      console.log(decodedToken)
+      for(let i = 0; i < decodedToken.roles.length; i++ ){
+       if(decodedToken.roles[i].authority == "centralbank"){
+          this.isCentralBank = true;
+        }else if (decodedToken.roles[i].authority == "commercialbank"){
+          this.isCommercialBank = true;
+        }else if (decodedToken.roles[i].authority == "user"){
+          this.isUser = true;
+        }else if (decodedToken.roles[i].authority == "merchant"){
+          this.isMerchant = true;
+        }else{
+          this.pays = decodedToken.roles[i].authority;
+        }
+      }
+      this.accountId = decodedToken.sub;
+      console.log(this.accountId)
+    }
+
   }
 
 

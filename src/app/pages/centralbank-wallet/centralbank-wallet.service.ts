@@ -5,6 +5,7 @@
 // import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
 // import { Activities, SearchResult } from './centralbank-wallet.model';
+// import { TransactionInterbancaire } from 'src/app/core/models/transaction-interbanks.model';
 
 // import { activitiesData } from './data';
 
@@ -27,15 +28,15 @@
 
 // /**
 //  * Sort the table data
-//  * @param activities Table field value
+//  * @param transactions Table field value
 //  * @param column Fetch the column
 //  * @param direction Sort direction Ascending or Descending
 //  */
-// function sort(activities: Activities[], column: string, direction: string): Activities[] {
+// function sort(transactions: TransactionInterbancaire[], column: string, direction: string): TransactionInterbancaire[] {
 //     if (direction === '') {
-//         return activities;
+//         return transactions;
 //     } else {
-//         return [...activities].sort((a, b) => {
+//         return [...transactions].sort((a, b) => {
 //             const res = compare(a[column], b[column]);
 //             return direction === 'asc' ? res : -res;
 //         });
@@ -44,16 +45,16 @@
 
 // /**
 //  * Table Data Match with Search input
-//  * @param activities Table field value fetch
+//  * @param transactions Table field value fetch
 //  * @param term Search the value
 //  */
-// function matches(activities: Activities, term: string, pipe: PipeTransform) {
-//     return activities.id.toLowerCase().includes(term)
-//         || activities.date.toLowerCase().includes(term)
-//         || activities.type.toLowerCase().includes(term)
-//         || activities.currency.toLowerCase().includes(term)
-//         || activities.amount.toLowerCase().includes(term)
-//         || activities.usd.toLowerCase().includes(term);
+// function matches(transactions: TransactionInterbancaire, term: string, pipe: PipeTransform) {
+//     return transactions.accountReceiver.toString().toLowerCase().includes(term)
+//         || transactions.amountToTransfert.toString().toLowerCase().includes(term)
+//         || transactions.date.toLowerCase().includes(term)
+//         || transactions.pays.toLowerCase().includes(term)
+//         || transactions.centralBankFees.toString().toLowerCase().includes(term)
+//         || transactions.motifTransaction.toLowerCase().includes(term);
 // }
 
 // @Injectable({
@@ -66,7 +67,7 @@
 //     // tslint:disable-next-line: variable-name
 //     private _search$ = new Subject<void>();
 //     // tslint:disable-next-line: variable-name
-//     private _activities$ = new BehaviorSubject<Activities[]>([]);
+//     private _transactions$ = new BehaviorSubject<TransactionInterbancaire[]>([]);
 //     // tslint:disable-next-line: variable-name
 //     private _total$ = new BehaviorSubject<number>(0);
 
@@ -90,7 +91,7 @@
 //             delay(200),
 //             tap(() => this._loading$.next(false))
 //         ).subscribe(result => {
-//             this._activities$.next(result.activities);
+//             this.transactions$.next(result.transactions);
 //             this._total$.next(result.total);
 //         });
 
@@ -100,7 +101,7 @@
 //     /**
 //      * Returns the value
 //      */
-//     get activities$() { return this._activities$.asObservable(); }
+//     get transactions$() { return this.transactions$.asObservable(); }
 //     get total$() { return this._total$.asObservable(); }
 //     get loading$() { return this._loading$.asObservable(); }
 //     get page() { return this._state.page; }
@@ -137,27 +138,27 @@
 //     /**
 //      * Search Method
 //      */
-//     private _search(): Observable<SearchResult> {
+//     private _search(){
 //         const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
 //         // 1. sort
-//         let activities = sort(activitiesData, sortColumn, sortDirection);
+//         let transactions = sort(this.transactions$, sortColumn, sortDirection);
 
 //         // 2. filter
-//         activities = activities.filter(table => matches(table, searchTerm, this.pipe));
-//         const total = activities.length;
+//         transactions = transactions.filter(table => matches(table, searchTerm, this.pipe));
+//         const total = transactions.length;
 
 //         // 3. paginate
-//         this.totalRecords = activities.length;
+//         this.totalRecords = transactions.length;
 //         this._state.startIndex = (page - 1) * this.pageSize;
 //         this._state.endIndex = (page - 1) * this.pageSize + this.pageSize;
 //         if (this.endIndex > this.totalRecords) {
 //             this.endIndex = this.totalRecords;
 //         }
-//         activities = activities.slice(this._state.startIndex, this._state.endIndex);
+//         transactions = transactions.slice(this._state.startIndex, this._state.endIndex);
 
 //         return of(
-//             { activities, total }
+//             { transactions, total }
 //         );
 //     }
 // }

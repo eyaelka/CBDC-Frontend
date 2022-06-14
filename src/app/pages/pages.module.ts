@@ -1,8 +1,8 @@
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from "ngx-spinner";
-
+import { NgbModule }
+from '@ng-bootstrap/ng-bootstrap';
 ////////
 
 
@@ -51,12 +51,13 @@ import { CommercialbankComponent } from './commercialbank/commercialbank.compone
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { ActivateMerchantComponent } from './activate-merchant/activate-merchant.component';
 import { RegulateMoneyComponent } from './regulate-money/regulate-money.component';
-//import { CentralbankWalletComponent } from './centralbank-wallet/centralbank-wallet.component';
+import { CentralbankWalletComponent } from './centralbank-wallet/centralbank-wallet.component';
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
 import { MerchantWalletComponent } from './merchant-wallet/merchant-wallet.component';
 import { RegulateDeviseComponent } from './regulate-devise/regulate-devise.component';
 import { RegulatetransferComponent } from './regulatetransfer/regulatetransfer.component';
 //import { TransferlocalComponent } from './regulatetransfer/transferlocal/transferlocal.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -66,9 +67,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent, UserWalletComponent, MerchantWalletComponent, RegulateDeviseComponent,RegulatetransferComponent],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent, UserWalletComponent, MerchantWalletComponent, RegulateDeviseComponent,RegulatetransferComponent,CentralbankWalletComponent],
   imports: [
     CommonModule,
+    NgbModule,
     FormsModule,
     NgbDropdownModule,
     NgbModalModule,
@@ -92,7 +94,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormModule,
     TablesModule,
     IconsModule,
-    ChartModule,
     WidgetModule,
     MapsModule,
     FullCalendarModule,
@@ -101,10 +102,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgbCollapseModule,
     SimplebarAngularModule,
     LightboxModule,
-    ArchwizardModule
+    ArchwizardModule,
+    NgxSpinnerModule
       ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [DecimalPipe],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 
 
 

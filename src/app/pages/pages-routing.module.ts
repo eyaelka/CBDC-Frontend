@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { NgApexchartsModule } from 'ng-apexcharts';
-//import { CentralbankWalletComponent } from './centralbank-wallet/centralbank-wallet.component';
+import { CentralbankWalletComponent } from './centralbank-wallet/centralbank-wallet.component';
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
 import { MerchantWalletComponent } from './merchant-wallet/merchant-wallet.component';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -26,13 +26,13 @@ const routes: Routes = [
   { path: 'merchant-wallet',component:MerchantWalletComponent },
   { path: 'regulatedevise', component:RegulateDeviseComponent},
   { path: 'regulatetransfer', component:RegulatetransferComponent},
-  //{ path: 'centralbank-wallet', component:CentralbankWalletComponent},
+  { path: 'centralbank-wallet', component:CentralbankWalletComponent},
   { path: 'commercialbank', component:CommercialbankComponent},
   { path: 'enduser/activation/:token', component:ActivateAccountComponent},
   { path: 'merchant/activation/:token', component:ActivateMerchantComponent},
   { path: 'regulatemoney', component:RegulateMoneyComponent},
   { path: 'filemanager', component: FilemanagerComponent },
-  //{ path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
+  { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
   { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
   //{ path: 'crypto', loadChildren: () => import('./crypto/crypto.module').then(m => m.CryptoModule) },
   { path: 'email', loadChildren: () => import('./email/email.module').then(m => m.EmailModule) },

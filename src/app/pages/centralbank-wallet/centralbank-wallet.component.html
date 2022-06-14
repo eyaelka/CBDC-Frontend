@@ -1,16 +1,22 @@
-<!-- <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-xl-4">
-            <div class="card" >
-                <div class="card-body border-top" id="wallet">
+        <div class="col-xl-4 ">
+            <div class="card" id="wallet">
+                <div class="card-body" >
 
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 mb-5 " style="height: 11rem;">
                             <div>
-                                <h4 class="text-muted mb-2">Solde actuel</h4>
-                                <h3>$ 9148.23</h3>
+                                <h4 class="text-muted mb-2" >Solde actuel</h4>
+                                <h3 style="color: #737373;">{{balance}} e-dinar</h3>
                             </div>
                         </div>
+                        <div class="card-footer bg-transparent border-top ">
+                          <div class="text-center">
+                                <button type="button" class="btn btn-outline-light me-2 w-md" id="sa-warning" (click)="openModal(content)" style="color: #686256;">Alimenter Portefeuille</button>
+                              <!-- <a href="" class="btn btn-outline-light me-2 w-md" style="color: #686256;">Alimenter Portefeuille</a> -->
+                          </div>
+                      </div>
 
                     </div>
                 </div>
@@ -19,8 +25,36 @@
         </div>
 
         <div class="col-xl-8">
+          <div class="card">
+            <div>
+              <div class="row">
+                <div class="col-lg-9 col-sm-8">
+                  <div class="p-4">
+                      <h5 class="text-primary">Bienvenue Agent Banque Centrale !</h5>
+                      <p>Vous pouvez : </p>
+
+                      <div class="text-muted">
+                          <p class="mb-1"><i class="mdi mdi-circle-medium align-middle text-primary me-1"></i>
+                              Créer du e-dinar</p>
+                          <p class="mb-0"><i class="mdi mdi-circle-medium align-middle text-primary me-1"></i>
+                                Gérer les régulations monétaire</p>
+                          <p class="mb-1"><i class="mdi mdi-circle-medium align-middle text-primary me-1"></i>
+                              Effectuer des transferts Interbancaire</p>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-sm-4 align-self-center">
+                <div>
+                    <img src="assets/images/crypto/features-img/img-1.png" alt="" class="img-fluid d-block">
+                </div>
+            </div>
+              </div>
+
+            </div>
+          </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6" >
                     <div class="card mini-stats-wid">
                         <div class="card-body">
                             <div class="media">
@@ -35,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" >
                     <div class="card mini-stats-wid">
                         <div class="card-body">
                             <div class="media">
@@ -51,27 +85,228 @@
                     </div>
                 </div>
             </div>
-            <!-- end row
+          </div>
+          </div>
+            <!-- end row-->
+          <div class="row">
+            <div class="col-8">
+                <div class="card" style="height: 26rem;">
+                  <div class="card-body">
+                      <div *ngIf="test == true">
+                        <!-- <div id="chart">
+                          <apx-chart
+                            [series]="chartOptions.series"
+                            [chart]="chartOptions.chart"
+                            [dataLabels]="chartOptions.dataLabels"
+                            [plotOptions]="chartOptions.plotOptions"
+                            [yaxis]="chartOptions.yaxis"
+                            [xaxis]="chartOptions.xaxis"
+                            [stroke]="chartOptions.stroke"
+                            [grid]="chartOptions.grid"
+                            [fill]="chartOptions.fill"
+                            [annotations]="chartOptions.annotations"
+                          ></apx-chart>
+                        </div></div>
+                        </div> -->
+                    </div>
+                  </div>
 
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">Transactions</h4>
 
-                    <div>
-                        <div id="overview-chart" class="apex-charts" dir="ltr"></div>
-                        <apx-chart class="apex-charts" dir="ltr" [series]="OveviewChart.series"
-                            [chart]="OveviewChart.chart" [colors]="OveviewChart.colors" [stroke]="OveviewChart.stroke"
-                            [dataLabels]="OveviewChart.dataLabels" [fill]="OveviewChart.fill"
-                            [xaxis]="OveviewChart.xaxis">
-                        </apx-chart>
+                <div class="col-4">
+                     <div class="card" >
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Transférer CBDC</h4>
+                            <div>
+                                <p class="text-muted mb-2"><i class="mdi mdi-wallet me-1"></i> Solde actuel</p>
+                                <h5>{{balance}} e-dinar</h5>
+                            </div>
+                            <form [formGroup]="sendForm">
+                            <div class="mt-4">
+                                <div>
+                                        <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                            <label class="input-group-text">Destinataire</label>
+                                          </div>
+                                          <input type="text" class="form-control" formControlName="accountReceiver">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                            <label class="input-group-text">Somme</label>
+                                          </div>
+                                          <input type="text" class="form-control" formControlName="amountToTransfert">
+                                          <div class="input-group-append">
+                                            <label class="input-group-text">e-dinar</label>
+                                          </div>
+                                        </div>
+                                        <div>
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="local" checked >
+                                            <label class="form-check-label" for="local">
+                                              Local
+                                            </label>
+                                          </div>
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="transfrontalier"  (click)="abroad()">
+                                            <label class="form-check-label" for="transfrontalier">
+                                              Transfrontalier
+                                            </label>
+                                          </div>
+                                        </div>
+                                        <div class="input-group mb-3" *ngIf="transfrontalier == true">
+                                          <div class="input-group-prepend">
+                                            <label class="input-group-text">Pays</label>
+                                          </div>
+                                          <input type="text" class="form-control" formControlName="pays">
+                                        </div>
+
+                                        <div class="input-group mb-3" *ngIf="transfrontalier == true">
+                                          <div class="input-group-prepend">
+                                            <label class="input-group-text">Frais Banque Centrale</label>
+                                          </div>
+                                          <input type="text" class="form-control" formControlName="centralBankFees">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                            <label class="input-group-text">Mot de passe</label>
+                                          </div>
+                                          <input type="text" class="form-control" formControlName="password">
+                                        </div>
+                                  </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary w-md" (click)="doTransfer()">Transférer</button>
+                                  </div>
+                                  <ngx-spinner
+                                    bdColor="rgba(51,51,51,0.8)"
+                                    size="medium"
+                                    color="#fff"
+                                    type="ball-scale-multiple">
+                                    <p style="font-size: 20px; color: white">Loading...</p>
+                                    </ngx-spinner>
+
+                              </form>
+
+                        </div>
+
                     </div>
                 </div>
+            <!--endRow-->
+            </div>
+            <!--endRow-->
+            <div class="row">
+              <div class="col-lg-12">
+                  <div class="card">
+                      <div class="card-body">
+                          <h4 class="card-title mb-4">Latest Transaction</h4>
+                          <app-transaction [transactions]="transactions"></app-transaction>
+                          <!-- end table
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <!-- Standard Modal -->
+
+<ng-template #content role="document" let-modal>
+
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">Créer CBDC</h5>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+   <form (ngSubmit)="createMoney()" [formGroup]="formData">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="mb-3">
+          <label class="control-label">Montant</label>
+          <input class="form-control" placeholder="Saisissez Montant " type="text" name="title" autocomplete="off" formControlName="amountToTransfert"
+              [ngClass]="{'is-invalid': submitted && form.amountToTransfert.errors}" />
+            <div *ngIf="submitted && form.amountToTransfert.errors" class="invalid-feedback">
+              <span *ngIf="form.amountToTransfert.errors.required">Vous devez saisir une somme à créer.</span>
             </div>
         </div>
-    </div>
-    <!-- end row
+        <div class="mb-3">
+          <label class="control-label">Mot de passe</label>
+          <input class="form-control" placeholder="Saisissez Mot de passe" type="text" name="title" autocomplete="off" formControlName="password"
+              [ngClass]="{'is-invalid': submitted && form.password.errors}" />
+            <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+              <span *ngIf="form.password.errors.required">Vous devez saisir votre mot de passe.</span>
+            </div>
+        </div>
 
-    <div class="row">
+      </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary" id="btn-save-event">
+      Créer
+    </button>
+      <div class="spinner-border text-secondary m-1" role="status" *ngIf="this.submitted == true">
+      </div>
+   </form>
+  </div>
+
+</ng-template>
+
+
+
+            <!-- <div class="col-xl-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h4 class="card-title mb-4">Envoyé CBDC</h4>
+
+                      <div>
+                          <p class="text-muted mb-2"><i class="mdi mdi-wallet me-1"></i> Solde </p>
+                          <h5>$ 9148.23</h5>
+                      </div>
+
+                      <div class="mt-4">
+                        <h5 class="font-size-14 mb-4">Buy Coin</h5>
+                          <div>
+                            <div>
+                              <label>Add Amount :</label>
+                                  <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text">Amount</label>
+                                    </div>
+                                    <input type="text" class="form-control">
+                                  </div>
+                                  <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text">Price</label>
+                                    </div>
+                                    <input type="text" class="form-control">
+                                    <div class="input-group-append">
+                                      <label class="input-group-text">$</label>
+                                    </div>
+                                  </div>
+                                  <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <label class="input-group-text">Total</label>
+                                    </div>
+                                    <input type="text" class="form-control">
+                                  </div>
+                            </div>
+                            </div>
+                            </div>
+
+                            <div class="text-center">
+                              <button type="button" class="btn btn-success w-md">Buy Coin</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+
+
+
+
+
+    <!-- end row-->
+
+    <!-- <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -156,7 +391,7 @@
                                             </ngb-pagination>
                                         </div>
                                     </div>
-                                    <!-- End Pagination>
+                                    <!-- End Pagination
                                 </div>
                             </ng-template>
                         </li>

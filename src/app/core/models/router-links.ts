@@ -16,6 +16,18 @@ export class MyRouterLink{
   linkDefineRegulationDevise ="http://localhost:10050/politique/createdeviseregulation";
   linkDefineRegulationLocalTransfer= "http://localhost:10050/politique/createtxregulationlocal";
   linkDefineRegulationTransferAbroad= "http://localhost:10050/politique/createtxregulationinterpays";
+  linkGetLastMoneyRegulation = "http://localhost:10050/politique/regulationmassemonnetaire";
+  linkGetLastDeviseRegulation ="http://localhost:10050/politique/regulationdevise" ;
+  linkGetLastLocalTxRegulation ="http://localhost:10050/politique/txregulationlocal";
+  linkGetLastInterpaysTxRegulation ="http://localhost:10050/politique/txregulationinterpays";
+  linkGetAllCommercialBanks = "http://localhost:10050/getAllCommercialBanks";
+  linkGetCurrentBalance = "http://localhost:10050/getCurrentBalance";
+  linkCreateMoney = "http://localhost:10050/createmoney";
+  linkSendMoney = "http://localhost:10050/interbanktransaction";
+  linkGetAllMoneySentBySender = "http://localhost:10050/getAllTx";
+  linkGetAllDatesMoneySentBySender = "http://localhost:10050/getAllTxDates";
+  linkGetAllTxBySender = "http://localhost:10050/getAllTxByCentralBank"
+
 
 
   //Commercial Bank Link

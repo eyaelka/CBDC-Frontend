@@ -1,0 +1,451 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-xs me-3">
+                                    <span
+                                        class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                        <i class="bx bxs-bank"></i>
+                                    </span>
+                                </div>
+                                <h5 class="font-size-14 mb-0">Banques Commerciales Locales</h5>
+                            </div>
+                            <div class="text-muted mt-4">
+                                <h4>{{nbLocal}}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-xs me-3">
+                                    <span
+                                        class="avatar-title rounded-circle bg-success bg-soft text-success font-size-18">
+                                        <i class="bx bx-world"></i>
+                                    </span>
+                                </div>
+                                <h5 class="font-size-14 mb-0">Banques Commerciales Etrangères</h5>
+                            </div>
+                            <div class="text-muted mt-4">
+                                <h4>{{nbAbroad}}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                  <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title mb-4">Banques Commerciales</h4>
+                          <!-- <div id="chart">
+                            <apx-chart
+                              [series]="chartOptions.series"
+                              [chart]="chartOptions.chart"
+                              [labels]="chartOptions.labels"
+                              [title]="chartOptions.title"
+                              [theme]="chartOptions.theme"
+                              [responsive]="chartOptions.responsive"
+                            ></apx-chart>
+                          </div> -->
+                    </div>
+
+                      </div>
+                  </div>
+              </div>
+
+
+
+            </div>
+            <!-- end row-->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-8">
+          <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Devise</h4>
+
+                <div class="table-responsive" *ngIf="deviseRegulation != null">
+                    <table class="table table-nowrap table-centered mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Devise</th>
+                                <th scope="col">Taux Achat</th>
+                                <th scope="col">Taux Vente</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Pays</th>
+                                <th scope="col" colspan="2">Motif Régulation</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-xs me-3">
+                                            <span
+                                                class="avatar-title rounded-circle bg-soft bg-warning text-warning font-size-18">
+                                                <i class="mdi mdi-bitcoin"></i>
+                                            </span>
+                                        </div>
+                                        <span>{{ this.deviseRegulation.nom }}</span>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="text-muted">
+                                      {{ this.deviseRegulation.tauxAchat }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-muted">{{ this.deviseRegulation.tauxVente }}</div>
+                                </td>
+                                <td>
+                                    <div class="text-muted">{{ this.deviseRegulation.date }}</div>
+                                </td>
+                                <td>
+                                    <div class="text-muted">{{ this.deviseRegulation.pays }}</div>
+                                </td>
+                                <td >
+                                  <div class="text-muted">{{ deviseRegulation.motifVariation }}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row-->
+
+    <div class="row">
+        <div class="col">
+            <div class="card" style=" height: 36rem;">
+                <div class="card-body">
+                    <div class="clearfix">
+                        <h4 class="card-title mb-4">Régulation Monétaire</h4>
+                    </div>
+                        <div class="table-responsive mt-4">
+                            <table class="table table-centered mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h5 class="font-size-14 mb-1">TRO</h5>
+                                            <p class="text-muted mb-0">Taux Réserve Obligatoire</p>
+                                        </td>
+                                        <td>
+                                            <h5 class="mb-0">{{ moneyRegulation.tauxReserveObligatoir }} %</h5>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <!--  -->
+                                        <td>
+                                          <h5 class="font-size-14 mb-1">TD</h5>
+                                          <p class="text-muted mb-0">Taux Directeur</p>
+                                        </td>
+                                        <td>
+                                          <h5 class="mb-0">{{ moneyRegulation.tauxDirecteur }} %</h5>
+                                        </td>
+                                      </tr>
+                                        <!--  -->
+                                        <tr>
+                                        <td>
+                                          <h5 class="font-size-14 mb-1">TN</h5>
+                                          <p class="text-muted mb-0">Taux Négatif</p>
+                                        </td>
+                                        <td>
+                                          <h5 class="mb-0">{{ moneyRegulation.tauxNegatif }} %</h5>
+                                        </td>
+                                      </tr>
+                                      <!--  -->
+                                      <tr>
+                                        <td>
+                                          <h5 class="font-size-14 mb-1">Pays</h5>
+                                          <p class="text-muted mb-0">pays bc</p>
+                                        </td>
+                                        <td>
+                                          <h5 class="mb-0">{{ moneyRegulation.pays }} </h5>
+                                        </td>
+                                      </tr>
+                                    <!--  -->
+                                    <tr>
+                                        <td>
+                                          <h5 class="font-size-14 mb-1">Motif de Régulation</h5>
+                                        </td>
+                                        <td>
+                                          <h5 class="mb-0">{{ moneyRegulation.motifRegulation }}</h5>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                <div class="card-footer bg-transparent ">
+                  <div class="text-center">
+                      <a routerLink="/page/regulatemoney" class="btn btn-primary"> Modifier Masse Monétaire</a>
+                  </div>
+              </div>
+            </div>
+        </div>
+
+<div class="col">
+  <div class="card" style=" height: 36rem;">
+      <div class="card-body">
+          <div class="clearfix">
+              <h4 class="card-title mb-4">Régulation Transfert Local</h4>
+          </div>
+              <div class="table-responsive mt-4">
+                  <table class="table table-centered mb-0">
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <h5 class="font-size-14 mb-1">SMI</h5>
+                                  <p class="text-muted mb-0">Seuil Maximal Interbanque</p>
+                              </td>
+                              <td>
+                                  <h5 class="mb-0">{{ txLocalRegulation.seuilMaximumInterbank }} </h5>
+                              </td>
+                            </tr>
+                            <tr>
+                              <!--  -->
+                              <td>
+                                <h5 class="font-size-14 mb-1">SMT</h5>
+                                <p class="text-muted mb-0">Seuil Maximal Tx Détail</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ txLocalRegulation.seuilMaximumAutresTX }} </h5>
+                              </td>
+                            </tr>
+                              <!--  -->
+                              <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">MM</h5>
+                                <p class="text-muted mb-0">Montant Minimal</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ txLocalRegulation.borneMinimum }} </h5>
+                              </td>
+                            </tr>
+                            <!--  -->
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">Pays</h5>
+                                <p class="text-muted mb-0">pays bc</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ txLocalRegulation.pays }} </h5>
+                              </td>
+                            </tr>
+                          <!--  -->
+                          <tr>
+                            <td>
+                              <h5 class="font-size-14 mb-1">Date</h5>
+                              <p class="text-muted mb-0">date transaction</p>
+                            </td>
+                            <td>
+                              <h5 class="mb-0">{{ txLocalRegulation.date }} </h5>
+                            </td>
+                          </tr>
+                        <!--  -->
+                          <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">Motif de Régulation</h5>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ txLocalRegulation.motifRegulation }}</h5>
+                              </td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+      </div>
+      <div class="card-footer bg-transparent ">
+        <div class="text-center">
+            <a routerLink="/page/regulatetransfer" class="btn btn-primary"> Modifier Transfert Local</a>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card"style=" height: 36rem;">
+      <div class="card-body">
+          <div class="clearfix">
+              <h4 class="card-title mb-4">Régulation Transfert Transfrontalier</h4>
+          </div>
+              <div class="table-responsive mt-4">
+                  <table class="table table-centered mb-0">
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <h5 class="font-size-14 mb-1">SMI</h5>
+                                  <p class="text-muted mb-0">Seuil Maximal Interbanque</p>
+                              </td>
+                              <td>
+                                  <h5 class="mb-0">{{ txAbroadRegulation.seuilMaximumInterbank }} </h5>
+                              </td>
+                            </tr>
+                            <tr>
+                              <!--  -->
+                              <td>
+                                <h5 class="font-size-14 mb-1">SMT</h5>
+                                <p class="text-muted mb-0">Seuil Maximal Tx Détail</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ txAbroadRegulation.seuilMaximumAutresTX }} </h5>
+                              </td>
+                            </tr>
+                              <!--  -->
+                              <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">MM</h5>
+                                <p class="text-muted mb-0">Montant Minimal</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ txAbroadRegulation.borneMinimum }} </h5>
+                              </td>
+                            </tr>
+                            <!--  -->
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">Pays</h5>
+                                <p class="text-muted mb-0">pays bc</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ txAbroadRegulation.paysBanqueCentral }} </h5>
+                              </td>
+                            </tr>
+                          <!--  -->
+                          <tr>
+                            <td>
+                              <h5 class="font-size-14 mb-1">Pays Etranger</h5>
+                              <p class="text-muted mb-0">pays étranger</p>
+                            </td>
+                            <td>
+                              <h5 class="mb-0">{{ txAbroadRegulation.pays }} </h5>
+                            </td>
+                          </tr>
+                        <!--  -->
+                        <tr>
+                          <td>
+                            <h5 class="font-size-14 mb-1">Frais</h5>
+                            <p class="text-muted mb-0">Frais Transaction</p>
+                          </td>
+                          <td>
+                            <h5 class="mb-0">{{ txAbroadRegulation.centralBankFees }} </h5>
+                          </td>
+                        </tr>
+                      <!--  -->
+                          <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">Motif de Régulation</h5>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ txAbroadRegulation.motifRegulation }}</h5>
+                              </td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+      </div>
+      <div class="card-footer bg-transparent ">
+        <div class="text-center">
+            <a routerLink="/page/regulatetransfer" class="btn btn-primary"> Modifier Transfert Transfrontalier</a>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card" style=" height: 36rem;">
+      <div class="card-body">
+          <div class="clearfix">
+              <h4 class="card-title mb-4">Régulation Devise</h4>
+          </div>
+              <div class="table-responsive mt-4">
+                  <table class="table table-centered mb-0">
+                      <tbody>
+                          <!--  -->
+                          <tr>
+                            <td>
+                              <h5 class="font-size-14 mb-1">Devise</h5>
+                              <p class="text-muted mb-0">Nom du devise</p>
+                            </td>
+                            <td>
+                              <h5 class="mb-0">{{ deviseRegulation.nom }} </h5>
+                            </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <h5 class="font-size-14 mb-1">TA</h5>
+                                  <p class="text-muted mb-0">Taux Achant</p>
+                              </td>
+                              <td>
+                                  <h5 class="mb-0">{{ deviseRegulation.tauxAchat }} </h5>
+                              </td>
+                            </tr>
+                            <tr>
+                              <!--  -->
+                              <td>
+                                <h5 class="font-size-14 mb-1">TV</h5>
+                                <p class="text-muted mb-0">Taux Vente</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ deviseRegulation.tauxVente }} </h5>
+                              </td>
+                            </tr>
+                              <!--  -->
+                              <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">Date</h5>
+                                <p class="text-muted mb-0">date régulation</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ deviseRegulation.date }} </h5>
+                              </td>
+                            </tr>
+                            <!--  -->
+                            <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">Pays</h5>
+                                <p class="text-muted mb-0">pays bc</p>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ deviseRegulation.pays }} </h5>
+                              </td>
+                            </tr>
+                          <!--  -->
+                          <tr>
+                              <td>
+                                <h5 class="font-size-14 mb-1">Motif de Régulation</h5>
+                              </td>
+                              <td>
+                                <h5 class="mb-0">{{ deviseRegulation.motifVariation }}</h5>
+                              </td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+      </div>
+      <div class="card-footer bg-transparent ">
+        <div class="text-center">
+            <a routerLink="/page/regulatedevise" class="btn btn-primary"> Modifier Devise</a>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+</div>

@@ -33,4 +33,33 @@ export class CentralBankService{
   defineRegulationTransferEtranger(url,regulatory){
     return this.http.post<any>(url,regulatory)
   }
+
+  getLastRegulation(url,pays){
+    return this.http.get<any>(url+"/"+pays)
+  }
+
+  getAllCommercialBanks(url){
+    return this.http.get<any>(url)
+  }
+
+  getCurrentBalence(url){
+    return this.http.get<any>(url);
+  }
+
+  createMoney(url,amount){
+    return this.http.post<any>(url,amount);
+  }
+
+  sendMoney(url,amount){
+    return this.http.post<any>(url,amount);
+  }
+
+  getAllMoneySentBySender(url,sender){
+    return this.http.get<any>(url+"/"+sender);
+  }
+
+  getTxBySender(url,sender){
+    return this.http.get<any>(url+"/"+sender);
+  }
+
 }

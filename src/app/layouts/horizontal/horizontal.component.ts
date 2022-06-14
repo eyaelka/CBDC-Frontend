@@ -30,7 +30,7 @@ export class HorizontalComponent implements OnInit, AfterViewInit {
     document.body.removeAttribute('data-sidebar');
     document.body.removeAttribute('data-layout-size');
     document.body.removeAttribute('data-keep-enlarged');
-    document.body.removeAttribute('data-sidebar-small');    
+    document.body.removeAttribute('data-sidebar-small');
 
     this.changeTopbar(this.topbar);
   }
@@ -51,13 +51,13 @@ export class HorizontalComponent implements OnInit, AfterViewInit {
         document.body.setAttribute("data-topbar", "light");
         break;
       case "dark":
-        document.body.setAttribute("data-topbar", "dark");
+        document.body.setAttribute("data-topbar", "light");
         break;
       case "colored":
         document.body.setAttribute("data-topbar", "colored");
         break;
       default:
-        document.body.setAttribute("data-topbar", "dark");
+        document.body.setAttribute("data-topbar", "light");
         break;
     }
   }

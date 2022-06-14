@@ -10,13 +10,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class TransactionComponent implements OnInit {
 
   @Input() transactions: Array<{
-    id?: string;
-    index?: number,
-    name?: string,
-    date?: string,
-    total?: string,
-    status?: string,
-    payment?: string[],
+   accountSender?: string;
+   defaultAmount?: Number;
+   currentAmount?: Number;
+  amountToTransfert?: Number;
+  accountReceiver?: string;
+  motifTransaction?: string;
+  pays?: string;
+  appFees?: number;
+  centralBankFees?: number;// centralBankFees >0 si la TX est transfrontalière
+  date?: string;
+  nameDevise?: string;
   }>;
 
   constructor(private modalService: NgbModal) { }

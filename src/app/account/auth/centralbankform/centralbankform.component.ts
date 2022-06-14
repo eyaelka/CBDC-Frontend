@@ -5,6 +5,9 @@ import { LoaderService } from '../../../core/services/loader.service';
 import { GenericUserService } from 'src/app/core/services/generic-user.service';
 import bsCustomFileInput from 'bs-custom-file-input';
 import { MyRouterLink } from '../../../core/models/router-links';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
 
 @Component({
   selector: 'app-centralbankform',
@@ -22,7 +25,8 @@ submitted = false;
 constructor(private formBuilder: FormBuilder,
             private router: Router,
             private loaderService : LoaderService,
-            private userService : GenericUserService) { }
+            private userService : GenericUserService,
+            private spinnerService: NgxSpinnerService) { }
 
 ngOnInit() {
   document.body.classList.add('auth-body-bg')
@@ -55,8 +59,10 @@ addCentralBankAccount(){
   console.log(request);
   this.userService.addUser(this.myRouterLink.linkAddCentralBank,request).subscribe(
     res =>{
+      this.spinnerService.show();
       this.submitted = false;
       this.router.navigate(['/login'])
+      this.spinnerService.hide()
     })
 }
 

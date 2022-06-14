@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { NgOtpInputModule } from  'ng-otp-input';
 import { ArchwizardModule } from 'angular-archwizard';
@@ -41,7 +43,9 @@ import { CentralbankformComponent } from './centralbankform/centralbankform.comp
     NgOtpInputModule,
     ArchwizardModule,
     DropzoneModule,
-    WebcamModule
+    WebcamModule,
+    FormsModule,
+    NgxSpinnerModule
   ]
 })
 export class AuthModule { }
