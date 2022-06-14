@@ -45,7 +45,7 @@ export class CentralbankDashboardComponent implements OnInit {
   moneyRegulation : RegulatorMoney = new RegulatorMoney;
   txLocalRegulation: RegulatorTxLocal = new RegulatorTxLocal;
   txAbroadRegulation: RegulatorTxTransfrontalier = new RegulatorTxTransfrontalier;
-  deviseRegulation: RegulatorDevise = new RegulatorDevise;
+  deviseRegulation: Array<RegulatorDevise> = [] ;
 
 
   sassEarning: Array<Object>;
@@ -63,6 +63,8 @@ export class CentralbankDashboardComponent implements OnInit {
 
   // Form submit
   chatSubmit: boolean;
+  test = false;
+
 
   constructor(public formBuilder: FormBuilder, private configService: ConfigService,
               private centralbankService: CentralBankService,
@@ -151,6 +153,8 @@ export class CentralbankDashboardComponent implements OnInit {
             }
           ]
         };
+        this.test = true;
+
 
 
 
@@ -206,10 +210,12 @@ export class CentralbankDashboardComponent implements OnInit {
         if (res != null) {
           this.deviseRegulation = res;
           console.log(this.deviseRegulation)
+
         }else{
           console.log ("wait");
         }
       })
+
   }
 
 
