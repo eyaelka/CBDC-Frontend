@@ -288,39 +288,6 @@ editCustomer(){
     }
   )
   }
-
-
-
-
-
-
-
-  // this.deactivated = true;
-  //  let user = {
-  //   bankAccountId:this.formDataDeactivate.value.bankAccountId,
-  //   endUserAccountId: this.deactivateAccountId,
-  //   suspendFlag: true,
-  //   newAccountType:"keep the same"
-  //  }
-  //  console.log(user)
-  //  this.spinner.show();
-  //  this.userService.deactivateUser(this.myRouterLink.linkDeactivateCommercialBank,user).subscribe(
-  //    res => {
-  //      this.deactivated = false;
-  //      console.log(res);
-  //      this.spinner.hide();
-  //      this.alertService.successAlert('Banque Commerciale Désactivée ')
-  //      this.modalService.dismissAll();
-  //    },
-  //    err =>{
-  //     this.spinner.hide();
-  //      this.alertService.errorAlert('Erreur au cours de la désactivation du compte')
-  //     this.modalService.dismissAll()
-  //   }
-  //  )
-
-
-
  }
 
 }

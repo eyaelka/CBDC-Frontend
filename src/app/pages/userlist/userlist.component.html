@@ -1,1 +1,312 @@
-<p>userlist works!</p>
+
+<div class="container-fluid">
+
+
+  <app-page-title title="Liste des Banque Commerciales" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <ngx-spinner
+                  bdColor="rgba(51,51,51,0.8)"
+                  size="default"
+                  color="#fff"
+                  type="ball-circus"
+                  showSpinner="true"
+              >
+              <p style="font-size: 20px; color: white">Patientez...</p>
+              </ngx-spinner>
+          <div class="row mb-2">
+            <div class="col-sm-4">
+              <div class="search-box me-2 mb-2 d-inline-block">
+                <div class="position-relative">
+                  <input type="text" class="form-control" placeholder="Recherche..." [(ngModel)]="term" />
+                  <i class="bx bx-search-alt search-icon"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="text-sm-end">
+                <!--<button type="button" class="btn btn-primary btn-rounded mb-2 mr-2" (click)="openModal(content)">
+                  <i class="mdi mdi-plus me-1"></i> Ajouter
+                </button>-->
+              </div>
+            </div>
+            <!-- end col-->
+          </div>
+          <div class="table-responsive">
+            <table class="table align-middle table-nowrap">
+              <thead>
+                <tr>
+                  <!-- <th>Identifiant Banque</th> -->
+                  <th>CIN</th>
+                  <th>Nom Utilisateur</th>
+                  <th>Date Naissance</th>
+                  <th>Adresse</th>
+                  <th>Nationalité</th>
+                  <th>Teléphone</th>
+                  <th>Email</th>
+                  <th>Banque</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let users of enduser ">
+
+                  <!-- <td>{{commercialbanks.compteId}}</td> -->
+                  <td>{{users.endUserData.cin}}</td>
+                  <td>{{users.endUserData.nom}}</td>
+                  <td>{{users.endUserData.dateNaissance}}</td>
+
+                  <td>{{users.endUserData.adresse}}</td>
+                  <td>{{users.endUserData.nationalite}}</td>
+                  <td>{{users.endUserData.telephone}}</td>
+                  <td>{{users.endUserData.email}}</td>
+                  <td>{{users.endUserData.bankWhoAddUser}}</td>
+
+
+
+
+                  <td>
+                    <div class="btn">
+                      <span class="cell-btn" (click)="openModalEdit(content1,users)">
+                        <i class="fas fa-pencil-alt text-primary"></i>
+                      </span> &nbsp;&nbsp;
+                      <span class="cell-btn"  *ngIf="!suspendFlag " (click)="openModalDeactivate(content2,users)">
+                        <i class="fas fa-ban text-danger"></i>
+                      </span>
+                      <span class="cell-btn" *ngIf="suspendFlag" (click)="openDeleteAlert()">
+                        <i class="fas fa-user-slash text-danger"></i>
+                      </span>
+                    </div>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+</div>
+
+<!-- Standard Modal -->
+<!--
+<ng-template #content role="document" let-modal>
+
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">Ajouter Banque Commerciale</h5>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+   <form (ngSubmit)="saveCustomer()" [formGroup]="formData">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="mb-3">
+          <label class="control-label">Nom Banque</label>
+          <input class="form-control" placeholder="Saisissez nom " type="text" name="title" autocomplete="off" formControlName="name"
+              [ngClass]="{'is-invalid': submitted && form.name.errors}" />
+            <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+              <span *ngIf="form.name.errors.required">Vous devez saisir le nom de la banque.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Abreviation</label>
+          <input class="form-control" placeholder="Saisissez abreviation" type="text" name="title" autocomplete="off" formControlName="abreviation"
+              [ngClass]="{'is-invalid': submitted && form.abreviation.errors}" />
+            <div *ngIf="submitted && form.abreviation.errors" class="invalid-feedback">
+              <span *ngIf="form.abreviation.errors.required">Vous devez saisir l'abreviation de la banque.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Pays</label>
+          <input class="form-control" placeholder="Saisissez pays" type="text" name="title" autocomplete="off" formControlName="pays"
+              [ngClass]="{'is-invalid': submitted && form.abreviation.errors}" />
+            <div *ngIf="submitted && form.pays.errors" class="invalid-feedback">
+              <span *ngIf="form.pays.errors.required">Vous devez saisir le pays de la banque.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Email</label>
+          <input class="form-control" placeholder="Saisissez email" type="text" name="email" autocomplete="off" formControlName="email"
+              [ngClass]="{'is-invalid': submitted && form.email.errors}" />
+              <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                <span *ngIf="form.email.errors.required">Vous devez saisir un email.</span>
+                <span *ngIf="form.email.errors.pattern">Adresse email non valide.</span>
+              </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Fax</label>
+          <input class="form-control" placeholder="Saisissez votre fax" type="text" name="fax" autocomplete="off" formControlName="fax"
+              [ngClass]="{'is-invalid': submitted && form.fax.errors}" />
+            <div *ngIf="submitted && form.fax.errors" class="invalid-feedback">
+              <span *ngIf="form.fax.errors.required">Vous devez saisir un numéro fax.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Adresse</label>
+          <input class="form-control" placeholder="Saisissez adresse" type="text" autocomplete="off" name="address" formControlName="address"
+              [ngClass]="{'is-invalid': submitted && form.address.errors}" />
+            <div *ngIf="submitted && form.address.errors" class="invalid-feedback">
+              <span *ngIf="form.address.errors.required">Vous devez saisir l'adresse.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Type de compte</label>
+          <input class="form-control" placeholder="Saisissez type" type="text" autocomplete="off" name="accountType" formControlName="accountType"
+              [ngClass]="{'is-invalid': submitted && form.accountType.errors}" />
+            <div *ngIf="submitted && form.accountType.errors" class="invalid-feedback">
+              <span *ngIf="form.accountType.errors.required">Vous devez saisir le type du compte</span>
+            </div>
+        </div>
+      </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary" id="btn-save-event">
+      Ajouter
+    </button>
+   </form>
+  </div>
+
+</ng-template> -->
+
+<!-- Standard Modal -->
+
+<ng-template #content1 role="document" let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">Modifier Banque Commerciale</h5>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+   <form (ngSubmit)="editCustomer()" [formGroup]="formData">
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3">
+          <label class="control-label">CIN</label>
+          <input class="form-control" placeholder="Saisissez CIN" type="text" name="cin" autocomplete="off" formControlName="cin"
+              [ngClass]="{'is-invalid': submitted && form.cin.errors}" />
+            <div *ngIf="submitted && form.cin.errors" class="invalid-feedback">
+              <span *ngIf="form.cin.errors.required">Vous devez saisir cin utilisateur.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Nom Utilisateur</label>
+          <input class="form-control" placeholder="Saisissez Nom Utilisateur" type="text" name="nom" autocomplete="off" formControlName="nom"
+              [ngClass]="{'is-invalid': submitted && form.nom.errors}" />
+            <div *ngIf="submitted && form.nom.errors" class="invalid-feedback">
+              <span *ngIf="form.nom.errors.required">Vous devez saisir nom utilisateur.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Date Naissance</label>
+          <input class="form-control" placeholder="Saisissez Date Naissance" type="text" name="dateNaissance" autocomplete="off" formControlName="dateNaissance"
+              [ngClass]="{'is-invalid': submitted && form.dateNaissance.errors}" />
+            <div *ngIf="submitted && form.dateNaissance.errors" class="invalid-feedback">
+              <span *ngIf="form.dateNaissance.errors.required">Vous devez saisir date de naissance.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Adresse</label>
+          <input class="form-control" placeholder="Saisissez Adresse" type="text" name="adresse" autocomplete="off" formControlName="adresse"
+              [ngClass]="{'is-invalid': submitted && form.adresse.errors}" />
+              <div *ngIf="submitted && form.adresse.errors" class="invalid-feedback">
+                <span *ngIf="form.adresse.errors.required">Vous devez saisir une adresse.</span>
+                <span *ngIf="form.adresse.errors.pattern">Adresse non valide.</span>
+              </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Nationalité</label>
+          <input class="form-control" placeholder="Saisissez votre nationalité" type="text" name="nationalite" autocomplete="off" formControlName="nationalite"
+              [ngClass]="{'is-invalid': submitted && form.nationalite.errors}" />
+            <div *ngIf="submitted && form.nationalite.errors" class="invalid-feedback">
+              <span *ngIf="form.nationalite.errors.required">Vous devez saisir nationalité.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Télephone</label>
+          <input class="form-control" placeholder="Saisissez télephone" type="text" autocomplete="off" name="telephone" formControlName="telephone"
+              [ngClass]="{'is-invalid': submitted && form.telephone.errors}" />
+            <div *ngIf="submitted && form.telephone.errors" class="invalid-feedback">
+              <span *ngIf="form.telephone.errors.required">Vous devez saisir numéro de télephone.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Email</label>
+          <input class="form-control" placeholder="Saisissez email" type="text" autocomplete="off" name="email" formControlName="email"
+              [ngClass]="{'is-invalid': submitted && form.email.errors}" />
+            <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+              <span *ngIf="form.email.errors.required">Vous devez saisir email.</span>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Banque</label>
+          <input class="form-control" placeholder="Saisissez banque" type="text" autocomplete="off" name="bankWhoAddUser" formControlName="bankWhoAddUser"
+              [ngClass]="{'is-invalid': submitted && form.bankWhoAddUser.errors}" />
+            <div *ngIf="submitted && form.bankWhoAddUser.errors" class="invalid-feedback">
+              <span *ngIf="form.bankWhoAddUser.errors.required">Vous devez saisir votre banque.</span>
+            </div>
+        </div>
+      </div>
+    </div>
+      <button type="submit" class="btn btn-primary" id="btn-save-event">
+        Modifier
+      </button>
+   </form>
+  </div>
+</ng-template>
+
+
+
+
+<!-- Deactivate Modal -->
+<ng-template #content2 role="document" let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">Suspendre Banque Commerciale</h5>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+   <form (ngSubmit)="deactivateCustomer()" [formGroup]="formDataDeactivate">
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3">
+          <label class="control-label">Identifant compte </label>
+          <div *ngFor="let userAccount of allUserAccounts">
+            <!-- <select name ="bankAccountId" id="bankAccountId" *ngFor="let bankAccount of allBankAccounts">
+                <option value="{{bankAccount.accountId}}"></option>
+            </select> -->
+
+            <!-- <input class="form-control" type="radio" autocomplete="off" formControlName="bankAccountId" />
+              {{bankAccount.accountId}}
+
+
+            <div *ngIf="submitted && form.bankAccountId.errors" class="invalid-feedback">
+              <span *ngIf="form.bankAccountId.errors.required">Vous devez saisir l'identifiant de la banque commerciale.</span> -->
+            <!-- </div> -->
+
+            <input type="radio" name="bankId"  (change)="onSelectionChang(userAccount.accountId)"/> &nbsp; &nbsp;
+            {{userAccount.accountId}}
+
+          </div>
+
+        </div>
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" id="suspendFlag" formControlName="suspendFlag" >
+          <label class="form-check-label" for="suspendFlag">Desactiver</label>
+      </div>
+      </div>
+    </div>
+      <button type="submit" class="btn btn-primary" id="btn-save-event">
+        Valider
+      </button>
+
+
+
+   </form>
+  </div>
+</ng-template>
+

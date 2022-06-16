@@ -1,7 +1,9 @@
 export class MyRouterLink{
   //User Link
   linkSendEmailVerificationToUser = "http://localhost:10053/enduser/sendcodeverification";
-  linkUserNotifyAdmin = "http://localhost:10053/enduser/notifyAdmin"; ;
+  linkUserNotifyAdmin = "http://localhost:10053/enduser/notifyAdmin";
+  linkUserUpdate ="http://localhost:10053/enduser/update";
+  linkDesactivateUser = "http://localhost:10053/enduser/deleteoractiveorswithacountytype";
 
   //Merchant Link
   linkSendEmailVerificationToMerchant = "http://localhost:10054/merchant/sendcodeverification";
