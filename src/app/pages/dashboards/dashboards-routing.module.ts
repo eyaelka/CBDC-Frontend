@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DefaultComponent } from './default/default.component';
 import { CentralbankDashboardComponent } from './centralbank-dashboard/centralbank-dashboard.component';
+import { CommercialbankDashboardComponent } from './commercialbank-dashboard/commercialbank-dashboard.component';
 //import { SaasComponent } from './saas/saas.component';
 //import { CryptoComponent } from './crypto/crypto.component';
 //import { BlogComponent } from './blog/blog.component';
@@ -15,6 +16,10 @@ const routes: Routes = [
     {
       path: 'centralbank',
       component: CentralbankDashboardComponent
+  },
+  {
+    path: 'commercialbank',
+    component: CommercialbankDashboardComponent
   },
     {
         path: 'saas',

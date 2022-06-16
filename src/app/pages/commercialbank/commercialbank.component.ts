@@ -7,6 +7,10 @@ import { LoaderService } from '../../core/services/loader.service';
 import { MyRouterLink } from '../../core/models/router-links';
 import { AlertService } from '../../core/services/alert.service';
 import { CentralBankService } from 'src/app/core/services/centralbank.service';
+import { NgxSpinnerService } from "ngx-spinner";
+import { Route, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+
 
 @Component({
   selector: 'app-commercialbank',
@@ -35,6 +39,8 @@ export class CommercialbankComponent implements OnInit {
   editted = false;
   deactivated= false;
   commercialbank: CommercialBankAccountInfo;
+  allBankAccounts;
+  selectedAccountId = null;
 
 
 
@@ -43,9 +49,12 @@ export class CommercialbankComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder,
               private userService: GenericUserService, private loaderService: LoaderService,
-              private alertService: AlertService, private centralbankService: CentralBankService) { }
+              private alertService: AlertService, private centralbankService: CentralBankService,
+              private spinner: NgxSpinnerService, private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
+    let myToken = this.authService.decodeUserAccesToken();
+
     this.formData = this.formBuilder.group({
       name: ['', [Validators.required]],
       abreviation: ['', [Validators.required]],
@@ -112,13 +121,27 @@ export class CommercialbankComponent implements OnInit {
   }
 
   openModalEdit(content: any, oldData: any){
-    this.formData.reset;
+
+    //this.formData.reset;
     this.oldData = oldData;
+    console.log(oldData)
+    this.formData = this.formBuilder.group({
+      name: [oldData.commercialBankData.name, [Validators.required]],
+      abreviation: [oldData.commercialBankData.abreviation, [Validators.required]],
+      email: [oldData.commercialBankData.email, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      fax: [oldData.commercialBankData.fax, [Validators.required]],
+      address: [oldData.commercialBankData.address, [Validators.required]],
+      pays: [oldData.commercialBankData.pays, [Validators.required]]
+
+    });
     this.modalService.open(content);
 
   }
 
   openModalDeactivate(content: any, deactivateData){
+    this.oldData = deactivateData
+    this.allBankAccounts = this.oldData.commercialBankAccounts;
+    console.log(this.allBankAccounts)
     this.deactivateAccountId = deactivateData.compteId
     this.modalService.open(content);
   }
@@ -139,6 +162,7 @@ export class CommercialbankComponent implements OnInit {
       suspend:false,
       date:currentDate
     }
+    this.spinner.show();
      this.userService.addUser(this.myRouterLink.linkAddCommercialBank,userDetails).subscribe(
        res => {
          this.submitted = false;
@@ -147,16 +171,18 @@ export class CommercialbankComponent implements OnInit {
             user: userDetails,
             compteId: res.compteId
           };
-          console.log(userData);
           this.commercialBankData.push(userData);
+          this.spinner.hide();
           this.alertService.successAlert('Banque Commerciale Ajoutée ')
           this.modalService.dismissAll();
-
+          this.router.navigateByUrl('/page/commercialbank');
         }
        },
        err => {
+        this.spinner.hide();
          this.alertService.errorAlert('Erreur d\'Ajout de la banque commerciale')
         this.modalService.dismissAll();
+        this.router.navigateByUrl('/page/commercialbank')
        }
      );
 
@@ -168,7 +194,7 @@ editCustomer(){
     "commercialBankData":{
       ...this.formData.value,
     },
-    compteId: this.oldData.compteId
+    compteId: this.oldData.commercialBankAccounts[0].accountId
   }
   console.log(user)
 
@@ -182,8 +208,9 @@ editCustomer(){
       pays:user.commercialBankData.pays
     },
     commercialBankAccountId: user.compteId
-  }
 
+  }
+  this.spinner.show();
   this.userService.updateUser(this.myRouterLink.linkUpdateCommercialBank,userToEdit).subscribe(
 
     (res) => {
@@ -214,11 +241,13 @@ editCustomer(){
            }
            commercialBankDataTemp.push(updatedUser)
            this.commercialBankData = commercialBankDataTemp
+           this.spinner.hide();
            this.alertService.successAlert('Banque Commerciale Modifiée ')
            this.modalService.dismissAll()
           }
     },
     err =>{
+      this.spinner.hide();
       this.alertService.errorAlert('Erreur au cours de la modification du compte')
       this.modalService.dismissAll()
     }
@@ -230,28 +259,65 @@ editCustomer(){
 
  }
 
- deactivateCustomer(){
-  this.deactivated = true;
-   let user = {
-    bankAccountId:this.formDataDeactivate.value.bankAccountId,
-    endUserAccountId: this.deactivateAccountId,
-    suspendFlag: true,
-    newAccountType:"keep the same"
-   }
-   console.log(user)
+ onSelectionChang(compteId){
+  this.selectedAccountId = compteId
+  console.log (this.selectedAccountId)
+ }
 
-   this.userService.deactivateUser(this.myRouterLink.linkDeactivateCommercialBank,user).subscribe(
-     res => {
-       this.deactivated = false;
-       console.log(res);
-       this.alertService.successAlert('Banque Commerciale Désactivée ')
-       this.modalService.dismissAll();
-     },
-     err =>{
-       this.alertService.errorAlert('Erreur au cours de la désactivation du compte')
+ deactivateCustomer(){
+  if (this.selectedAccountId != null){
+    let user = {
+      bankAccountId:this.authService.accountId,
+      endUserAccountId: this.selectedAccountId,
+      suspendFlag: true,
+      newAccountType:"keep the same"
+     }
+     console.log(user);
+     this.spinner.show();
+    this.userService.deactivateUser(this.myRouterLink.linkDeactivateCommercialBank,user).subscribe(
+    res =>{
+      if(res != null){
+        console.log(res)
+      }
+      this.alertService.successAlert('Compte Banque Commerciale Suspendu ')
       this.modalService.dismissAll()
+      this.spinner.hide();
+
+
+
     }
-   )
+  )
+  }
+
+
+
+
+
+
+
+  // this.deactivated = true;
+  //  let user = {
+  //   bankAccountId:this.formDataDeactivate.value.bankAccountId,
+  //   endUserAccountId: this.deactivateAccountId,
+  //   suspendFlag: true,
+  //   newAccountType:"keep the same"
+  //  }
+  //  console.log(user)
+  //  this.spinner.show();
+  //  this.userService.deactivateUser(this.myRouterLink.linkDeactivateCommercialBank,user).subscribe(
+  //    res => {
+  //      this.deactivated = false;
+  //      console.log(res);
+  //      this.spinner.hide();
+  //      this.alertService.successAlert('Banque Commerciale Désactivée ')
+  //      this.modalService.dismissAll();
+  //    },
+  //    err =>{
+  //     this.spinner.hide();
+  //      this.alertService.errorAlert('Erreur au cours de la désactivation du compte')
+  //     this.modalService.dismissAll()
+  //   }
+  //  )
 
 
 

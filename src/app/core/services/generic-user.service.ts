@@ -12,9 +12,9 @@ export class GenericUserService{
 
 
   //Create User
-  addUser(url,userDetails){
+  addUser(url,userDetails):Observable<any>{
     let token = this.authenticationService.getUserToken();
-    return this.http.post<any>(url,userDetails);
+    return this.http.post<any>(url,userDetails) ;
   }
 
   //Read User
@@ -22,6 +22,10 @@ export class GenericUserService{
     //retrieve the token
     let token = this.authenticationService.getUserToken();
     return this.http.get<any>(url,userId);
+  }
+
+  getLastRegulation(url,pays){
+    return this.http.get<any>(url+"/"+pays)
   }
 
   //Read All User
@@ -68,6 +72,8 @@ export class GenericUserService{
 deactivateUser(url,endUser){
   return this.http.post<any>(url,endUser);
 }
+
+
 
 
 

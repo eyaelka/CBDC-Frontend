@@ -27,6 +27,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   loggedIn = false;
 
   menuItems = [];
+  myRole = null;
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
@@ -46,10 +47,18 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 
 
   ngOnInit() {
-    this.authService.decodeUserAccesToken();
+    let myToken = this.authService.getUserToken();
+    if (myToken == null){
+      this.router.navigateByUrl('/start-page');
+    }else{
+      this.authService.decodeUserAccesToken();
+      this.myRole = this.authService.role;
+      this.initialize();
+      this._scrollElement();
 
-    this.initialize();
-    this._scrollElement();
+    }
+
+
   }
 
   ngAfterViewInit() {

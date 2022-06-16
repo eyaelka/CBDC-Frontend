@@ -14,6 +14,7 @@ export class AuthenticationService{
   isCommercialBank = false;
   isUser = false;
   isMerchant = false;
+  role = null;
   pays;
   accountId
 
@@ -87,7 +88,7 @@ export class AuthenticationService{
   //Remove the token
   logout(){
     localStorage.removeItem("currentUser");
-    this.router.navigate(['']);
+    this.router.navigate(['/start-page']);
   }
 
   //Remove refresh token
@@ -118,13 +119,13 @@ export class AuthenticationService{
       console.log(decodedToken)
       for(let i = 0; i < decodedToken.roles.length; i++ ){
        if(decodedToken.roles[i].authority == "centralbank"){
-          this.isCentralBank = true;
+          this.role = "centralbank";
         }else if (decodedToken.roles[i].authority == "commercialbank"){
-          this.isCommercialBank = true;
+          this.role = "commercialbank";
         }else if (decodedToken.roles[i].authority == "user"){
-          this.isUser = true;
+          this.role = "user";
         }else if (decodedToken.roles[i].authority == "merchant"){
-          this.isMerchant = true;
+          this.role = "merchant";
         }else{
           this.pays = decodedToken.roles[i].authority;
         }

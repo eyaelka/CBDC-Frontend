@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +20,7 @@ import {
   ChartComponent
 
 } from "ng-apexcharts";
+import { GenericUserService } from 'src/app/core/services/generic-user.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -30,11 +32,11 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-centralbank-dashboard',
-  templateUrl: './centralbank-dashboard.component.html',
-  styleUrls: ['./centralbank-dashboard.component.scss']
+  selector: 'app-commercialbank-dashboard',
+  templateUrl: './commercialbank-dashboard.component.html',
+  styleUrls: ['./commercialbank-dashboard.component.scss']
 })
-export class CentralbankDashboardComponent implements OnInit {
+export class CommercialbankDashboardComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
@@ -46,8 +48,10 @@ export class CentralbankDashboardComponent implements OnInit {
   deviseRegulation: Array<RegulatorDevise> = [] ;
   localCountry: Array<{}> = [] ;
   abroadCountry: Array<{}> = [] ;
-  nbLocal = 0;
-  nbAbroad = 0;
+  nbLocalUser = 0;
+  nbAbroadUser = 0;
+  nbUsers = 0;
+  nbMerchants = 0;
   numberChart = [];
   formData: FormGroup;
   pays;
@@ -57,7 +61,8 @@ export class CentralbankDashboardComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder, private configService: ConfigService,
               private centralbankService: CentralBankService,
-              private route: ActivatedRoute, private authService:AuthenticationService ) {
+              private route: ActivatedRoute, private authService:AuthenticationService,
+              private userService: GenericUserService ) {
 
               }
 
@@ -83,36 +88,31 @@ export class CentralbankDashboardComponent implements OnInit {
 
 
   private _fetchData() {
-        this.centralbankService.getAllCommercialBanks(this.myRouterLink.linkGetAllCommercialBanks).subscribe(
+        this.userService.getAll(this.myRouterLink.linkGetAllUsers).subscribe(
       res => {
-        if (res != null) {
-          console.log(res[0].commercialBankData.pays == this.pays)
-
-        for(let i=0; i<res.length ; i++){
-            if(res[i].commercialBankData.pays == this.pays){
-              this.localCountry.unshift(res[i].commercialBankData);
-              this.nbLocal = this.nbLocal+1;
+        this.nbUsers = res.length;
+         if (res != null) {
+           for(let i=0; i<res.length ; i++){
+            if(res[i].endUserData.pays == this.pays){
+              this.localCountry.unshift(res[i].endUserData);
+              this.nbLocalUser = this.nbLocalUser+1;
             }else{
-              this.abroadCountry.unshift(res[i].commercialBankData);
-              this.nbAbroad = this.nbAbroad+1;
+              this.abroadCountry.unshift(res[i].endUserData);
+              this.nbAbroadUser = this.nbAbroadUser+1;
             }
-            this.numberChart.push(this.nbLocal);
-            this.numberChart.push(this.nbAbroad);
 
         }
-        console.log("nblocal",this.nbLocal),
-        console.log("nbetrangere",this.nbAbroad)
         }
 
         this.chartOptions = {
-          series: [this.nbLocal,this.nbAbroad],
+          series: [this.nbLocalUser,this.nbAbroadUser],
           chart: {
             width: "100%",
             type: "pie"
           },
           labels: [
-            "Locale",
-            "Etrangère"
+            "Local",
+            "Etranger"
           ],
           theme: {
             monochrome: {
@@ -139,16 +139,14 @@ export class CentralbankDashboardComponent implements OnInit {
         this.test = true;
 
 
-
-
-      })
+         })
 
 
     /////////////////////////
     //Money Regulation
     ////////////////////////
     this.pays = this.authService.pays;
-    this.centralbankService.getLastRegulation(this.myRouterLink.linkGetLastMoneyRegulation,this.pays).subscribe(
+    this.userService.getLastRegulation(this.myRouterLink.linkGetLastMoneyRegulationBSR,this.pays).subscribe(
       res =>{
         if (res != null) {
           this.moneyRegulation = res;
@@ -161,7 +159,7 @@ export class CentralbankDashboardComponent implements OnInit {
     ///////////////////////
     //Local Tx Regulation
     ///////////////////////////
-    this.centralbankService.getLastRegulation(this.myRouterLink.linkGetLastLocalTxRegulation,this.pays).subscribe(
+    this.userService.getLastRegulation(this.myRouterLink.linkGetLastLocalTxRegulationBSR,this.pays).subscribe(
       res =>{
         if (res != null) {
           this.txLocalRegulation = res;
@@ -174,8 +172,7 @@ export class CentralbankDashboardComponent implements OnInit {
     ///////////////////////
     //Tx Regulation Interpays
     ///////////////////////////
-    this.paysBanqueCentral = this.pays
-    this.centralbankService.getLastRegulation(this.myRouterLink.linkGetLastInterpaysTxRegulation,this.paysBanqueCentral ).subscribe(
+    this.userService.getLastRegulation(this.myRouterLink.linkGetLastInterpaysTxRegulationBSR,this.pays ).subscribe(
       res =>{
         if (res != null) {
           this.txAbroadRegulation = res;
@@ -185,10 +182,11 @@ export class CentralbankDashboardComponent implements OnInit {
 
       }
     )
+
     ///////////////////////
     //Devise Regulation
     ///////////////////////////
-    this.centralbankService.getLastRegulation(this.myRouterLink.linkGetLastDeviseRegulation,this.pays).subscribe(
+    this.userService.getLastRegulation(this.myRouterLink.linkGetLastDeviseRegulationBSR,this.pays).subscribe(
       res =>{
         if (res != null) {
           this.deviseRegulation = res;
@@ -199,13 +197,16 @@ export class CentralbankDashboardComponent implements OnInit {
         }
       })
 
-  }
-
-
-
-
-
 
 
   }
+
+
+
+
+
+
+
+  }
+
 

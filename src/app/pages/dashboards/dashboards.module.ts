@@ -11,6 +11,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgbDropdownModule, NgbTooltipModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap'
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { CentralbankDashboardComponent } from './centralbank-dashboard/centralbank-dashboard.component';
+import { CommercialbankDashboardComponent } from './commercialbank-dashboard/commercialbank-dashboard.component';
 
 
 // import { DefaultComponent } from './default/default.component';
@@ -21,7 +22,7 @@ import { CentralbankDashboardComponent } from './centralbank-dashboard/centralba
 // import { WalletComponent } from './wallet/wallet.component';
 
 @NgModule({
-  declarations: [CentralbankDashboardComponent],
+  declarations: [CentralbankDashboardComponent, CommercialbankDashboardComponent],
   imports: [
     CommonModule,
     FormsModule,

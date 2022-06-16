@@ -8,6 +8,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { MyRouterLink } from 'src/app/core/models/router-links';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-regulate-money',
   templateUrl: './regulate-money.component.html',
@@ -36,7 +37,8 @@ export class RegulateMoneyComponent implements OnInit {
    constructor(private formBuilder: FormBuilder,
               private centralbankService: CentralBankService,
               private alertService: AlertService,
-              private spinner: NgxSpinnerService
+              private spinner: NgxSpinnerService,
+              private router : Router
               ) { }
 
    ngOnInit() {
@@ -87,6 +89,7 @@ export class RegulateMoneyComponent implements OnInit {
           this.alertService.successAlert('Régulation masse monétaire ajoutée ');
           console.log(res)
           this.spinner.hide();
+          this.router.navigateByUrl("/page/dashboards/centralbank")
         }else{
           this.alertService.errorAlert('Erreur d\'Ajout du régulateur masse monétaire');
           this.spinner.hide();

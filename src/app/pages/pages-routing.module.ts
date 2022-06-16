@@ -16,6 +16,8 @@ import { ActivateMerchantComponent } from './activate-merchant/activate-merchant
 import { RegulateMoneyComponent } from './regulate-money/regulate-money.component';
 import { RegulateDeviseComponent } from './regulate-devise/regulate-devise.component';
 import { RegulatetransferComponent } from './regulatetransfer/regulatetransfer.component';
+import { CommercialbankWalletComponent } from './commercialbank-wallet/commercialbank-wallet.component';
+import { UserlistComponent } from './userlist/userlist.component';
 const routes: Routes = [
 
 
@@ -27,7 +29,9 @@ const routes: Routes = [
   { path: 'regulatedevise', component:RegulateDeviseComponent},
   { path: 'regulatetransfer', component:RegulatetransferComponent},
   { path: 'centralbank-wallet', component:CentralbankWalletComponent},
+  { path: 'commercialbank-wallet', component:CommercialbankWalletComponent},
   { path: 'commercialbank', component:CommercialbankComponent},
+  { path : 'users', component:UserlistComponent},
   { path: 'enduser/activation/:token', component:ActivateAccountComponent},
   { path: 'merchant/activation/:token', component:ActivateMerchantComponent},
   { path: 'regulatemoney', component:RegulateMoneyComponent},

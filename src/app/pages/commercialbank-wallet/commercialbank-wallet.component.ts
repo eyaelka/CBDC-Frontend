@@ -5,14 +5,6 @@ import { AlertService } from 'src/app/core/services/alert.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { TransactionInterbancaire } from 'src/app/core/models/transaction-interbanks.model';
-
-
-//import { CentralbankWalletService } from './centralbank-wallet.service';
-//import {  CentralBankWalletSortableService, SortEvent } from './centralbank-wallet-sortable.directive';
-
-//import { ChartType, Activities } from './centralbank-wallet.model';
-
-//import { OveviewChart, activitiesData } from './data';
 import { CentralBankService } from 'src/app/core/services/centralbank.service';
 import { MyRouterLink } from 'src/app/core/models/router-links';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
@@ -48,11 +40,11 @@ export type ChartOptions = {
 
 
 @Component({
-  selector: 'app-centralbank-wallet',
-  templateUrl: './centralbank-wallet.component.html',
-  styleUrls: ['./centralbank-wallet.component.scss']
+  selector: 'app-commercialbank-wallet',
+  templateUrl: './commercialbank-wallet.component.html',
+  styleUrls: ['./commercialbank-wallet.component.scss']
 })
-export class CentralbankWalletComponent implements OnInit {
+export class CommercialbankWalletComponent implements OnInit {
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -123,7 +115,7 @@ export class CentralbankWalletComponent implements OnInit {
     });
 
 
-    this.centralBankService.getSentRecieve(this.myRouterLink.linkSentRecieveBalance, this.accountId).subscribe(
+    this.centralBankService.getSentRecieve(this.myRouterLink.linkSentRecieveBalanceBSR, this.accountId).subscribe(
       res =>{
         if (res != null){
           console.log(res)
@@ -132,7 +124,7 @@ export class CentralbankWalletComponent implements OnInit {
         }
       }
     )
-    this.centralBankService.getAllMoneySentBySender(this.myRouterLink.linkGetAllMoneySentBySender,this.accountId).subscribe(
+    this.centralBankService.getAllMoneySentBySender(this.myRouterLink.linkGetAllMoneySentBySenderBSR,this.accountId).subscribe(
       res =>{
         if (res != null){
           console.log(res)
@@ -152,7 +144,7 @@ export class CentralbankWalletComponent implements OnInit {
             ],
             chart: {
               height: 350,
-              type: "bar"
+              type: "area"
             },
             plotOptions: {
               bar: {
@@ -163,7 +155,7 @@ export class CentralbankWalletComponent implements OnInit {
               enabled: false
             },
             stroke: {
-              width: 2
+              width: 5
             },
 
             grid: {
@@ -203,89 +195,27 @@ export class CentralbankWalletComponent implements OnInit {
 
 
 
-    this.centralBankService.getTxBySender(this.myRouterLink.linkGetAllTxBySender,this.accountId).subscribe(
+    this.centralBankService.getTxBySender(this.myRouterLink.linkGetAllTxBySenderBSR,this.accountId).subscribe(
       res => {
         if (res != null){
           this.transactions = res;
-
         }
-
-
-      }
-    )
+      })
 
     this._fetchData();
   }
 
-    /**
- * Sort table data
- * @param param0 sort the column
- *
 
-  onSort({ column, direction }: SortEvent) {
-    // resetting other headers
-    this.headers.forEach(header => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
-    });
-    // this.service.sortColumn = column;
-    // this.service.sortDirection = direction;
-  }*/
 
   openModal(content: any) {
-    // this.formData = this.formBuilder.group({
-    //   amountToTransfert: ['', [Validators.required]],
-    //   password: ['', [Validators.required]]
-    // });
     this.modalService.open(content);
   }
-
-  createMoney(){
-    this.submitted = true;
-    const currentDate = new Date();
-    let moneyDetails = {
-      "transactionInterBanks":{
-        accountSender: this.authService.accountId,
-        defaultAmount: 200.0,
-        currentAmount: this.balance,
-        amountToTransfert: this.formData.value.amountToTransfert,
-        accountReceiver: this.authService.accountId,
-        motifTransaction: "Création de la monnaie",
-        pays: this.authService.pays,
-        appFees: 0.0,
-        centralBankFees: 0.0,
-        date: currentDate
-      },
-     password: this.formData.value.password
-    }
-    console.log(moneyDetails)
-    this.spinner.show();
-    this.centralBankService.createMoney(this.myRouterLink.linkCreateMoney,moneyDetails).subscribe(
-       res => {
-         if(res != null){
-          this.submitted = false;
-          this._fetchData();
-          this.alertService.successAlert('CBDC Crée ')
-          this.modalService.dismissAll();
-          this.spinner.hide();
-          this.formData.reset();
-         }else{
-          this.alertService.errorAlert('Erreur de creation de CBDC')
-          this.modalService.dismissAll();
-          this.spinner.hide();
-          this.formData.reset();
-         }
-
-       });
-      }
-
   get form() {
     return this.formData.controls;
   }
 
   private _fetchData() {
-    this.centralBankService.getCurrentBalence(this.myRouterLink.linkGetCurrentBalance,this.accountId).subscribe(
+    this.centralBankService.getCurrentBalence(this.myRouterLink.linkGetCurrentBalanceBSR,this.accountId).subscribe(
       res =>{
         console.log(res);
         this.balance = res;
@@ -320,7 +250,7 @@ export class CentralbankWalletComponent implements OnInit {
      password: this.sendForm.value.password
     }
     this.spinner.show();
-     this.centralBankService.sendMoney(this.myRouterLink.linkSendMoney,moneyDetails).subscribe(
+     this.centralBankService.sendMoney(this.myRouterLink.linkSendMoneyBSR,moneyDetails).subscribe(
        res => {
          if(res != null){
           this.submitted = false;
@@ -356,7 +286,7 @@ export class CentralbankWalletComponent implements OnInit {
       }
       this.spinner.show();
 
-       this.centralBankService.sendMoney(this.myRouterLink.linkSendMoney,moneyDetails).subscribe(
+       this.centralBankService.sendMoney(this.myRouterLink.linkSendMoneyBSR,moneyDetails).subscribe(
          res => {
            if(res != null){
             this.submitted = false;

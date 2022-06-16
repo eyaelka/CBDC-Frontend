@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas';
 import { MyRouterLink } from 'src/app/core/models/router-links';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -49,7 +50,8 @@ myRouterLink: MyRouterLink = new MyRouterLink();
               private centralbankService: CentralBankService,
               private alertService: AlertService,
               private modalService : NgbModal,
-              private spinner : NgxSpinnerService
+              private spinner : NgxSpinnerService,
+              private router: Router
               ) { }
 
    ngOnInit() {
@@ -138,6 +140,8 @@ myRouterLink: MyRouterLink = new MyRouterLink();
         console.log(res)
         this.modalService.dismissAll();
         this.activeID = 1;
+        this.router.navigateByUrl("/page/dashboards/centralbank")
+
 
       },
       err =>{
@@ -174,6 +178,7 @@ myRouterLink: MyRouterLink = new MyRouterLink();
         console.log(res)
         this.modalService.dismissAll();
         this.activeID = 1;
+        this.router.navigateByUrl("/page/dashboards/centralbank");
 
 
       },

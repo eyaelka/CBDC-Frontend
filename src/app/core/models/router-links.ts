@@ -21,12 +21,13 @@ export class MyRouterLink{
   linkGetLastLocalTxRegulation ="http://localhost:10050/politique/txregulationlocal";
   linkGetLastInterpaysTxRegulation ="http://localhost:10050/politique/txregulationinterpays";
   linkGetAllCommercialBanks = "http://localhost:10050/getAllCommercialBanks";
-  linkGetCurrentBalance = "http://localhost:10050/getCurrentBalance";
+  linkGetCurrentBalance = "http://localhost:10050/CurrentBalance";
   linkCreateMoney = "http://localhost:10050/createmoney";
   linkSendMoney = "http://localhost:10050/interbanktransaction";
   linkGetAllMoneySentBySender = "http://localhost:10050/getAllTx";
   linkGetAllDatesMoneySentBySender = "http://localhost:10050/getAllTxDates";
-  linkGetAllTxBySender = "http://localhost:10050/getAllTxByCentralBank"
+  linkGetAllTxBySender = "http://localhost:10050/getAllTxByCentralBank";
+  linkSentRecieveBalance = "http://localhost:10050/allUpdatesBalance";
 
 
 
@@ -35,6 +36,26 @@ export class MyRouterLink{
   linkUpdateCommercialBank = "http://localhost:10051/commercialbank/update";
   linkDeactivateCommercialBank = "http://localhost:10051/commercialbank/deleteoractiveorswithacountytype";
   linkCommercialBankLoginPath = "http://localhost:10051/login"
+  linkGetAllUsers = "http://localhost:10051/getAllUsers";
+  linkGetLastInterpaysTxRegulationBSR ="http://localhost:10051/politique/txregulationinterpays";
+  linkGetLastLocalTxRegulationBSR ="http://localhost:10051/politique/txregulationlocal";
+  linkGetLastDeviseRegulationBSR ="http://localhost:10051/politique/regulationdevise" ;
+  linkGetLastMoneyRegulationBSR = "http://localhost:10051/politique/regulationmassemonnetaire";
+  linkSentRecieveBalanceBSR = "http://localhost:10051/allUpdatesBalance";
+  linkGetCurrentBalanceBSR = "http://localhost:10051/CurrentBalance";
+  linkGetAllMoneySentBySenderBSR = "http://localhost:10051/getAllTx";
+  linkGetAllTxBySenderBSR = "http://localhost:10051/getAllTxByCommercialBank";
+  linkSendMoneyBSR = "http://localhost:10051/interbanktransaction";
+
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -9,6 +9,7 @@ import { MyRouterLink } from 'src/app/core/models/router-links';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from '@angular/router';
 
 
 
@@ -43,7 +44,8 @@ export class RegulateDeviseComponent implements OnInit {
    constructor(private formBuilder: FormBuilder,
               private centralbankService: CentralBankService,
               private alertService: AlertService,
-              private spinner: NgxSpinnerService
+              private spinner: NgxSpinnerService,
+              private router : Router
               ) { }
 
    ngOnInit() {
@@ -93,6 +95,9 @@ export class RegulateDeviseComponent implements OnInit {
       res => {
         this.alertService.successAlert('Régulation Devise ajoutée ')
         this.spinner.hide();
+        this.router.navigateByUrl("/page/dashboards/centralbank")
+
+
       },
       err =>{
         this.alertService.errorAlert('Erreur d\'Ajout du régulateur devise')

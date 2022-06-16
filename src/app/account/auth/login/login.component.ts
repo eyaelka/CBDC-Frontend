@@ -95,13 +95,24 @@ export class LoginComponent implements OnInit {
           if ( res != null){
             console.log(res)
             let jwt = res.headers.get('Authorization');
-            this.authService.saveTokenLocalStorage("superadminToken",jwt);
+            this.authService.saveTokenLocalStorage("currentUser",jwt);
             this.router.navigate(['/centralbank-form'])
           }
         },
         (err) => {
           console.log(err);
         })
+    }else if (accountIdAndPassword.compteId.substring(accountIdAndPassword.compteId.length-2,accountIdAndPassword.compteId.length) == "cb"){
+      this.authService.login("http://localhost:10051/login",accountIdAndPassword).subscribe(
+        res =>{
+          if (res != null){
+            let jwt = res.headers.get('Authorization');
+            this.authService.saveTokenLocalStorage("currentUser",jwt);
+            this.router.navigate(['/page/dashboards/commercialbank'])
+
+          }
+        }
+      )
     }
 
 

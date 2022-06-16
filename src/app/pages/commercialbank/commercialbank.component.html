@@ -8,6 +8,15 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
+          <ngx-spinner
+                  bdColor="rgba(51,51,51,0.8)"
+                  size="default"
+                  color="#fff"
+                  type="ball-circus"
+                  showSpinner="true"
+              >
+              <p style="font-size: 20px; color: white">Patientez...</p>
+              </ngx-spinner>
           <div class="row mb-2">
             <div class="col-sm-4">
               <div class="search-box me-2 mb-2 d-inline-block">
@@ -160,8 +169,6 @@
     <button type="submit" class="btn btn-primary" id="btn-save-event">
       Ajouter
     </button>
-      <div class="spinner-border text-secondary m-1" role="status" *ngIf="this.submitted == true">
-      </div>
    </form>
   </div>
 
@@ -179,7 +186,7 @@
       <div class="col-12">
         <div class="mb-3">
           <label class="control-label">Nom Banque</label>
-          <input class="form-control" placeholder="Saisissez nom " type="text" name="title" autocomplete="off" formControlName="name"
+          <input class="form-control" placeholder="Saisissez nom" type="text" name="name" autocomplete="off" formControlName="name"
               [ngClass]="{'is-invalid': submitted && form.name.errors}" />
             <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
               <span *ngIf="form.name.errors.required">Vous devez saisir le nom de la banque.</span>
@@ -226,20 +233,11 @@
               <span *ngIf="form.address.errors.required">Vous devez saisir l'adresse.</span>
             </div>
         </div>
-        <div class="mb-3">
-          <label class="control-label">Type de compte</label>
-          <input class="form-control" placeholder="Saisissez type" type="text" autocomplete="off" name="accountType" formControlName="accountType"
-              [ngClass]="{'is-invalid': submitted && form.accountType.errors}" />
-            <div *ngIf="submitted && form.accountType.errors" class="invalid-feedback">
-              <span *ngIf="form.accountType.errors.required">Vous devez saisir le type du compte</span>
-            </div>
-        </div>
       </div>
     </div>
       <button type="submit" class="btn btn-primary" id="btn-save-event">
         Modifier
       </button>
-      <div class="spinner-border text-secondary m-1" role="status" *ngIf="this.editted == true"></div>
    </form>
   </div>
 </ng-template>
@@ -258,12 +256,25 @@
     <div class="row">
       <div class="col-12">
         <div class="mb-3">
-          <label class="control-label">Identifant Banque Centrale</label>
-          <input class="form-control" placeholder="Saisissez Identifant BC" type="text" name="title" autocomplete="off" formControlName="bankAccountId"
-              [ngClass]="{'is-invalid': submitted && form.bankAccountId.errors}" />
+          <label class="control-label">Identifant compte </label>
+          <div *ngFor="let bankAccount of allBankAccounts">
+            <!-- <select name ="bankAccountId" id="bankAccountId" *ngFor="let bankAccount of allBankAccounts">
+                <option value="{{bankAccount.accountId}}"></option>
+            </select> -->
+
+            <!-- <input class="form-control" type="radio" autocomplete="off" formControlName="bankAccountId" />
+              {{bankAccount.accountId}}
+
+
             <div *ngIf="submitted && form.bankAccountId.errors" class="invalid-feedback">
-              <span *ngIf="form.bankAccountId.errors.required">Vous devez saisir l'identifiant de la banque centrale.</span>
-            </div>
+              <span *ngIf="form.bankAccountId.errors.required">Vous devez saisir l'identifiant de la banque commerciale.</span> -->
+            <!-- </div> -->
+
+            <input type="radio" name="bankId"  (change)="onSelectionChang(bankAccount.accountId)"/> &nbsp; &nbsp;
+            {{bankAccount.accountId}}
+
+          </div>
+
         </div>
         <div class="form-check form-switch mb-3">
           <input class="form-check-input" type="checkbox" id="suspendFlag" formControlName="suspendFlag" >
@@ -274,7 +285,6 @@
       <button type="submit" class="btn btn-primary" id="btn-save-event">
         Valider
       </button>
-      <div class="spinner-border text-secondary m-1" role="status" *ngIf="this.deactivated == true"></div>
 
 
 

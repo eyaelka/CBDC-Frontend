@@ -58,6 +58,8 @@ import { RegulateDeviseComponent } from './regulate-devise/regulate-devise.compo
 import { RegulatetransferComponent } from './regulatetransfer/regulatetransfer.component';
 //import { TransferlocalComponent } from './regulatetransfer/transferlocal/transferlocal.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { CommercialbankWalletComponent } from './commercialbank-wallet/commercialbank-wallet.component';
+import { UserlistComponent } from './userlist/userlist.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -67,7 +69,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent, UserWalletComponent, MerchantWalletComponent, RegulateDeviseComponent,RegulatetransferComponent,CentralbankWalletComponent],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, CommercialbankComponent, ActivateAccountComponent, ActivateMerchantComponent, RegulateMoneyComponent, UserWalletComponent, MerchantWalletComponent, RegulateDeviseComponent,RegulatetransferComponent,CentralbankWalletComponent, CommercialbankWalletComponent, UserlistComponent],
   imports: [
     CommonModule,
     NgbModule,

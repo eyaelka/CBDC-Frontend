@@ -42,8 +42,8 @@ export class CentralBankService{
     return this.http.get<any>(url)
   }
 
-  getCurrentBalence(url){
-    return this.http.get<any>(url);
+  getCurrentBalence(url,sender){
+    return this.http.post<any>(url,sender);
   }
 
   createMoney(url,amount){
@@ -60,6 +60,10 @@ export class CentralBankService{
 
   getTxBySender(url,sender){
     return this.http.get<any>(url+"/"+sender);
+  }
+
+  getSentRecieve(url, sender){
+    return this.http.post<any>(url,sender);
   }
 
 }
