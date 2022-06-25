@@ -67,6 +67,14 @@ export const MENU: MenuItem[] = [
     link:'/page/users',
     role:'commercialbank'
   },
+  {
+    id:9,
+    label:'Utilisateurs En Attente',
+    icon: 'bx-user',
+    link:'/page/enduser/activation/:token',
+    role:'commercialbank'
+  },
+
 
 
 

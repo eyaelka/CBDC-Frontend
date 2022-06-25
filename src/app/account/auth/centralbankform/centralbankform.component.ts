@@ -6,6 +6,9 @@ import { GenericUserService } from 'src/app/core/services/generic-user.service';
 import bsCustomFileInput from 'bs-custom-file-input';
 import { MyRouterLink } from '../../../core/models/router-links';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AlertService } from 'src/app/core/services/alert.service';
+
+
 
 
 
@@ -26,7 +29,8 @@ constructor(private formBuilder: FormBuilder,
             private router: Router,
             private loaderService : LoaderService,
             private userService : GenericUserService,
-            private spinnerService: NgxSpinnerService) { }
+            private spinner: NgxSpinnerService,
+            private alertService: AlertService) { }
 
 ngOnInit() {
   document.body.classList.add('auth-body-bg')
@@ -57,12 +61,13 @@ addCentralBankAccount(){
     accountType: "courant",
    }
   console.log(request);
+  this.spinner.show();
   this.userService.addUser(this.myRouterLink.linkAddCentralBank,request).subscribe(
     res =>{
-      this.spinnerService.show();
       this.submitted = false;
-      this.router.navigate(['/login'])
-      this.spinnerService.hide()
+      this.alertService.successAlert('Banque Centrale ajoutée ');
+      this.spinner.hide();
+      this.router.navigate(['/login']);
     })
 }
 

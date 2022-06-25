@@ -171,12 +171,15 @@ myRouterLink: MyRouterLink = new MyRouterLink();
       paysBanqueCentral: ['', [Validators.required]]
     });
     console.log(this.reg)
+    this.spinner.show();
     this.centralbankService.defineRegulationTransferEtranger(this.myRouterLink.linkDefineRegulationTransferAbroad,this.reg).subscribe(
       res => {
         this.submitted = false;
         this.alertService.successAlert('Régulation de Transfert Transfrontalier ajoutée ')
         console.log(res)
         this.modalService.dismissAll();
+        this.spinner.hide();
+
         this.activeID = 1;
         this.router.navigateByUrl("/page/dashboards/centralbank");
 
